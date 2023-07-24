@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers\Api\Users;
+
 use App\Http\Controllers\Api\ApiController;
 use App\Models\User;
 use Illuminate\Contracts\Container\BindingResolutionException;

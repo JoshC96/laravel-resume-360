@@ -1,4 +1,5 @@
 import axios from "axios";
+import { usePage } from "@inertiajs/vue3";
 
 
 const BASE_URL = 'api';
@@ -14,7 +15,7 @@ export default class ApiService {
 
     constructor(baseUrl, baseEndpoint, version) {
         this.bearer = null;
-        this.userId = null;
+        this.userId = usePage().props.auth.user.id;
         this.baseUrl = baseUrl;
         this.baseEndpoint = baseEndpoint;
         this.version = version;
@@ -30,7 +31,6 @@ export default class ApiService {
         return axios.create({
             baseURL: `/${this.baseUrl}/v${this.version}/${this.baseEndpoint}`,
             headers: {
-                'X-CLIENT-BEARER' : this.bearer ?? '',
                 'Accept': 'application/json'
             }
         });
