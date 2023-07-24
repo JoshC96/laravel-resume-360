@@ -39,6 +39,9 @@ return new class extends Migration
         Schema::create('qualifications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('field');
+            $table->string('grade');
+            $table->string('description');
             $table->date('started_at')->nullable();
             $table->date('finished_at')->nullable();
 
@@ -76,6 +79,7 @@ return new class extends Migration
             $table->string('position')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
 

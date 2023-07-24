@@ -23,4 +23,7 @@ export default defineConfig({
             },
         }),
     ],
+    resolve: {
+        extensions: ['.vue', '.js', '.ts', '.tsx', '.jsx'],
+    }
 });

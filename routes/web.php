@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,9 +30,17 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/account', [AccountController::class, 'edit'])->name('account.edit');
+    Route::patch('/account', [AccountController::class, 'update'])->name('account.update');
+    Route::delete('/account', [AccountController::class, 'destroy'])->name('account.destroy');
+
+    Route::get('/jobs', [AccountController::class, 'edit'])->name('jobs');
+
+    Route::prefix('profile')->controller(ProfileController::class)->group(function () {
+        Route::get('/', function () {return Inertia::render('Profile/Profile');})->name('profile');
+        Route::get('/resumes', 'getResumes')->name('resumes');
+        Route::get('/cover-letters', 'getCoverLetters')->name('cover-letters');
+    });
 });
 
 require __DIR__.'/auth.php';
