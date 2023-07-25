@@ -3,13 +3,13 @@ import { ref } from "vue";
 
 
 export const useSidebarStore = defineStore('sidebar', () => {
-  const isOpen = ref(false);
+    const isOpen = ref(false);
   
-  function toggleSidebar() {
-    isOpen.value = !isOpen;
-  }
+    function toggleSidebar() {
+        isOpen.value = !isOpen;
+    }
 
-  return { isOpen, toggleSidebar }
+    return { isOpen, toggleSidebar }
 }, { 
-  persist: true
+    persist: true
 })

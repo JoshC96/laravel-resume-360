@@ -169,7 +169,9 @@ import IconEdit from '@/Components/IconEdit.vue';
 import { ref } from 'vue';
 import ApiService from '@/Services/ApiService';
 import { onMounted } from 'vue';
+import { useUserFlashesStore } from '@/Stores/user-flashes-store.store';
 
+const userFlashStore = useUserFlashesStore();
 const api = ApiService.make();
 const showContactDetailsModal = ref(false);
 const bio = ref('');
@@ -256,8 +258,9 @@ const referees = ref([{
 }]);
 
 
-onMounted(() => {
-    console.log(api.getUserReferees());
+onMounted(async () => {
+    const resp = await api.getUserReferees();
+    userFlashStore.showSuccess('Profile fetched' + resp.data.data.referees[0].id)
 })
 
 </script>

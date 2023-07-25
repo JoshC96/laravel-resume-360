@@ -11,6 +11,9 @@
                     <div class="container mx-auto px-6 py-8">
                         <slot />
                     </div>
+
+                    <UserFlash />
+
                 </main>
                 <Footer />
             </div>
@@ -22,4 +25,5 @@
 import Sidebar from '@/Sidebar';
 import Header from '@/Layouts/Components/Header';
 import Footer from '@/Layouts/Components/Footer';
+import UserFlash from './Components/UserFlash.vue';
 </script>
