@@ -10,13 +10,27 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * 
- * @package App\Models
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $email_verified_at
+ * @property string $password
+ * @property string $bio
+ * @property string $date_of_birth
+ * @property string $mobile_phone
+ * @property string $work_phone
+ * @property string $website
+ * @property string $address
+ * @property Carbon $updated_at
+ * @property-read Carbon $created_at
  */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+    public const TABLE = 'users';
+
+    public const FIELD_ID = 'id';
     public const FIELD_NAME = 'name';
     public const FIELD_EMAIL = 'email';
     public const FIELD_VERIFIED_AT = 'email_verified_at';
@@ -27,8 +41,6 @@ class User extends Authenticatable
     public const FIELD_WORK_PHONE = 'work_phone';
     public const FIELD_WEBSITE = 'website';
     public const FIELD_ADDRESS = 'address';
-    
-    
 
     /**
      * The attributes that are mass assignable.
