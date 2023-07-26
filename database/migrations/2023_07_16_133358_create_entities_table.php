@@ -22,6 +22,9 @@ return new class extends Migration
 
         Schema::create('entity_locations', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('type')->default(0);
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('location_id');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->unsignedBigInteger('entity_id');
@@ -44,12 +47,6 @@ return new class extends Migration
             $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
             $table->timestamps();
         });
-
-        Schema::table('qualifications', function (Blueprint $table) {
-            $table->unsignedBigInteger('entity_id')->nullable();
-            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('set null');
-        });
-
     }
 
     /**

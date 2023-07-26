@@ -12,15 +12,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cover_letters', function (Blueprint $table) {
+        Schema::create('user_cover_letters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->longText('content');
             $table->timestamps();
 
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->unsignedBigInteger('entity_id')->nullable();
+        });
+
+        Schema::create('entity_cover_letters', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->longText('content');
+            $table->timestamps();
+
+            $table->unsignedBigInteger('entity_id');
             $table->foreign('entity_id')->references('id')->on('entities')->onDelete('set null');
         });
     }
@@ -30,6 +38,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cover_letters');
+        Schema::dropIfExists('user_cover_letters');
+        Schema::dropIfExists('entity_cover_letters');
     }
 };

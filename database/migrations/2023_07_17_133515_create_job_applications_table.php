@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_applications', function (Blueprint $table) {
+        Schema::create('user_job_applications', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->integer('status')->default(0);
@@ -26,10 +26,10 @@ return new class extends Migration
             $table->foreign('job_listing_id')->references('id')->on('job_listings')->onDelete('cascade');
 
             $table->unsignedBigInteger('cover_letter_id')->nullable();
-            $table->foreign('cover_letter_id')->references('id')->on('cover_letters')->onDelete('set null');
+            $table->foreign('cover_letter_id')->references('id')->on('user_cover_letters')->onDelete('set null');
 
             $table->unsignedBigInteger('resume_id')->nullable();
-            $table->foreign('resume_id')->references('id')->on('resumes')->onDelete('set null');
+            $table->foreign('resume_id')->references('id')->on('user_resumes')->onDelete('set null');
         });
     }
 
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_applications');
+        Schema::dropIfExists('user_job_applications');
     }
 };

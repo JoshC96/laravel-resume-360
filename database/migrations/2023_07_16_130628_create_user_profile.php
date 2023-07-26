@@ -26,8 +26,8 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address')->nullable();
-            $table->string('city')->nullable();
+            $table->string('address');
+            $table->string('city');
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('postal_code')->nullable();
@@ -36,33 +36,38 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('qualifications', function (Blueprint $table) {
+        Schema::create('user_qualifications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('field');
-            $table->string('grade');
-            $table->string('description');
+            $table->string('grade')->nullable();
+            $table->string('description')->nullable();
             $table->date('started_at')->nullable();
             $table->date('finished_at')->nullable();
 
             $table->unsignedBigInteger('location_id')->nullable();
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::create('work_experiences', function (Blueprint $table) {
+        Schema::create('user_work_experiences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('position');
-            $table->string('entity')->nullable();
             $table->date('started_at')->nullable();
             $table->date('finished_at')->nullable();
             $table->text('description')->nullable();
 
             $table->unsignedBigInteger('location_id')->nullable();
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::create('publications', function (Blueprint $table) {
+        Schema::create('user_publications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->date('published_at')->nullable();
@@ -70,37 +75,42 @@ return new class extends Migration
 
             $table->unsignedBigInteger('location_id')->nullable();
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::create('referees', function (Blueprint $table) {
+        Schema::create('user_referees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('entity')->nullable();
             $table->string('position')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::create('licences', function (Blueprint $table) {
+        Schema::create('user_licences', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->date('issued_at')->nullable();
+            $table->string('name');
+            $table->date('issued_at');
             $table->text('description')->nullable();
 
-            $table->unsignedBigInteger('location_id')->nullable();
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Schema::create('certifications', function (Blueprint $table) {
+        Schema::create('user_certifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->date('issued_at')->nullable();
+            $table->string('name');
+            $table->date('issued_at');
             $table->text('description')->nullable();
 
-            $table->unsignedBigInteger('location_id')->nullable();
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -122,11 +132,10 @@ return new class extends Migration
             ]);
         });
 
-        Schema::dropIfExists('qualifications');
-        Schema::dropIfExists('licences');
-        Schema::dropIfExists('work_experiences');
-        Schema::dropIfExists('publications');
-        Schema::dropIfExists('user_work_experience');
+        Schema::dropIfExists('user_qualifications');
+        Schema::dropIfExists('user_licences');
+        Schema::dropIfExists('user_work_experiences');
+        Schema::dropIfExists('user_publications');
         Schema::dropIfExists('locations');
     }
 };

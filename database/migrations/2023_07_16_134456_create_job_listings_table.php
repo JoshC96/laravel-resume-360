@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('description');
             $table->string('industry');
             $table->string('role');
-            $table->string('salary_min')->nullable();
-            $table->string('salary_max')->nullable();
+            $table->float('salary_min')->nullable();
+            $table->float('salary_max')->nullable();
             $table->integer('contract_type')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('entity_id');
-            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
+            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('set null');
         });
     }
 
