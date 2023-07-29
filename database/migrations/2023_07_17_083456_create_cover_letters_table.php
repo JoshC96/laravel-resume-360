@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('entity_cover_letters', function (Blueprint $table) {
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('entity_id');
-            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('set null');
+            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
         });
     }
 

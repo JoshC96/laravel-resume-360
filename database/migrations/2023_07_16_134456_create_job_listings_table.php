@@ -22,8 +22,8 @@ return new class extends Migration
             $table->integer('contract_type')->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('entity_id');
-            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('set null');
+            $table->unsignedBigInteger('entity_id')->nullable();
+            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
         });
     }
 

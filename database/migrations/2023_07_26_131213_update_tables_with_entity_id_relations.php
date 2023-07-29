@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::table('user_work_experiences', function (Blueprint $table) {
             $table->unsignedBigInteger('entity_id');
-            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('set null');
+            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
         });
 
         Schema::table('user_referees', function (Blueprint $table) {
             $table->unsignedBigInteger('entity_id');
-            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('set null');
+            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
         });
 
         Schema::table('user_qualifications', function (Blueprint $table) {
             $table->unsignedBigInteger('entity_id');
-            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('set null');
+            $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
         });
     }
 
