@@ -30,7 +30,7 @@ class ApiController extends Controller
      */
     protected function formatResponse(array $data = [], int $statusCode = 200): JsonResponse
     {
-        return response()->json(['data' => $data], $statusCode);
+        return response()->json(['resp' => $data], $statusCode);
     }
 
 
