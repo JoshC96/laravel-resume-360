@@ -21,8 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
-    Route::prefix('users')->controller(UserController::class)->group(function () {
-        Route::get('/', 'getUser')->name('resumes');
-        Route::get('/{userId}/referees', 'getReferees')->name('api-referees');
+
+    Route::prefix('profile')->controller(UserController::class)->group(function () {
+        Route::get('/', 'getProfile');
+        Route::get('/referees', 'getReferees');
+
+        Route::prefix('bio')->group(function () {
+            Route::get('/', 'getBio');
+            Route::patch('/', 'updateBio');
+        }); 
     });
+
 });
