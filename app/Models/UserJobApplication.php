@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read UserCoverLetter|null $coverLetter
  * @property-read Carbon $created_at
  */
-class UserResume extends Model
+class UserJobApplication extends Model
 {
     public const TABLE = 'user_job_applications';
 
