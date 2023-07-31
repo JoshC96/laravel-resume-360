@@ -1,17 +1,16 @@
 import axios from "axios";
 import { usePage } from "@inertiajs/vue3";
 
-
-const BASE_URL = 'api';
-const VERSION = 1;
-const BASE_ENDPOINTS = {
-    DEFAULT: '',
-    USER: 'users',
-    JOBS: 'jobs',
-    COMPANIES: 'companies',
-};
-
 export default class ApiService {
+
+    static BASE_URL = 'api';
+    static VERSION = 1;
+    static BASE_ENDPOINTS = {
+        DEFAULT: '',
+        USER: 'users',
+        JOBS: 'jobs',
+        COMPANIES: 'companies',
+    };
 
     constructor(baseUrl, baseEndpoint, version) {
         this.bearer = null;
@@ -45,7 +44,7 @@ export default class ApiService {
     }
 
     static make() {
-        return new ApiService(BASE_URL, BASE_ENDPOINTS.DEFAULT, VERSION)
+        return new ApiService(this.BASE_URL, this.BASE_ENDPOINTS.DEFAULT, this.VERSION)
     }
 
     static getBaseUrl() {
@@ -59,20 +58,4 @@ export default class ApiService {
     static getBaseEndpoints() {
         return BASE_ENDPOINTS;
     }
-
-    getUserReferees() {
-        this.baseEndpoint = BASE_ENDPOINTS.USER;
-        return this.axios.get(`/${this.userId}/referees`)
-    }
-
-    createUserReferee(payload) {
-        this.baseEndpoint = BASE_ENDPOINTS.USER;
-        return this.axios.post(`/${this.userId}/referees`, payload)
-    }
-
-    updateUserReferee(refereeId, payload) {
-        this.baseEndpoint = BASE_ENDPOINTS.USER;
-        return this.axios.patch(`/${this.userId}/referees/${refereeId}`, payload)
-    }
-
 }
