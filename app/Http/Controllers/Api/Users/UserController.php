@@ -3,18 +3,25 @@
 namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\User\Profile\UserProfileRequest;
-use App\Http\Resources\User\Profile\UserProfileResource;
+use App\Http\Requests\User\StoreRefereeRequest;
+use App\Http\Requests\User\UpdateRefereeRequest;
+use App\Http\Requests\User\UserProfileRequest;
+use App\Http\Resources\User\UserProfileResource;
 use App\Models\User;
+use App\Models\UserReferee;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\MassAssignmentException;
+use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use InvalidArgumentException;
+use RefereeRepository;
 
 class UserController extends ApiController
 {
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, protected RefereeRepository $refereeRepository)
     {
         parent::__construct($request);
     }
@@ -25,7 +32,7 @@ class UserController extends ApiController
      */
     public function getProfile(UserProfileRequest $request): JsonResponse
     {
-        $data = $request->collect();
+        $data = $request->all();
 
         return $this->formatResponse([
             UserProfileRequest::REQUEST_USER_PROFILE => new UserProfileResource(Auth::user())
@@ -37,12 +44,17 @@ class UserController extends ApiController
      * @return JsonResponse 
      * @throws BindingResolutionException 
      */
-    public function getReferees(UserProfileRequest $request): JsonResponse
+    public function updateBio(UserProfileRequest $request): JsonResponse
     {
-        $data = $request->collect();
+        $validated = $request->validate([
+            UserProfileRequest::REQUEST_BIO => 'string|nullable|max:1000'
+        ]);
+        /** @var User $user */
+        $user = Auth::user();
+        $user->{User::FIELD_BIO} = $validated[UserProfileRequest::REQUEST_BIO];
 
         return $this->formatResponse([
-            UserProfileRequest::REQUEST_REFEREES => Auth::user()->{User::RELATION_REFEREES}
+            'status' => $user->save()
         ]);
     }
 
@@ -51,15 +63,45 @@ class UserController extends ApiController
      * @return JsonResponse 
      * @throws BindingResolutionException 
      */
-    public function updateBio(UserProfileRequest $request): JsonResponse
+    public function getReferees(UserProfileRequest $request): JsonResponse
     {
-        $data = $request->collect();
-        /** @var User $user */
-        $user = Auth::user();
-        $user->{User::FIELD_BIO} = $data[UserProfileRequest::REQUEST_BIO];
+        $data = $request->all();
 
         return $this->formatResponse([
-            'status' => $user->save()
+            UserProfileRequest::REQUEST_REFEREES => Auth::user()->{User::RELATION_REFEREES}
+        ]);
+    }
+
+    /**
+     * @param StoreRefereeRequest $request 
+     * @return JsonResponse 
+     * @throws BindingResolutionException 
+     */
+    public function createReferee(StoreRefereeRequest $request): JsonResponse
+    {
+        $data = $request->safe()->all();
+        $user = Auth::user();
+
+        return $this->formatResponse([
+            'referee' => $this->refereeRepository->createUserReferee($user, $data)
+        ]);
+    }
+
+    /**
+     * @param UserReferee $referee 
+     * @param UpdateRefereeRequest $request 
+     * @return JsonResponse 
+     * @throws MassAssignmentException 
+     * @throws InvalidArgumentException 
+     * @throws InvalidCastException 
+     * @throws BindingResolutionException 
+     */
+    public function updateReferee(UserReferee $referee, UpdateRefereeRequest $request): JsonResponse
+    {
+        $data = $request->safe()->all();
+
+        return $this->formatResponse([
+            'status' => $this->refereeRepository->updateUserReferee($referee, $data)
         ]);
     }
 
