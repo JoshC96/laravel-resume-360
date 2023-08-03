@@ -28,6 +28,12 @@ class UserResume extends Model
     public const RELATION_LICENCES = 'licences';
     public const RELATION_CERTIFICATIONS = 'certifications';
 
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
+
+
     /**
      * @return BelongsTo 
      */

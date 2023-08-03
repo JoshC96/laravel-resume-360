@@ -28,6 +28,12 @@ class Entity extends Model
 
     public const RELATION_LOCATIONS = 'locations';
     public const RELATION_CONTACTS = 'contacts';
+
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
+
     
     /**
      * @return HasMany 

@@ -31,6 +31,12 @@ class EntityLocation extends Model
 
     public const RELATION_LOCATION = 'location';
     public const RELATION_ENTITY = 'entity';
+
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
+
     
     /**
      * @return HasOne

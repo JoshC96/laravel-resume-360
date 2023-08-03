@@ -27,6 +27,12 @@ class UserLicence extends Model
 
     public const RELATION_USER = 'user';
 
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
+
+
     /**
      * @return BelongsTo 
      */

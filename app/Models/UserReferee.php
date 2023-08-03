@@ -26,15 +26,20 @@ class UserReferee extends Model
 
     public const FIELD_ID = 'id';
     public const FIELD_NAME = 'name';
-    public const FIELD_ADDRESS = 'position';
+    public const FIELD_POSITION = 'position';
     public const FIELD_DESCRIPTION = 'description';
-    public const FIELD_STARTED_AT = 'phone';
-    public const FIELD_FINISHED_AT = 'email';
+    public const FIELD_PHONE = 'phone';
+    public const FIELD_EMAIL = 'email';
     public const FIELD_USER_ID = 'user_id';
     public const FIELD_ENTITY_ID = 'entity_id';
 
     public const RELATION_USER = 'user';
     public const RELATION_ENTITY = 'entity';
+
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
 
     /**
      * @return BelongsTo 

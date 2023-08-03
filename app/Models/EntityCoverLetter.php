@@ -25,6 +25,12 @@ class EntityCoverLetter extends Model
 
     public const RELATION_ENTITY = 'entity';
 
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
+
+
     /**
      * @return BelongsTo 
      */

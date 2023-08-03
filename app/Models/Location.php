@@ -31,5 +31,11 @@ class Location extends Model
     public const FIELD_LATITUDE = 'latitude';
     public const FIELD_LONGITUDE = 'longitude';
 
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
+
+
     
 }

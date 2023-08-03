@@ -43,6 +43,12 @@ class UserJobApplication extends Model
     public const RELATION_COVER_LETTER = 'coverLetter';
     public const RELATION_JOB_LISTING = 'jobListing';
 
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
+
+
     /**
      * @return BelongsTo 
      */

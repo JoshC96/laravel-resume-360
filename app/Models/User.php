@@ -55,6 +55,12 @@ class User extends Authenticatable
     public const RELATION_RESUMES = 'resumes';
     public const RELATION_JOB_APPLICATIONS = 'jobApplications';
 
+    protected $table = self::TABLE;
+    protected $guarded = [
+        self::FIELD_ID
+    ];
+
+
 
     /**
      * The attributes that are mass assignable.
