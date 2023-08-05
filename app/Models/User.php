@@ -44,7 +44,6 @@ class User extends Authenticatable
     public const FIELD_ADDRESS = 'address';
 
     public const RELATION_REFEREES = 'referees';
-    public const RELATION_EDUCATION = 'education';
     public const RELATION_WORK_EXPERIENCES = 'workExperiences';
     public const RELATION_QUALIFICATIONS = 'qualifications';
     public const RELATION_PUBLICATIONS = 'publications';

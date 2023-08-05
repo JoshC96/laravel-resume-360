@@ -28,7 +28,7 @@ class UserWorkExperience extends Model
 
     public const FIELD_ID = 'id';
     public const FIELD_NAME = 'name';
-    public const FIELD_ADDRESS = 'position';
+    public const FIELD_POSITION = 'position';
     public const FIELD_DESCRIPTION = 'description';
     public const FIELD_STARTED_AT = 'started_at';
     public const FIELD_FINISHED_AT = 'finished_at';
