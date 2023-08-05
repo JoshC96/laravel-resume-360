@@ -22,13 +22,59 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
-    Route::prefix('profile')->controller(UserController::class)->group(function () {
+    Route::prefix('user')->controller(UserController::class)->group(function () {
         Route::get('/', 'getProfile');
-        Route::get('/referees', 'getReferees');
 
         Route::prefix('bio')->group(function () {
             Route::get('/', 'getBio');
             Route::patch('/', 'updateBio');
+        }); 
+
+        Route::prefix('referees')->group(function () {
+            Route::get('/', 'getReferees');
+            Route::post('/', 'createReferee');
+            Route::patch('/{referee}', 'updateReferee');
+            Route::delete('/{referee}', 'destroyReferee');
+        });
+
+
+        Route::prefix('workExperiences')->group(function () {
+            Route::get('/', 'getWorkExperiences');
+            Route::post('/', 'createWorkExperience');
+            Route::patch('/{workExperience}', 'updateWorkExperience');
+            Route::delete('/{workExperience}', 'destroyWorkExperience');
+        });
+
+
+        Route::prefix('qualifications')->group(function () {
+            Route::get('/', 'getQualifications');
+            Route::post('/', 'createQualification');
+            Route::patch('/{qualification}', 'updateQualification');
+            Route::delete('/{qualification}', 'destroyQualification');
+        });
+
+
+        Route::prefix('publications')->group(function () {
+            Route::get('/', 'getPublications');
+            Route::post('/', 'createPublication');
+            Route::patch('/{publication}', 'updatePublication');
+            Route::delete('/{publication}', 'destroyPublication');
+        });
+
+
+        Route::prefix('certifications')->group(function () {
+            Route::get('/', 'getCertifications');
+            Route::post('/', 'createCertification');
+            Route::patch('/{certification}', 'updateCertification');
+            Route::delete('/{certification}', 'destroyCertification');
+        });
+
+
+        Route::prefix('licences')->group(function () {
+            Route::get('/', 'getLicences');
+            Route::post('/', 'createLicence');
+            Route::patch('/{licence}', 'updateLicence');
+            Route::delete('/{licence}', 'destroyLicence');
         }); 
     });
 
