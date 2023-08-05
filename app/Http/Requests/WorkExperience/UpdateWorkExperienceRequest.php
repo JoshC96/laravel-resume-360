@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\WorkExperience;
 
 use App\Models\User;
-use App\Models\UserReferee;
+use App\Models\UserWorkExperience;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class UpdateRefereeRequest extends FormRequest
+class UpdateWorkExperienceRequest extends FormRequest
 {
 
-    public const REQUEST_NAME = UserReferee::FIELD_NAME;
-    public const REQUEST_POSITION = UserReferee::FIELD_POSITION;
-    public const REQUEST_DESCRIPTION = UserReferee::FIELD_DESCRIPTION;
-    public const REQUEST_PHONE = UserReferee::FIELD_PHONE;
-    public const REQUEST_EMAIL = UserReferee::FIELD_EMAIL;
-    public const REQUEST_USER_ID = UserReferee::FIELD_USER_ID;
-    public const REQUEST_ENTITY_ID = UserReferee::FIELD_ENTITY_ID;
-    public const REQUEST_COMPANY = 'company';
+    public const REQUEST_NAME = UserWorkExperience::FIELD_NAME;
+    public const REQUEST_POSITION = UserWorkExperience::FIELD_POSITION;
+    public const REQUEST_DESCRIPTION = UserWorkExperience::FIELD_DESCRIPTION;
+    public const REQUEST_STARTED_AT = UserWorkExperience::FIELD_STARTED_AT;
+    public const REQUEST_FINISHED_AT = UserWorkExperience::FIELD_FINISHED_AT;
+    public const REQUEST_USER_ID = UserWorkExperience::FIELD_USER_ID;
+    public const REQUEST_ENTITY_ID = UserWorkExperience::FIELD_ENTITY_ID;
 
 
     /**
@@ -40,12 +39,11 @@ class UpdateRefereeRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'sometimes', 'max:100'],
             self::REQUEST_POSITION => ['string', 'sometimes', 'max:100'],
-            self::REQUEST_DESCRIPTION => ['string','sometimes', 'max:500'],
-            self::REQUEST_PHONE => ['string', 'sometimes', 'max:15'],
-            self::REQUEST_EMAIL => ['email:rfc,dns','sometimes', 'max:75'],
+            self::REQUEST_DESCRIPTION => ['string', 'sometimes', 'max:500'],
+            self::REQUEST_STARTED_AT => ['string', 'sometimes'],
+            self::REQUEST_FINISHED_AT => ['string', 'sometimes'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
             self::REQUEST_ENTITY_ID => ['numeric', 'sometimes'],
-            self::REQUEST_COMPANY => ['string', 'sometimes'],
         ];
     }
 }

@@ -1,22 +1,12 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Licence;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UserProfileRequest extends FormRequest
+class DestroyLicenceRequest extends FormRequest
 {
-
-    public const REQUEST_USER_PROFILE = 'profile';
-    public const REQUEST_BIO = 'bio';
-    public const REQUEST_REFEREES = 'referees';
-    public const REQUEST_WORK_EXPERIENCES = 'workExperiences';
-    public const REQUEST_QUALFICATIONS = 'qualifications';
-    public const REQUEST_CERTIFICATIONS = 'certifications';
-    public const REQUEST_LICENCES = 'licences';
-    public const REQUEST_PUBLICATIONS = 'publications';
-
 
     /**
      * Determine if the user is authorized to make this request.
