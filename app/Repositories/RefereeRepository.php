@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repositories;
+
 use App\Models\User;
 use App\Models\UserReferee;
 use Illuminate\Database\Eloquent\MassAssignmentException;
