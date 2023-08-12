@@ -9,7 +9,7 @@ export default class ProfileApi extends ApiService {
     }
 
     static make() {
-        return new ProfileApi(this.BASE_URL, `profile`, this.VERSION)
+        return new ProfileApi(this.BASE_URL, `user`, this.VERSION)
     }    
 
     getProfile() {
@@ -44,20 +44,20 @@ export default class ProfileApi extends ApiService {
         return this.axios.patch(`/bio`, { bio: bioContent })
     }
 
-    getWorkHistory() {
-        return this.axios.get(`/work-history`)
+    getWorkExperience() {
+        return this.axios.get(`/work-experiences`)
     }
 
-    createWorkHistory(payload) {
-        return this.axios.post(`/work-history`, payload)
+    createWorkExperience(payload) {
+        return this.axios.post(`/work-experiences`, payload)
     }
 
-    updateWorkHistory(workHistoryId, payload) {
-        return this.axios.patch(`/work-history/${workHistoryId}`, payload)
+    updateWorkExperience(workExperienceId, payload) {
+        return this.axios.patch(`/work-experiences/${workExperienceId}`, payload)
     }
 
-    deleteWorkHistory(workHistoryId, payload) {
-        return this.axios.patch(`/work-history/${workHistoryId}`, payload)
+    deleteWorkExperience(workExperienceId, payload) {
+        return this.axios.patch(`/work-experiences/${workExperienceId}`, payload)
     }
 
     getEducation() {
