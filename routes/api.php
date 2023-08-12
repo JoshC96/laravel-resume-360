@@ -38,7 +38,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         });
 
 
-        Route::prefix('workExperiences')->group(function () {
+        Route::prefix('work-experiences')->group(function () {
             Route::get('/', 'getWorkExperiences');
             Route::post('/', 'createWorkExperience');
             Route::patch('/{workExperience}', 'updateWorkExperience');
