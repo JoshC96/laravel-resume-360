@@ -46,6 +46,7 @@ class StoreRefereeRequest extends FormRequest
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
             self::REQUEST_ENTITY_ID => ['numeric', 'sometimes'],
             self::REQUEST_COMPANY => ['string', 'nullable'],
+            'entity' => ['string', 'required'],
         ];
     }
 }

@@ -13,7 +13,8 @@ class UpdateLicenceRequest extends FormRequest
 
     public const REQUEST_NAME = UserLicence::FIELD_NAME;
     public const REQUEST_DESCRIPTION = UserLicence::FIELD_DESCRIPTION;
-    public const REQUEST_ISSUED_AT = UserLicence::FIELD_ISSUED_AT;
+    public const REQUEST_ISSUED_MONTH = UserLicence::FIELD_ISSUED_MONTH;
+    public const REQUEST_ISSUED_YEAR = UserLicence::FIELD_ISSUED_YEAR;
     public const REQUEST_USER_ID = UserLicence::FIELD_USER_ID;
 
     /**
@@ -35,7 +36,8 @@ class UpdateLicenceRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'sometimes', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string', 'sometimes', 'max:500'],
-            self::REQUEST_ISSUED_AT => ['string', 'sometimes'],
+            self::REQUEST_ISSUED_MONTH => ['string', 'required'],
+            self::REQUEST_ISSUED_YEAR => ['string', 'required'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
         ];
     }

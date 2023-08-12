@@ -14,8 +14,10 @@ class StoreWorkExperienceRequest extends FormRequest
     public const REQUEST_NAME = UserWorkExperience::FIELD_NAME;
     public const REQUEST_POSITION = UserWorkExperience::FIELD_POSITION;
     public const REQUEST_DESCRIPTION = UserWorkExperience::FIELD_DESCRIPTION;
-    public const REQUEST_STARTED_AT = UserWorkExperience::FIELD_STARTED_AT;
-    public const REQUEST_FINISHED_AT = UserWorkExperience::FIELD_FINISHED_AT;
+    public const REQUEST_STARTED_MONTH = UserWorkExperience::FIELD_STARTED_MONTH;
+    public const REQUEST_STARTED_YEAR = UserWorkExperience::FIELD_STARTED_YEAR;
+    public const REQUEST_FINISHED_MONTH = UserWorkExperience::FIELD_FINISHED_MONTH;
+    public const REQUEST_FINISHED_YEAR = UserWorkExperience::FIELD_FINISHED_YEAR;
     public const REQUEST_USER_ID = UserWorkExperience::FIELD_USER_ID;
     public const REQUEST_ENTITY_ID = UserWorkExperience::FIELD_ENTITY_ID;
 
@@ -36,11 +38,13 @@ class StoreWorkExperienceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            self::REQUEST_NAME => ['string', 'required', 'max:100'],
+            self::REQUEST_NAME => ['string', 'nullable', 'max:100'],
             self::REQUEST_POSITION => ['string', 'required', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string','required', 'max:500'],
-            self::REQUEST_STARTED_AT => ['string', 'required'],
-            self::REQUEST_FINISHED_AT => ['string', 'required'],
+            self::REQUEST_STARTED_MONTH => ['numeric', 'required'],
+            self::REQUEST_STARTED_YEAR => ['numeric', 'required'],
+            self::REQUEST_FINISHED_MONTH => ['numeric', 'required'],
+            self::REQUEST_FINISHED_YEAR => ['numeric', 'required'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
             self::REQUEST_ENTITY_ID => ['numeric', 'sometimes'],
         ];

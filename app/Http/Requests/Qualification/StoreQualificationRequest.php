@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Qualification;
 
 use App\Models\User;
-use App\Models\UserReferee;
+use App\Models\UserQualification;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -11,13 +11,16 @@ use Illuminate\Validation\Rule;
 class StoreQualificationRequest extends FormRequest
 {
 
-    public const REQUEST_NAME = UserReferee::FIELD_NAME;
-    public const REQUEST_POSITION = UserReferee::FIELD_POSITION;
-    public const REQUEST_DESCRIPTION = UserReferee::FIELD_DESCRIPTION;
-    public const REQUEST_PHONE = UserReferee::FIELD_PHONE;
-    public const REQUEST_EMAIL = UserReferee::FIELD_EMAIL;
-    public const REQUEST_USER_ID = UserReferee::FIELD_USER_ID;
-    public const REQUEST_ENTITY_ID = UserReferee::FIELD_ENTITY_ID;
+    public const REQUEST_NAME = UserQualification::FIELD_NAME;
+    public const REQUEST_INDUSTRY = UserQualification::FIELD_INDUSTRY;
+    public const REQUEST_DESCRIPTION = UserQualification::FIELD_DESCRIPTION;
+    public const REQUEST_STARTED_MONTH = UserQualification::FIELD_STARTED_MONTH;
+    public const REQUEST_STARTED_YEAR = UserQualification::FIELD_STARTED_YEAR;
+    public const REQUEST_FINISHED_MONTH = UserQualification::FIELD_FINISHED_MONTH;
+    public const REQUEST_FINISHED_YEAR = UserQualification::FIELD_FINISHED_YEAR;
+    public const REQUEST_GRADE = UserQualification::FIELD_GRADE;
+    public const REQUEST_USER_ID = UserQualification::FIELD_USER_ID;
+    public const REQUEST_ENTITY_ID = UserQualification::FIELD_ENTITY_ID;
     public const REQUEST_COMPANY = 'company';
 
 
@@ -39,10 +42,13 @@ class StoreQualificationRequest extends FormRequest
     {
         return [
             self::REQUEST_NAME => ['string', 'required', 'max:100'],
-            self::REQUEST_POSITION => ['string', 'required', 'max:100'],
+            self::REQUEST_INDUSTRY => ['string', 'required', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string','nullable', 'max:500'],
-            self::REQUEST_PHONE => ['string', 'nullable', 'max:15'],
-            self::REQUEST_EMAIL => ['email:rfc,dns', 'sometimes', 'max:75'],
+            self::REQUEST_GRADE => ['string', 'nullable', 'max:15'],
+            self::REQUEST_STARTED_MONTH => ['numeric', 'required'],
+            self::REQUEST_STARTED_YEAR => ['numeric', 'required'],
+            self::REQUEST_FINISHED_MONTH => ['numeric', 'required'],
+            self::REQUEST_FINISHED_YEAR => ['numeric', 'required'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
             self::REQUEST_ENTITY_ID => ['numeric', 'sometimes'],
             self::REQUEST_COMPANY => ['string', 'nullable'],

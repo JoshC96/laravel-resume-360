@@ -25,7 +25,8 @@ class UserPublication extends Model
     public const FIELD_ID = 'id';
     public const FIELD_NAME = 'name';
     public const FIELD_DESCRIPTION = 'description';
-    public const FIELD_PUBLISHED_AT = 'published_at';
+    public const FIELD_PUBLISHED_MONTH = 'published_month';
+    public const FIELD_PUBLISHED_YEAR = 'published_year';
     public const FIELD_LOCATION_ID = 'location_id';
     public const FIELD_USER_ID = 'user_id';
 

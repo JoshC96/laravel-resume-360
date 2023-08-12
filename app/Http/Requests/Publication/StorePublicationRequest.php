@@ -12,7 +12,8 @@ class StorePublicationRequest extends FormRequest
 {
     public const REQUEST_NAME = UserPublication::FIELD_NAME;
     public const REQUEST_DESCRIPTION = UserPublication::FIELD_DESCRIPTION;
-    public const REQUEST_PUBLISHED_AT = UserPublication::FIELD_PUBLISHED_AT;
+    public const REQUEST_PUBLISHED_MONTH = UserPublication::FIELD_PUBLISHED_MONTH;
+    public const REQUEST_PUBLISHED_YEAR = UserPublication::FIELD_PUBLISHED_YEAR;
     public const REQUEST_USER_ID = UserPublication::FIELD_USER_ID;
 
     /**
@@ -34,7 +35,8 @@ class StorePublicationRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'required', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string', 'required', 'max:500'],
-            self::REQUEST_PUBLISHED_AT => ['string', 'required'],
+            self::REQUEST_PUBLISHED_MONTH => ['string', 'required'],
+            self::REQUEST_PUBLISHED_YEAR => ['string', 'required'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
         ];
     }
