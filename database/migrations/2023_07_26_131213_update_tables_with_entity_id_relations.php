@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('user_work_experiences', function (Blueprint $table) {
-            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('entity_id')->nullable();
             $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
         });
 
         Schema::table('user_referees', function (Blueprint $table) {
-            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('entity_id')->nullable();
             $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
         });
 
         Schema::table('user_qualifications', function (Blueprint $table) {
-            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('entity_id')->nullable();
             $table->foreign('entity_id')->references('id')->on('entities')->onDelete('cascade');
         });
     }
@@ -33,18 +33,18 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('user_work_experiences', function (Blueprint $table) {
-            $table->dropForeign('entity_id');
-            $table->dropColumn('entity_id');
+            $table->dropForeign(['entity_id']);
+            $table->dropColumn(['entity_id']);
         });
 
         Schema::table('user_referees', function (Blueprint $table) {
-            $table->dropForeign('entity_id');
-            $table->dropColumn('entity_id');
+            $table->dropForeign(['entity_id']);
+            $table->dropColumn(['entity_id']);
         });
 
         Schema::table('user_qualifications', function (Blueprint $table) {
-            $table->dropForeign('entity_id');
-            $table->dropColumn('entity_id');
+            $table->dropForeign(['entity_id']);
+            $table->dropColumn(['entity_id']);
         });
     }
 };
