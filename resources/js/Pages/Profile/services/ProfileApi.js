@@ -33,7 +33,7 @@ export default class ProfileApi extends ApiService {
     }
 
     deleteReferee(refereeId, payload) {
-        return this.axios.patch(`/referees/${refereeId}`, payload)
+        return this.axios.delete(`/referees/${refereeId}`, payload)
     }
 
     getBio() {
@@ -61,19 +61,19 @@ export default class ProfileApi extends ApiService {
     }
 
     getEducation() {
-        return this.axios.get(`/education`)
+        return this.axios.get(`/qualifications`)
     }
 
-    createEducation(payload) {
-        return this.axios.post(`/education`, payload)
+    createQualification(payload) {
+        return this.axios.post(`/qualifications`, payload)
     }
 
-    updateEducation(educationId, payload) {
-        return this.axios.patch(`/education/${educationId}`, payload)
+    updateQualification(qualificationId, payload) {
+        return this.axios.patch(`/qualifications/${qualificationId}`, payload)
     }
 
-    deleteEducation(educationId, payload) {
-        return this.axios.patch(`/education/${educationId}`, payload)
+    deleteQualification(qualificationId, payload) {
+        return this.axios.patch(`/qualifications/${qualificationId}`, payload)
     }
 
     getPublications() {
@@ -92,37 +92,37 @@ export default class ProfileApi extends ApiService {
         return this.axios.patch(`/publications/${publicationId}`, payload)
     }
 
-    getCertificates() {
-        return this.axios.get(`/certificates`)
+    getCertifications() {
+        return this.axios.get(`/certifications`)
     }
 
-    createCertificate(payload) {
-        return this.axios.post(`/certificates`, payload)
+    createCertification(payload) {
+        return this.axios.post(`/certifications`, payload)
     }
 
-    updateCertificate(certificateId, payload) {
-        return this.axios.patch(`/certificates/${certificateId}`, payload)
+    updateCertification(certificationId, payload) {
+        return this.axios.patch(`/certifications/${certificationId}`, payload)
     }
 
-    deleteCertificate(certificateId, payload) {
-        return this.axios.patch(`/certificates/${certificateId}`, payload)
+    deleteCertification(certificationId, payload) {
+        return this.axios.patch(`/certifications/${certificationId}`, payload)
     }
 
     
-    getLicenses() {
-        return this.axios.get(`/licenses`)
+    getLicences() {
+        return this.axios.get(`/licences`)
     }
 
-    createLicense(payload) {
-        return this.axios.post(`/licenses`, payload)
+    createLicence(payload) {
+        return this.axios.post(`/licences`, payload)
     }
 
-    updateLicense(licenseId, payload) {
-        return this.axios.patch(`/licenses/${licenseId}`, payload)
+    updateLicence(licenceId, payload) {
+        return this.axios.patch(`/licences/${licenceId}`, payload)
     }
 
-    deleteLicense(licenseId, payload) {
-        return this.axios.patch(`/licenses/${licenseId}`, payload)
+    deleteLicence(licenceId, payload) {
+        return this.axios.patch(`/licences/${licenceId}`, payload)
     }
 
 

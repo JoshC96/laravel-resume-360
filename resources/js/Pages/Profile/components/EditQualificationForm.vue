@@ -1,14 +1,36 @@
 <template>
     <Modal 
-        :show="profileStore.showExperienceModal"
-        @close="profileStore.closeExperienceModal"
-        @confirm="profileStore.saveExperience"
+        :show="profileStore.showQualificationModal"
+        @close="profileStore.closeQualificationModal"
+        @confirm="profileStore.saveQualification"
     >
         <template v-slot:header>
-            <h2 class="h2 text-xl"> {{ profileStore.editingExperience?.id ? 'Edit' : 'Create' }} Work Experience</h2>
+            <h2 class="h2 text-xl"> {{ profileStore.editingQualification?.id ? 'Edit' : 'Create' }} Qualification</h2>
         </template>
         <template v-slot:content>
             <div class="space-y-6">
+                <div>
+                    <InputLabel for="name" value="Name *" />
+
+                    <TextInput
+                        id="name"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="profileStore.editingQualification.name"
+                        required
+                    />
+                </div>
+                <div>
+                    <InputLabel for="field" value="Field *" />
+
+                    <TextInput
+                        id="field"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="profileStore.editingQualification.field"
+                        required
+                    />
+                </div>
                 <div class="grid md:grid-cols-2 gap-5"> 
                     <div>
                         <InputLabel for="started_at" value="Started *" />
@@ -22,25 +44,13 @@
                     </div>
                 </div>
                 <div>
-                    <InputLabel for="position" value="Position *" />
-
-                    <TextInput
-                        id="position"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="profileStore.editingExperience.position"
-                        required
-                    />
-                </div>
-                <div>
-                    <InputLabel for="description" value="Describe your responsibilities  *" />
+                    <InputLabel for="description" value="Description" />
 
                     <TextAreaInput
                         id="description"
                         type="text"
                         class="mt-1 block w-full"
-                        v-model="profileStore.editingExperience.description"
-                        required
+                        v-model="profileStore.editingQualification.description"
                     />
                 </div>
             </div>
@@ -67,15 +77,17 @@ const finishedAt = ref({
     year: new Date().getFullYear()
 });
 
+
 watch(startedAt, (newVal) => {
-    profileStore.editingExperience.started_month = newVal.month;
-    profileStore.editingExperience.started_year = newVal.year;
+    profileStore.editingQualification.started_month = newVal.month;
+    profileStore.editingQualification.started_year = newVal.year;
 })
 
 watch(finishedAt, (newVal) => {
-    profileStore.editingExperience.finished_month = newVal.month;
-    profileStore.editingExperience.finished_year = newVal.year;
+    profileStore.editingQualification.finished_month = newVal.month;
+    profileStore.editingQualification.finished_year = newVal.year;
 })
+
 
 
 </script>

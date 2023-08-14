@@ -8,19 +8,31 @@ export const useUserProfileStore = defineStore('userProfileStore', () => {
     const userFlashStore = useUserFlashesStore();
     const api = ProfileApi.make();
     const bio = ref('');
-    const licences = ref([]);
+    const referees = ref([]);
     const workExperiences = ref([]);
     const qualifications = ref([]);
+    const licences = ref([]);
     const certifications = ref([]);
     const publications = ref([]);
-    const referees = ref([]);
 
     const showRefereeModal = ref(false);
     const editingReferee = ref({});
 
     const showExperienceModal = ref(false);
     const editingExperience = ref({});
-    
+
+    const showQualificationModal = ref(false);
+    const editingQualification = ref({});
+
+    const showPublicationModal = ref(false);
+    const editingPublication = ref({});
+
+    const showLicenceModal = ref(false);
+    const editingLicence = ref({});
+
+    const showCertificationModal = ref(false);
+    const editingCertification = ref({});
+
     
     async function getProfile() {
         const { data } = await api.getProfile();
@@ -35,54 +47,193 @@ export const useUserProfileStore = defineStore('userProfileStore', () => {
         referees.value = profile.referees;
     }
 
-    async function saveReferee() {
-        if (editingReferee?.id) {
-            const { data } = await api.createReferee(editingReferee)
 
-            if (data.resp?.referee) {
-                userFlashStore.showSuccess('Added a new referee')
-                closeModal();
-            } else {
-                userFlashStore.reportError('Error creating referee, please try again later')
-            }
+    async function saveBio() {
+        const { data } = await api.updateBio(bio.value)
+
+        if (data.resp?.status) {
+            userFlashStore.showSuccess('Updated bio')
         } else {
-            const { data } = await api.updateReferee(editingReferee.id, editingReferee)
+            userFlashStore.reportError('Error updating bio, please try again later')
+        }
+    }
+
+    async function saveReferee() {
+        if (editingReferee.value.id) {
+            const { data } = await api.updateReferee(editingReferee.value.id, editingReferee.value)
 
             if (data.resp?.status) {
                 userFlashStore.showSuccess('Updated referee')
-                closeModal();
+                closeRefereeModal();
+                getProfile();
             } else {
                 userFlashStore.reportError('Error updating referee, please try again later')
+            }
+        } else {
+            const { data } = await api.createReferee(editingReferee.value)
+
+            if (data.resp?.referee) {
+                userFlashStore.showSuccess('Added a new referee')
+                closeRefereeModal();
+                getProfile();
+            } else {
+                userFlashStore.reportError('Error creating referee, please try again later')
             }
         }
     }
 
     async function saveExperience() {
 
-        editingExperience.started_month = startedAt.value.month;
-        editingExperience.started_year = startedAt.value.year;
-        editingExperience.finished_month = finishedAt.value.month;
-        editingExperience.finished_year = finishedAt.value.year;
-
-        if (editingExperience?.id) {
-            api.updateWorkExperience(editingExperience?.id, editingExperience).then(function (resp) {
+        if (editingExperience.value?.id) {
+            api.updateWorkExperience(editingExperience.value.id, editingExperience.value).then(function (resp) {
                 if (resp.status) {
                     userFlashStore.showSuccess('Updated work experience');
+                    getProfile();
                 } else {
-                    userFlashStore.reportError('Error updating new work experience');
+                    userFlashStore.reportError('Error updating work experience');
                 }
+            }).catch(() => {
+                userFlashStore.reportError('Error updating work experience');
             }).finally(() => {
-                closeModal()
+                closeExperienceModal()
             })
         } else {
-            api.createWorkExperience(editingExperience).then(function (resp) {
+            api.createWorkExperience(editingExperience.value).then(function (resp) {
                 if (resp.status) {
                     userFlashStore.showSuccess('New work experience added');
+                    getProfile();
                 } else {
                     userFlashStore.reportError('Error creating new work experience');
                 }
+            }).catch(() => {
+                userFlashStore.reportError('Error creating work experience');
             }).finally(() => {
-                closeModal()
+                closeExperienceModal()
+            })
+        }
+    }
+
+
+    async function saveQualification() {
+
+        if (editingQualification.value?.id) {
+            api.updateQualification(editingQualification.value.id, editingQualification.value).then(function (resp) {
+                if (resp.status) {
+                    userFlashStore.showSuccess('Updated qualification');
+                    getProfile();
+                } else {
+                    userFlashStore.reportError('Error updating qualification');
+                }
+            }).catch(() => {
+                userFlashStore.reportError('Error updating qualification');
+            }).finally(() => {
+                closeQualificationModal()
+            })
+        } else {
+            api.createQualification(editingQualification.value).then(function (resp) {
+                if (resp.status) {
+                    userFlashStore.showSuccess('New qualification added');
+                    getProfile();
+                } else {
+                    userFlashStore.reportError('Error creating new qualification');
+                }
+            }).catch(() => {
+                userFlashStore.reportError('Error creating new qualification');
+            }).finally(() => {
+                closeQualificationModal()
+            })
+        }
+    }
+
+    async function savePublication() {
+
+        if (editingPublication.value?.id) {
+            api.updatePublication(editingPublication.value.id, editingPublication.value).then(function (resp) {
+                if (resp.status) {
+                    userFlashStore.showSuccess('Updated publication');
+                    getProfile();
+                } else {
+                    userFlashStore.reportError('Error updating qualification');
+                }
+            }).catch(() => {
+                userFlashStore.reportError('Error updating qualification');
+            }).finally(() => {
+                closePublicationModal()
+            })
+        } else {
+            api.createPublication(editingPublication.value).then(function (resp) {
+                if (resp.status) {
+                    userFlashStore.showSuccess('New publication added');
+                    getProfile();
+                } else {
+                    userFlashStore.reportError('Error creating new publication');
+                }
+            }).catch(() => {
+                userFlashStore.reportError('Error creating new publication');
+            }).finally(() => {
+                closePublicationModal()
+            })
+        }
+    }
+
+    async function saveLicence() {
+
+        if (editingLicence.value?.id) {
+            api.updateLicence(editingLicence.value.id, editingLicence.value).then(function (resp) {
+                if (resp.status) {
+                    userFlashStore.showSuccess('Updated licence');
+                    getProfile();
+                } else {
+                    userFlashStore.reportError('Error updating licence');
+                }
+            }).catch(() => {
+                userFlashStore.reportError('Error updating licence');
+            }).finally(() => {
+                closeLicenceModal()
+            })
+        } else {
+            api.createLicence(editingLicence.value).then(function (resp) {
+                if (resp.status) {
+                    userFlashStore.showSuccess('New licence added');
+                    getProfile();
+                } else {
+                    userFlashStore.reportError('Error creating new licence');
+                }
+            }).catch(() => {
+                userFlashStore.reportError('Error creating licence');
+            }).finally(() => {
+                closeLicenceModal()
+            })
+        }
+    }
+
+    async function saveCertification() {
+
+        if (editingCertification.value?.id) {
+            api.updateCertification(editingCertification.value.id, editingCertification.value).then(function (resp) {
+                if (resp.status) {
+                    userFlashStore.showSuccess('Updated certification');
+                    getProfile();
+                } else {
+                    userFlashStore.reportError('Error updating certification');
+                }
+            }).catch(() => {
+                userFlashStore.reportError('Error updating certification');
+            }).finally(() => {
+                closeCertificationModal()
+            })
+        } else {
+            api.createCertification(editingCertification.value).then(function (resp) {
+                if (resp.status) {
+                    userFlashStore.showSuccess('New certification added');
+                    getProfile();
+                } else {
+                    userFlashStore.reportError('Error creating new certification');
+                }
+            }).catch(() => {
+                userFlashStore.reportError('Error creating certification');
+            }).finally(() => {
+                closeCertificationModal()
             })
         }
     }
@@ -115,6 +266,62 @@ export const useUserProfileStore = defineStore('userProfileStore', () => {
         showExperienceModal.value = false
     }
 
+    function triggerEditQualificationForm(qualification) {
+        editingQualification.value = { ...qualification };
+        showQualificationModal.value = true
+    }
+
+    function triggerAddQualificationForm() {
+        showQualificationModal.value = true
+    }
+
+    function closeQualificationModal() {
+        editingQualification.value = {};
+        showQualificationModal.value = false
+    }
+
+    function triggerEditPublicationForm(publication) {
+        editingPublication.value = { ...publication };
+        showPublicationModal.value = true
+    }
+
+    function triggerAddPublicationForm() {
+        showPublicationModal.value = true
+    }
+
+    function closePublicationModal() {
+        editingPublication.value = {};
+        showPublicationModal.value = false
+    }
+
+    function triggerEditLicenceForm(licence) {
+        editingLicence.value = { ...licence };
+        showLicenceModal.value = true
+    }
+
+    function triggerAddLicenceForm() {
+        showLicenceModal.value = true
+    }
+
+    function closeLicenceModal() {
+        editingLicence.value = {};
+        showLicenceModal.value = false
+    }
+
+    function triggerEditCertificationForm(certification) {
+        editingCertification.value = { ...certification };
+        showCertificationModal.value = true
+    }
+
+    function triggerAddCertificationForm() {
+        showCertificationModal.value = true
+    }
+
+    function closeCertificationModal() {
+        editingCertification.value = {};
+        showCertificationModal.value = false
+    }
+
     return {
         api, 
         bio,
@@ -128,15 +335,40 @@ export const useUserProfileStore = defineStore('userProfileStore', () => {
         editingReferee,
         showExperienceModal,
         editingExperience,
+        showQualificationModal,
+        editingQualification,
+        showPublicationModal,
+        editingPublication,
+        showLicenceModal,
+        editingLicence,
+        showCertificationModal,
+        editingCertification,
         getProfile,
+        saveBio,
         saveExperience,
         saveReferee,
+        saveQualification,
+        savePublication,
+        saveLicence,
+        saveCertification,
         triggerEditRefereeForm,
         triggerAddRefereeForm,
         closeRefereeModal,
         triggerEditExperienceForm,
         triggerAddExperienceForm,
-        closeExperienceModal
+        closeExperienceModal,
+        triggerEditQualificationForm,
+        triggerAddQualificationForm,
+        closeQualificationModal,
+        triggerEditPublicationForm,
+        triggerAddPublicationForm,
+        closePublicationModal,
+        triggerEditLicenceForm,
+        triggerAddLicenceForm,
+        closeLicenceModal,
+        triggerEditCertificationForm,
+        triggerAddCertificationForm,
+        closeCertificationModal
     }
 }, { 
     persist: false

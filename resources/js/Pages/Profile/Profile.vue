@@ -96,7 +96,7 @@
                     <div v-for="(qualification, index) in profileStore.qualifications" :key="index" class="mb-5">
                         <div class="flex justify-between">
                             <h3 class="h3 text-lg mb-1">{{ qualification.name }}</h3>
-                            <IconEdit />
+                            <IconEdit @click="profileStore.triggerEditQualificationForm(qualification)" />
                         </div>
                         <div class="text-sm text-slate-700 mb-3 space-y-2">
                             <p>{{ qualification.entity }}</p>
@@ -106,14 +106,15 @@
                         <p class="text-md mb-3">{{ qualification.description }}</p>
                         <hr v-if="profileStore.qualifications.length > 1 && index + 1 !== profileStore.qualifications.length" class="border-t-2 my-5 border-slate-300">
                     </div>
-                    <PrimaryButton class="mt-6">Add New</PrimaryButton>
+                    <EditQualificationForm />
+                    <PrimaryButton class="mt-6" @click="profileStore.triggerAddQualificationForm()">Add New</PrimaryButton>
                 </div>
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <h1 class="h1 text-2xl mb-6">Publications</h1>
                     <div v-for="(publication, index) in profileStore.publications" :key="index" class="mb-5">
                         <div class="flex justify-between">
                             <h3 class="h3 text-lg mb-1">{{ publication.name }}</h3>
-                            <IconEdit />
+                            <IconEdit @click="profileStore.triggerEditPublicationForm(publication)" />
                         </div>
                         <div class="text-sm text-slate-700 mb-3 space-y-2">
                             <p>{{ publication.entity }}</p>
@@ -121,16 +122,17 @@
                             <p>{{ publication.publishedAt }} </p>
                         </div>
                         <p class="text-md mb-3">{{ publication.description }}</p>
-                        <hr v-if="publications.length > 1 && index + 1 !== publications.length" class="border-t-2 my-5 border-slate-300">
+                        <hr v-if="profileStore.publications.length > 1 && index + 1 !== profileStore.publications.length" class="border-t-2 my-5 border-slate-300">
                     </div>
-                    <PrimaryButton class="mt-6">Add New</PrimaryButton>
+                    <EditPublicationForm />
+                    <PrimaryButton class="mt-6" @click="profileStore.triggerAddPublicationForm()">Add New</PrimaryButton>
                 </div>
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <h1 class="h1 text-2xl mb-6">Certifications</h1>
                     <div v-for="(certification, index) in profileStore.certifications" :key="index" class="mb-5">
                         <div class="flex justify-between">
                             <h3 class="h3 text-lg mb-1">{{ certification.name }}</h3>
-                            <IconEdit />
+                            <IconEdit @click="profileStore.triggerEditCertificationForm(certification)" />
                         </div>
                         <div class="text-sm text-slate-700 mb-3 space-y-2">
                             <p>{{ certification.entity }}</p>
@@ -140,14 +142,15 @@
                         <p class="text-md mb-3">{{ certification.description }}</p>
                         <hr v-if="profileStore.certifications.length > 1 && index + 1 !== profileStore.certifications.length" class="border-t-2 my-5 border-slate-300">
                     </div>
-                    <PrimaryButton class="mt-6">Add New</PrimaryButton>
+                    <EditCertificationForm />
+                    <PrimaryButton class="mt-6" @click="profileStore.triggerAddCertificationForm()">Add New</PrimaryButton>
                 </div>
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <h1 class="h1 text-2xl mb-6">Licences</h1>
                     <div v-for="(licence, index) in profileStore.licences" :key="index" class="mb-5">
                         <div class="flex justify-between">
                             <h3 class="h3 text-lg mb-1">{{ licence.name }}</h3>
-                            <IconEdit />
+                            <IconEdit @click="profileStore.triggerEditLicenceForm(licence)" />
                         </div>
                         <div class="text-sm text-slate-700 mb-3 space-y-2">
                             <p>{{ licence.entity }}</p>
@@ -157,7 +160,8 @@
                         <p class="text-md mb-3">{{ licence.description }}</p>
                         <hr v-if="profileStore.licences.length > 1 && index + 1 !== profileStore.licences.length" class="border-t-2 my-5 border-slate-300">
                     </div>
-                    <PrimaryButton class="mt-6">Add New</PrimaryButton>
+                    <EditLicenceForm />
+                    <PrimaryButton class="mt-6" @click="profileStore.triggerAddLicenceForm()">Add New</PrimaryButton>
                 </div>
             </div>
         </div>
@@ -179,6 +183,10 @@ import EditRefereeForm from './components/EditRefereeForm.vue'
 import EditExperienceForm from './components/EditExperienceForm.vue';
 import { monthNames } from '@/Services/DateService';
 import { useUserProfileStore } from '@/Stores/user-profile.store.js';
+import EditQualificationForm from './components/EditQualificationForm.vue';
+import EditPublicationForm from './components/EditPublicationForm.vue';
+import EditCertificationForm from './components/EditCertificationForm.vue';
+import EditLicenceForm from './components/EditLicenceForm.vue';
 
 
 const userFlashStore = useUserFlashesStore();

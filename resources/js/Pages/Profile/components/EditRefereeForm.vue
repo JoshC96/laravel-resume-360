@@ -87,12 +87,6 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextAreaInput from '@/Components/TextAreaInput.vue';
 import { useUserProfileStore } from '@/Stores/user-profile.store.js';
 
-const props = defineProps({
-    show: {
-        type: Boolean,
-        default: false,
-    },
-})
 const profileStore = useUserProfileStore();
 
 
