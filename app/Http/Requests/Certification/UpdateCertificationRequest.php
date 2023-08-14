@@ -13,7 +13,8 @@ class UpdateCertificationRequest extends FormRequest
 
     public const REQUEST_NAME = UserCertification::FIELD_NAME;
     public const REQUEST_DESCRIPTION = UserCertification::FIELD_DESCRIPTION;
-    public const REQUEST_ISSUED_AT = UserCertification::FIELD_ISSUED_AT;
+    public const REQUEST_ISSUED_MONTH = UserCertification::FIELD_ISSUED_MONTH;
+    public const REQUEST_ISSUED_YEAR = UserCertification::FIELD_ISSUED_YEAR;
     public const REQUEST_USER_ID = UserCertification::FIELD_USER_ID;
 
 
@@ -36,7 +37,8 @@ class UpdateCertificationRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'sometimes', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string', 'sometimes', 'max:500'],
-            self::REQUEST_ISSUED_AT => ['string', 'sometimes'],
+            self::REQUEST_ISSUED_MONTH => ['numeric', 'sometimes'],
+            self::REQUEST_ISSUED_YEAR => ['numeric', 'sometimes'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
         ];
     }

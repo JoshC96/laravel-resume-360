@@ -35,8 +35,8 @@ class StorePublicationRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'required', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string', 'required', 'max:500'],
-            self::REQUEST_PUBLISHED_MONTH => ['string', 'required'],
-            self::REQUEST_PUBLISHED_YEAR => ['string', 'required'],
+            self::REQUEST_PUBLISHED_MONTH => ['numeric', 'required'],
+            self::REQUEST_PUBLISHED_YEAR => ['numeric', 'required'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
         ];
     }

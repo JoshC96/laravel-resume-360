@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string|null $description
  * @property int|null $location_id
  * @property int $user_id
- * @property Carbon|null $published_at
+ * @property int $published_month
+ * @property int $published_year
  * @property Carbon $updated_at
  * @property-read User $user
  * @property-read Location|null $location

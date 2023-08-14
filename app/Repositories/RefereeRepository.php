@@ -21,16 +21,8 @@ class RefereeRepository
      */
     public function createUserReferee(User $user, array $data): UserReferee
     {
-
         $referee = new UserReferee();
         $referee->fill($data);
-
-        /** Todo: Improve this method of entity generation */
-        $entity = Entity::query()->create([
-            Entity::FIELD_NAME => $data['entity']
-        ])->save();
-        $referee->{UserReferee::FIELD_ENTITY_ID} = $user->{Entity::FIELD_ID};
-
         $referee->{UserReferee::FIELD_USER_ID} = $user->{User::FIELD_ID};
         $referee->save();
 

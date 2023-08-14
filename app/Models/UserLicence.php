@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $name
  * @property string|null $description
  * @property int $user_id
- * @property Carbon|null $issued_at
+ * @property int $issued_month
+ * @property int $issued_year
  * @property Carbon $updated_at
  * @property-read User $user
  * @property-read Carbon $created_at

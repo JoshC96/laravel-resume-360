@@ -37,8 +37,8 @@ class UpdatePublicationRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'sometimes', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string', 'sometimes', 'max:500'],
-            self::REQUEST_PUBLISHED_MONTH => ['string', 'sometimes'],
-            self::REQUEST_PUBLISHED_YEAR => ['string', 'sometimes'],
+            self::REQUEST_PUBLISHED_MONTH => ['numeric', 'sometimes'],
+            self::REQUEST_PUBLISHED_YEAR => ['numeric', 'sometimes'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
         ];
     }

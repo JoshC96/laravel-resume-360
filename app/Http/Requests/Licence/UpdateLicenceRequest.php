@@ -36,8 +36,8 @@ class UpdateLicenceRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'sometimes', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string', 'sometimes', 'max:500'],
-            self::REQUEST_ISSUED_MONTH => ['string', 'required'],
-            self::REQUEST_ISSUED_YEAR => ['string', 'required'],
+            self::REQUEST_ISSUED_MONTH => ['numeric', 'sometimes'],
+            self::REQUEST_ISSUED_YEAR => ['numeric', 'sometimes'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
         ];
     }

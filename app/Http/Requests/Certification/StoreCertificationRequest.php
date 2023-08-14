@@ -13,7 +13,8 @@ class StoreCertificationRequest extends FormRequest
 
     public const REQUEST_NAME = UserCertification::FIELD_NAME;
     public const REQUEST_DESCRIPTION = UserCertification::FIELD_DESCRIPTION;
-    public const REQUEST_ISSUED_AT = UserCertification::FIELD_ISSUED_AT;
+    public const REQUEST_ISSUED_MONTH = UserCertification::FIELD_ISSUED_MONTH;
+    public const REQUEST_ISSUED_YEAR = UserCertification::FIELD_ISSUED_YEAR;
     public const REQUEST_USER_ID = UserCertification::FIELD_USER_ID;
 
     /**
@@ -35,7 +36,8 @@ class StoreCertificationRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'required', 'max:100'],
             self::REQUEST_DESCRIPTION => ['string','sometimes', 'max:500'],
-            self::REQUEST_ISSUED_AT => ['string', 'required'],
+            self::REQUEST_ISSUED_MONTH => ['numeric', 'required'],
+            self::REQUEST_ISSUED_YEAR => ['numeric', 'required'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
         ];
     }

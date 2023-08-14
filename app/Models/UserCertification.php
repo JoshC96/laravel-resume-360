@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $name
  * @property string|null $description
  * @property int $user_id
- * @property Carbon|null $issued_at
+ * @property int $issued_month
+ * @property int $issued_year
  * @property Carbon $updated_at
  * @property-read User $user
  * @property-read Carbon $created_at
@@ -22,7 +23,8 @@ class UserCertification extends Model
     public const FIELD_ID = 'id';
     public const FIELD_NAME = 'name';
     public const FIELD_DESCRIPTION = 'description';
-    public const FIELD_ISSUED_AT = 'issued_at';
+    public const FIELD_ISSUED_MONTH = 'issued_month';
+    public const FIELD_ISSUED_YEAR = 'issued_year';
     public const FIELD_USER_ID = 'user_id';
 
     public const RELATION_USER = 'user';
