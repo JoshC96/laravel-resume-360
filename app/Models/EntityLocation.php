@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -20,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class EntityLocation extends Model
 {
+    use HasFactory;
+
     public const TABLE = 'entity_locations';
 
     public const FIELD_ID = 'id';
