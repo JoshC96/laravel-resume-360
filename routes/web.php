@@ -35,12 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/account', [AccountController::class, 'update'])->name('account.update');
     Route::delete('/account', [AccountController::class, 'destroy'])->name('account.destroy');
 
-    Route::get('/jobs', [AccountController::class, 'edit'])->name('jobs');
+    Route::prefix('profile')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('Profile/Profile');
+        })->name('profile');
+    });
 
-    Route::prefix('profile')->controller(ProfileController::class)->group(function () {
-        Route::get('/', function () {return Inertia::render('Profile/Profile');})->name('profile');
-        Route::get('/resumes', 'getResumes')->name('resumes');
-        Route::get('/cover-letters', 'getCoverLetters')->name('cover-letters');
+    Route::prefix('jobs')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('Jobs/Jobs');
+        })->name('jobs');
     });
 });
 
