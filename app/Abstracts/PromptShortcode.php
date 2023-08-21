@@ -12,7 +12,7 @@ abstract class PromptShortcode extends AbstractShortcode
 
     public function handle(mixed $data, \Closure $next)
     {
-        $data['message'] = Str::contains($data['message'], "{{$this->getKey()}}")
+        $data['message'] = Str::contains($data['message'], "{{{$this->getKey()}}}")
             ? $this->replace($data['message'], $this->getValue($data['payload']))
             : $data['message'];
 

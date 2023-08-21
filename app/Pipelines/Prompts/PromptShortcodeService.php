@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Pipelines\Prompts\Shortcodes;
+namespace App\Pipelines\Prompts;
 
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\App;
 use App\Abstracts\PromptShortcode;
 use App\Pipelines\Prompts\PromptPayload;
+use App\Pipelines\Prompts\Shortcodes\UserNameShortcode;
 
 class PromptShortcodeService {
 
@@ -38,6 +39,8 @@ class PromptShortcodeService {
         $pipeline->send(compact('message', 'payload'))
             ->through(self::SHORTCODES)
             ->via('handle')
-            ->then(function($result) use (&$message) { $message = $result['message']; })
+            ->then(function($result) use (&$message) { $message = $result['message']; });
+
+        return $message;
     }
 }

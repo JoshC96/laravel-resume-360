@@ -2,10 +2,10 @@
 
 namespace App\Pipelines\Prompts;
 
+use App\Models\Prompt;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Support\Collection;
-use Prompt;
 
 class PromptPayload implements Jsonable
 {
@@ -15,7 +15,7 @@ class PromptPayload implements Jsonable
      * @param Collection $data 
      * @return void 
      */
-    public function __construct(public Prompt $prompt, public Collection $data) {}
+    public function __construct(public Collection $data) {}
 
     /**
      * @param int $options 
@@ -34,7 +34,6 @@ class PromptPayload implements Jsonable
     public function toArray(): array
     {
         return [
-            'prompt' => $this->prompt->toArray(),
             'data' => $this->data->toArray()
         ];
     }
@@ -48,7 +47,6 @@ class PromptPayload implements Jsonable
         $object = json_decode($json, true);
 
         return new PromptPayload(
-            $object['Prompt'],
             collect($object['data'])
         );
     }

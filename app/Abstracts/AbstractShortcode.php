@@ -15,7 +15,7 @@ abstract class AbstractShortcode implements ShortcodeInterface
      */
     public function replace(string $data, string $value): string
     {
-        return Str::replace("{{$this->getKey()}}", $value, $data);
+        return Str::replace("{{{$this->getKey()}}}", $value, $data);
     }
     
 }
