@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('job_listings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->longText('description');
             $table->string('industry');
             $table->string('role');
             $table->float('salary_min')->nullable();

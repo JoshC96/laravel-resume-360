@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Users\UserController;
+use App\Http\Controllers\Api\JobListings\JobListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,12 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
             Route::patch('/{licence}', 'updateLicence');
             Route::delete('/{licence}', 'destroyLicence');
         }); 
+    });
+
+    Route::prefix('jobs')->controller(JobListingController::class)->group(function () {
+        Route::get('/', 'getJobs');
+        Route::get('/recommended-jobs', 'getRecommendedJobs');
+        Route::post('/quick-apply', 'quickApply');
     });
 
 });

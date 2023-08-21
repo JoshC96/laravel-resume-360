@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -14,10 +15,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $updated_at
  * @property-read Collection|null $locations
  * @property-read Collection|null $contacts
+ * @property-read Collection|null $jobs
  * @property-read Carbon $created_at
  */
 class Entity extends Model
 {
+    use HasFactory;
+
     public const TABLE = 'entities';
 
     public const FIELD_ID = 'id';
@@ -28,6 +32,7 @@ class Entity extends Model
 
     public const RELATION_LOCATIONS = 'locations';
     public const RELATION_CONTACTS = 'contacts';
+    public const RELATION_JOBS = 'jobs';
 
     protected $table = self::TABLE;
     protected $guarded = [
@@ -40,7 +45,7 @@ class Entity extends Model
      */
     public function locations(): HasMany
     {
-        return $this->hasMany(EntityLocation::TABLE);
+        return $this->hasMany(EntityLocation::class);
     }
 
     /**
@@ -48,6 +53,14 @@ class Entity extends Model
      */
     public function contacts(): HasMany
     {
-        return $this->hasMany(EntityContact::TABLE);
+        return $this->hasMany(EntityContact::class);
+    }
+
+    /**
+     * @return HasMany 
+     */
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(JobListing::class);
     }
 }

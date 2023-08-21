@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,11 +24,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class EntityContact extends Model
 {
+    use HasFactory;
+
     public const TABLE = 'entity_contacts';
 
     public const FIELD_ID = 'id';
     public const FIELD_NAME = 'name';
-    public const FIELD_TYPE = 'position';
+    public const FIELD_POSITION = 'position';
     public const FIELD_DESCRIPTION = 'description';
     public const FIELD_PHONE = 'phone';
     public const FIELD_EMAIL = 'email';

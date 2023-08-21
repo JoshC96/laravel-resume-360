@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class JobListing extends Model
 {
+    use HasFactory;
+
     public const TABLE = 'job_listings';
 
     public const FIELD_ID = 'id';
@@ -48,6 +51,6 @@ class JobListing extends Model
      */
     public function entity(): BelongsTo
     {
-        return $this->belongsTo(Entity::TABLE, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
+        return $this->belongsTo(Entity::class, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
     }
 }
