@@ -54,7 +54,7 @@ class UserJobApplication extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::TABLE, self::FIELD_USER_ID, User::FIELD_ID);
+        return $this->belongsTo(User::class, self::FIELD_USER_ID, User::FIELD_ID);
     }
 
     /**
@@ -62,7 +62,7 @@ class UserJobApplication extends Model
      */
     public function jobListing(): HasOne
     {
-        return $this->hasOne(JobListing::TABLE, self::FIELD_JOB_LISTING_ID, JobListing::FIELD_ID);
+        return $this->hasOne(JobListing::class, self::FIELD_JOB_LISTING_ID, JobListing::FIELD_ID);
     }
 
     /**
@@ -70,7 +70,7 @@ class UserJobApplication extends Model
      */
     public function resume(): HasOne
     {
-        return $this->hasOne(UserResume::TABLE, self::FIELD_RESUME_ID, UserResume::FIELD_ID);
+        return $this->hasOne(UserResume::class, self::FIELD_RESUME_ID, UserResume::FIELD_ID);
     }
 
     /**
@@ -78,6 +78,6 @@ class UserJobApplication extends Model
      */
     public function coverLetter(): HasOne
     {
-        return $this->hasOne(UserCoverLetter::TABLE, self::FIELD_COVER_LETTER_ID, UserCoverLetter::FIELD_ID);
+        return $this->hasOne(UserCoverLetter::class, self::FIELD_COVER_LETTER_ID, UserCoverLetter::FIELD_ID);
     }
 }

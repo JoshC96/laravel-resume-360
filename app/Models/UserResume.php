@@ -39,6 +39,6 @@ class UserResume extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::TABLE, self::FIELD_USER_ID, User::FIELD_ID);
+        return $this->belongsTo(User::class, self::FIELD_USER_ID, User::FIELD_ID);
     }
 }
