@@ -20,7 +20,7 @@ class UserProfileResource extends JsonResource
 
         return [
             UserProfileRequest::REQUEST_BIO => $user->{User::FIELD_BIO} ?? '',
-            UserProfileRequest::REQUEST_REFEREES => $user->{User::RELATION_REFEREES},
+            UserProfileRequest::REQUEST_REFEREES => UserRefereeResource::collection($user->{User::RELATION_REFEREES}),
             UserProfileRequest::REQUEST_QUALFICATIONS => $user->{User::RELATION_QUALIFICATIONS},
             UserProfileRequest::REQUEST_WORK_EXPERIENCES => $user->{User::RELATION_WORK_EXPERIENCES},
             UserProfileRequest::REQUEST_CERTIFICATIONS => $user->{User::RELATION_CERTIFICATIONS},

@@ -17,7 +17,7 @@ class StoreRefereeRequest extends FormRequest
     public const REQUEST_PHONE = UserReferee::FIELD_PHONE;
     public const REQUEST_EMAIL = UserReferee::FIELD_EMAIL;
     public const REQUEST_USER_ID = UserReferee::FIELD_USER_ID;
-    public const REQUEST_ENTITY_ID = UserReferee::FIELD_ENTITY_ID;
+    public const REQUEST_ORGANISATION = UserReferee::FIELD_ORGANISATION;
     public const REQUEST_COMPANY = 'company';
 
 
@@ -44,8 +44,7 @@ class StoreRefereeRequest extends FormRequest
             self::REQUEST_PHONE => ['string', 'nullable', 'max:15'],
             self::REQUEST_EMAIL => ['email:rfc,dns', 'sometimes', 'max:75'],
             self::REQUEST_USER_ID => ['numeric', 'sometimes', Rule::exists(User::TABLE, User::FIELD_ID)],
-            self::REQUEST_ENTITY_ID => ['numeric', 'sometimes'],
-            self::REQUEST_COMPANY => ['string', 'nullable'],
+            self::REQUEST_ORGANISATION => ['string', 'nullable',  'sometimes'],
             'entity' => ['string', 'required'],
         ];
     }

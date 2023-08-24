@@ -30,11 +30,10 @@ class UserReferee extends Model
     public const FIELD_DESCRIPTION = 'description';
     public const FIELD_PHONE = 'phone';
     public const FIELD_EMAIL = 'email';
+    public const FIELD_ORGANISATION = 'organisation';
     public const FIELD_USER_ID = 'user_id';
-    public const FIELD_ENTITY_ID = 'entity_id';
 
     public const RELATION_USER = 'user';
-    public const RELATION_ENTITY = 'entity';
 
     protected $table = self::TABLE;
     protected $guarded = [
@@ -46,14 +45,6 @@ class UserReferee extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::TABLE, self::FIELD_USER_ID, User::FIELD_ID);
-    }
-
-    /**
-     * @return HasOne 
-     */
-    public function entity(): HasOne
-    {
-        return $this->hasOne(Entity::TABLE, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
+        return $this->belongsTo(User::class, self::FIELD_USER_ID, User::FIELD_ID);
     }
 }
