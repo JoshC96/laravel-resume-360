@@ -7,6 +7,7 @@ use App\Http\Requests\User\UserProfileRequest;
 use App\Http\Resources\JobListings\JobListingCollection;
 use App\Http\Resources\JobListings\JobListingResource;
 use App\Http\Resources\User\UserProfileResource;
+use App\Jobs\QuickApplicationJob;
 use App\Models\JobListing;
 use App\Repositories\JobListingRepository;
 use Exception;
@@ -17,6 +18,7 @@ use OpenAI\Laravel\Facades\OpenAI;
 use App\Models\Prompt;
 use App\Pipelines\Prompts\PromptPayloadFactory;
 use App\Pipelines\Prompts\PromptShortcodeService;
+use App\Services\OpenAiPromptService;
 
 class JobListingController extends ApiController
 {
@@ -24,7 +26,7 @@ class JobListingController extends ApiController
     public function __construct(
         Request $request, 
         protected JobListingRepository $jobListingRepository,
-        protected PromptShortcodeService $promptShortcodeService
+        protected OpenAiPromptService $openAiPromptService
     )
     {
         parent::__construct($request);
@@ -75,31 +77,14 @@ class JobListingController extends ApiController
      * @param Request $request 
      * @return JsonResponse 
      */
-    public function quickApply(Request $request): JsonResponse
+    public function quickApply(JobListing $jobListing, Request $request): JsonResponse
     {
-        $content = Prompt::STANDARD_TEST;
+        $data = $request->collect();
 
-        $payload = PromptPayloadFactory::create(['user' => Auth::user()]);
+        QuickApplicationJob::dispatch(Auth::user(), $jobListing);
 
-        $filledPrompt = $this->promptShortcodeService->handle($content, $payload);
-
-        $chat = OpenAI::chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ['role' => 'user', 'content' => $filledPrompt],
-            ],
+        return $this->formatResponse([
+            'status' => true
         ]);
-
-        try {
-            return $this->formatResponse([
-                'prompt' => $filledPrompt,
-                'response' => $chat['choices'][0]['message']['content'],
-            ]);
-        } catch (Exception $exception) {
-            return $this->formatResponse([
-                'status' => false,
-                'message' => 'Failed to retrieve jobs, error code:' . $exception->getMessage()
-            ]);
-        }
     }
 }
