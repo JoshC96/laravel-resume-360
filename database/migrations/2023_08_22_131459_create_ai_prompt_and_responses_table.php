@@ -13,11 +13,18 @@ return new class extends Migration
     {
         Schema::create('prompts', function (Blueprint $table) {
             $table->id();
+            $table->longText('content');
             $table->timestamps();
         });
 
         Schema::create('ai_responses', function (Blueprint $table) {
             $table->id();
+            $table->integer('source')->default(0);
+            $table->longText('prompt');
+            $table->longText('content');
+            $table->jsonb('payload');
+            $table->string('remote_id')->nullable();
+            $table->string('model')->nullable();
             $table->timestamps();
         });
     }

@@ -35,7 +35,7 @@ class UserJobApplication extends Model
     public const FIELD_VIEWED_AT = 'viewed_at';
     public const FIELD_USER_ID = 'user_id';
     public const FIELD_JOB_LISTING_ID = 'job_listing_id';
-    public const FIELD_COVER_LETTER_ID = 'cover_letter_id';
+    public const FIELD_COVER_LETTER = 'cover_letter';
     public const FIELD_RESUME_ID = 'resume_id';
 
     public const RELATION_USER = 'user';
@@ -71,13 +71,5 @@ class UserJobApplication extends Model
     public function resume(): HasOne
     {
         return $this->hasOne(UserResume::class, self::FIELD_RESUME_ID, UserResume::FIELD_ID);
-    }
-
-    /**
-     * @return HasOne 
-     */
-    public function coverLetter(): HasOne
-    {
-        return $this->hasOne(UserCoverLetter::class, self::FIELD_COVER_LETTER_ID, UserCoverLetter::FIELD_ID);
     }
 }
