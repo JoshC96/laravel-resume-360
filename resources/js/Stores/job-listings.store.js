@@ -21,8 +21,8 @@ export const useJobListingStore = defineStore('jobListingStore', () => {
         recommendedJobs.value = data.resp.jobs;
     }
 
-    async function quickApply(prompt) {
-        return await api.quickApply(prompt);
+    async function quickApply(jobId) {
+        return await api.quickApply(jobId);
     }
 
     return {

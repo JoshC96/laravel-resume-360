@@ -73,8 +73,9 @@
                                 </div>
                                 <p class="mt-3">{{ job.description }}</p>
                                 <div class="flex justify-end space-x-2">
-                                    <PrimaryButton class="mt-6" @click="console.log('test')" >
+                                    <PrimaryButton class="mt-6" @click="quickApply(job.id)" >
                                         Quick Apply
+                                        <LoadingSpinner v-if="loading" classes="text-white" ></LoadingSpinner>
                                     </PrimaryButton>
                                     <SecondaryButton class="mt-6" @click="console.log('test')" >
                                         View Job
@@ -83,8 +84,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="col-span-1 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <h3 class="h3 text-xl mb-5">Recommended Jobs</h3>
@@ -115,7 +114,7 @@
         </div>
 
         <Modal 
-            :show="true"
+            :show="false"
             @close=""
             @confirm="quickApply"
         >
@@ -144,7 +143,6 @@
                             class="mt-1 block w-full"
                             v-model="response"
                         />
-                        <LoadingSpinner v-if="loading"></LoadingSpinner>
                     </div>
                 </div>
             </template>
@@ -198,9 +196,9 @@ onMounted(async () => {
     jobListingStore.getRecommendedJobs();
 })
 
-async function quickApply() {
+async function quickApply(jobId) {
     loading.value = true;
-    const { data } = await jobListingStore.quickApply({prompt: prompt.value});
+    const { data } = await jobListingStore.quickApply(jobId);
     response.value = data.resp.response
     loading.value = false;
 }

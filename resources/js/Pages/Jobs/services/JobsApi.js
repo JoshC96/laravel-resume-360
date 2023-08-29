@@ -31,8 +31,8 @@ export default class JobsApi extends ApiService {
         return this.axios.delete(`/${JobId}`, payload)
     }
 
-    quickApply(payload) {
-        return this.axios.post(`/quick-apply`, payload)
+    quickApply(jobId) {
+        return this.axios.get(`/${jobId}/quick-apply`)
     }
 
 }

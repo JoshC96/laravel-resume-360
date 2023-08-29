@@ -82,7 +82,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::prefix('jobs')->controller(JobListingController::class)->group(function () {
         Route::get('/', 'getJobs');
         Route::get('/recommended-jobs', 'getRecommendedJobs');
-        Route::post('/quick-apply', 'quickApply');
+        Route::get('/{jobListing}/quick-apply', 'quickApply');
     });
 
 });
