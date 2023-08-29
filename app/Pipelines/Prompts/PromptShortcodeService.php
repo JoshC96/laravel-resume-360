@@ -6,12 +6,16 @@ use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\App;
 use App\Abstracts\PromptShortcode;
 use App\Pipelines\Prompts\PromptPayload;
+use App\Pipelines\Prompts\Shortcodes\RoleShortcode;
 use App\Pipelines\Prompts\Shortcodes\UserNameShortcode;
+use App\Pipelines\Prompts\Shortcodes\UserProfileShortcode;
 
 class PromptShortcodeService {
 
     public const SHORTCODES = [
-        UserNameShortcode::class
+        UserNameShortcode::class,
+        UserProfileShortcode::class,
+        RoleShortcode::class
     ];
 
     /**
