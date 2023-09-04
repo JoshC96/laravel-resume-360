@@ -13,7 +13,7 @@ export const useJobListingStore = defineStore('jobListingStore', () => {
     
     async function getJobs() {
         const { data } = await api.getJobs();
-        jobs.value = data.resp.jobs.data;
+        jobs.value = data.resp.jobs;
     }
 
     async function getRecommendedJobs() {
