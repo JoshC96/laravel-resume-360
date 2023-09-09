@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import TextInput from '@/Components/TextInput.vue';
 import Modal from '@/Components/Modal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -66,6 +66,13 @@ const finishedAt = ref({
     month: new Date().getMonth(),
     year: new Date().getFullYear()
 });
+
+onMounted(() => {
+    profileStore.editingExperience.started_month = startedAt.value.month;
+    profileStore.editingExperience.started_year = startedAt.value.year;
+    profileStore.editingExperience.finished_month = finishedAt.value.month;
+    profileStore.editingExperience.finished_year = finishedAt.value.year;
+})
 
 watch(startedAt, (newVal) => {
     profileStore.editingExperience.started_month = newVal.month;
