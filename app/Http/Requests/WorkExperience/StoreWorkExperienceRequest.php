@@ -38,9 +38,9 @@ class StoreWorkExperienceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            self::REQUEST_NAME => ['string', 'nullable', 'max:100'],
-            self::REQUEST_POSITION => ['string', 'required', 'max:100'],
-            self::REQUEST_DESCRIPTION => ['string','required', 'max:500'],
+            self::REQUEST_NAME => ['string', 'nullable'],
+            self::REQUEST_POSITION => ['string', 'required'],
+            self::REQUEST_DESCRIPTION => ['string','required'],
             self::REQUEST_STARTED_MONTH => ['numeric', 'required'],
             self::REQUEST_STARTED_YEAR => ['numeric', 'required'],
             self::REQUEST_FINISHED_MONTH => ['numeric', 'required'],
