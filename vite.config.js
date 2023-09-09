@@ -6,13 +6,15 @@ export default defineConfig({
      server : {
         hmr:{
             host: process.env.DDEV_HOSTNAME,
-            protocol : 'wss'
-        }
+            protocol : 'wss',
+            refresh: false
+        },
+        refresh: false
     },
     plugins: [
         laravel({
             input: 'resources/js/app.js',
-            refresh: ['resources/**']
+            // refresh: ['resources/**']
         }),
         vue({
             template: {
