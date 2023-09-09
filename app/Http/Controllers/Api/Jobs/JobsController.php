@@ -37,7 +37,15 @@ class JobsController extends ApiController
 
         try {
             return $this->formatResponse([
-                'jobs' => JobListingResource::collection(JobListing::query()->paginate())
+                'jobs_paginated' => JobListing::query()
+                    ->paginate(
+                        $data['per_page'] ?? 20,
+                        ['*'],
+                        'page',
+                        $data['page'] ?? 1
+                    )
+                    ->onEachSide(1)
+                    ->through(fn ($jobListing) => new JobListingResource($jobListing))
             ]);
         } catch (Exception $exception) {
             return $this->formatResponse([
@@ -101,6 +109,27 @@ class JobsController extends ApiController
 
         return $this->formatResponse([
             'status' => true
+        ]);
+    }
+
+    /**
+     * @param Request $request 
+     * @return JsonResponse 
+     */
+    public function generateCoverLetter(JobListing $jobListing, Request $request): JsonResponse
+    {
+        $data = $request->collect();
+
+        $coverLetterPrompt = $this->openAiPromptService->generateCoverLetterPrompt(Auth::user(), $jobListing);
+
+        [
+            'prompt' => $coverLetterPrompt,
+            'response' => $coverLetterResponse
+        ] = $this->openAiPromptService->sendPrompt($coverLetterPrompt);
+
+        return $this->formatResponse([
+            'status' => true,
+            'coverLetter' => $coverLetterResponse
         ]);
     }
 }
