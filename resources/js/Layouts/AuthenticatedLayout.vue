@@ -15,7 +15,6 @@
                     <UserFlash />
 
                 </main>
-                <Footer />
             </div>
         </div>
     </div>
@@ -24,6 +23,5 @@
 <script setup>
 import Sidebar from '@/Sidebar';
 import Header from '@/Layouts/Components/Header';
-import Footer from '@/Layouts/Components/Footer';
 import UserFlash from './Components/UserFlash.vue';
 </script>
