@@ -84,6 +84,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('/recommended-jobs', 'getRecommendedJobs');
         Route::get('/applications', 'getApplications');
         Route::get('/{jobListing}/quick-apply', 'quickApply');
+        Route::get('/{jobListing}/generate-cover-letter', 'generateCoverLetter');
     });
 
 });

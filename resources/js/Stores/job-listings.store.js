@@ -8,12 +8,18 @@ import JobsApi from "@/Pages/Jobs/services/JobsApi";
 export const useJobListingStore = defineStore('jobListingStore', () => {
     const userFlashStore = useUserFlashesStore();
     const api = JobsApi.make();
-    const jobs = ref([]);
+    const jobs = ref();
+    const jobPaginationData = ref();
     const recommendedJobs = ref([]);
     
-    async function getJobs() {
-        const { data } = await api.getJobs();
-        jobs.value = data.resp.jobs;
+    async function getJobs(page = 1, perPage) {
+        const { data } = await api.getJobs({ page: page, per_page: perPage });
+        jobs.value = data.resp.jobs_paginated.data;
+        jobPaginationData.value = data.resp.jobs_paginated;
+    }
+
+    async function handleJobPaginationEvent(newPageUrl) {
+        getJobs(newPageUrl.newPage, newPageUrl.perPage);
     }
 
     async function getRecommendedJobs() {
@@ -28,11 +34,11 @@ export const useJobListingStore = defineStore('jobListingStore', () => {
     return {
         api, 
         jobs,
+        jobPaginationData,
         recommendedJobs,
         getJobs,
         getRecommendedJobs,
-        quickApply
+        quickApply,
+        handleJobPaginationEvent
     }
-}, { 
-    persist: false
 })
