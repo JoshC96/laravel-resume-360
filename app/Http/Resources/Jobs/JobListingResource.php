@@ -19,6 +19,7 @@ class JobListingResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->{JobListing::FIELD_ID},
             'title' => $this->{JobListing::FIELD_TITLE},
             'role' => $this->{JobListing::FIELD_ROLE},
             'description' => $this->{JobListing::FIELD_DESCRIPTION},
