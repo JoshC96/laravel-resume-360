@@ -8,6 +8,7 @@ use App\Models\Prompt;
 use App\Models\User;
 use App\Pipelines\Prompts\PromptPayloadFactory;
 use App\Pipelines\Prompts\PromptShortcodeService;
+use App\Repositories\AiPromptRepository;
 use App\Repositories\AiResponseRepository;
 use Exception;
 use Illuminate\Support\Arr;
@@ -23,7 +24,8 @@ class OpenAiPromptService
 
     public function __construct(
         protected PromptShortcodeService $promptShortcodeService,
-        protected AiResponseRepository $aiResponseRepository
+        protected AiResponseRepository $aiResponseRepository,
+        protected AiPromptRepository $aiPromptRepository
     ) {}
 
     /**
