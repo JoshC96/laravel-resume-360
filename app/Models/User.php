@@ -143,14 +143,6 @@ class User extends Authenticatable
     /**
      * @return HasMany 
      */
-    public function entityContact(): HasMany
-    {
-        return $this->hasMany(EntityContact::class, EntityContact::FIELD_USER_ID, self::FIELD_ID);
-    }
-
-    /**
-     * @return HasMany 
-     */
     public function coverLetters(): HasMany
     {
         return $this->hasMany(UserCoverLetter::class, UserCoverLetter::FIELD_USER_ID, self::FIELD_ID);

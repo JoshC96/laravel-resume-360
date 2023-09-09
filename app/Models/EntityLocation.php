@@ -46,7 +46,7 @@ class EntityLocation extends Model
      */
     public function location(): HasOne
     {
-        return $this->hasOne(Location::TABLE, self::FIELD_LOCATION_ID, Location::FIELD_ID);
+        return $this->hasOne(Location::class, self::FIELD_LOCATION_ID, Location::FIELD_ID);
     }
 
     /**
@@ -54,6 +54,6 @@ class EntityLocation extends Model
      */
     public function entity(): BelongsTo
     {
-        return $this->belongsTo(Entity::TABLE, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
+        return $this->belongsTo(Entity::class, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
     }
 }

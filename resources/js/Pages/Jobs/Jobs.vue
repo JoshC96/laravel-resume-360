@@ -1,6 +1,7 @@
 <template>
     <AuthenticatedLayout>
         <div class="py-6">
+            
             <div class="grid grid-cols-3 max-w-7xl mx-auto sm:px-6 lg:px-8 gap-4">
                 <div class="col-span-2 p-4 sm:p-8 bg-white shadow sm:rounded-lg"> 
 
@@ -68,88 +69,69 @@
                                     </div>
                                     <div class="text-right">
                                         <h5 class="text-md">{{ job.entity }}</h5>
-                                        <h6 class="text-sm">{{ job.location }}</h6>
+                                        <h6 class="text-sm">Added {{ job.createdAt }}</h6>
                                     </div>
                                 </div>
                                 <p class="mt-3">{{ job.description }}</p>
                                 <div class="flex justify-end space-x-2">
-                                    <PrimaryButton class="mt-6" @click="console.log('test')" >
+                                    <PrimaryButton class="mt-6" @click="job.showConfirmation = true" >
                                         Quick Apply
+                                        <LoadingSpinner v-if="job.loading" classes="text-white" ></LoadingSpinner>
                                     </PrimaryButton>
                                     <SecondaryButton class="mt-6" @click="console.log('test')" >
                                         View Job
                                     </SecondaryButton>
                                 </div>
                             </div>
+                            <Modal 
+                                :show="job.showConfirmation"
+                                @close="job.showConfirmation = false"
+                                @confirm="quickApply(job)"
+                            >
+                                <template v-slot:header>
+                                    <h2 class="h2 text-xl">Quick Apply for {{ job.role }}</h2>
+                                </template>
+                                <template v-slot:content>
+                                    <div class="space-y-6">
+                                        <div>
+                                            <p>By clicking 'Confirm' you confirm that we can generate an application based on your information and this will be shared with the company advertising the role.</p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </Modal>
                         </div>
                     </div>
-
-
                 </div>
-                <div class="col-span-1 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <h3 class="h3 text-xl mb-5">Recommended Jobs</h3>
-                    <div v-for="(job, index) in jobListingStore.recommendedJobs" :key="index" class="mb-5">
-                        <div class="border border-slate-200 shadow rounded-md p-3">
-                            <div class="">
+                <div class="col-span-1">
+                    <div class=" p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <h3 class="h3 text-xl mb-5">Recommended Jobs</h3>
+                        <div v-for="(job, index) in jobListingStore.recommendedJobs" :key="index" class="mb-5">
+                            <div class="border border-slate-200 shadow rounded-md p-3">
                                 <div>
-                                    <h4 class="h3 text-lg text-bold">{{ job.role }}</h4>
-                                    <h5 class="text-sm">{{ job.entity }}</h5>
+                                    <div>
+                                        <h4 class="h3 text-lg text-bold">{{ job.role }}</h4>
+                                        <h5 class="text-sm">{{ job.entity }}</h5>
+                                    </div>
+                                    <div class="text-right">
+                                        <h6 class="text-sm">{{ job.location }}</h6>
+                                    </div>
                                 </div>
-                                <div class="text-right">
-                                    <h6 class="text-sm">{{ job.location }}</h6>
+                                <p class="mt-3">{{ job.description }}</p>
+                                <div class="flex justify-end space-x-2">
+                                    <PrimarySmallButton class="mt-3" @click="console.log('test')" >
+                                        Apply
+                                    </PrimarySmallButton>
+                                    <SecondarySmallButton class="mt-3" @click="console.log('test')" >
+                                        View
+                                    </SecondarySmallButton>
                                 </div>
-                            </div>
-                            <p class="mt-3">{{ job.description }}</p>
-                            <div class="flex justify-end space-x-2">
-                                <PrimarySmallButton class="mt-3" @click="console.log('test')" >
-                                    Apply
-                                </PrimarySmallButton>
-                                <SecondarySmallButton class="mt-3" @click="console.log('test')" >
-                                    View
-                                </SecondarySmallButton>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
-
-        <Modal 
-            :show="true"
-            @close=""
-            @confirm="quickApply"
-        >
-            <template v-slot:header>
-                <h2 class="h2 text-xl"> Send Open AI Prompt</h2>
-            </template>
-            <template v-slot:content>
-                <div class="space-y-6">
-                    <div>
-                        <InputLabel for="prompt" value="Prompt *" />
-
-                        <TextInput
-                            id="prompt"
-                            type="text"
-                            class="mt-1 block w-full"
-                            v-model="prompt"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <InputLabel for="response" value="Response *" />
-
-                        <TextAreaInput
-                            id="response"
-                            type="text"
-                            class="mt-1 block w-full"
-                            v-model="response"
-                        />
-                        <LoadingSpinner v-if="loading"></LoadingSpinner>
-                    </div>
-                </div>
-            </template>
-        </Modal>
-
     </AuthenticatedLayout>
 </template>
 
@@ -165,7 +147,6 @@ import TextInput from '@/Components/TextInput.vue';
 import PrimarySmallButton from '@/Components/PrimarySmallButton.vue';
 import SecondarySmallButton from '@/Components/SecondarySmallButton.vue';
 import Modal from '@/Components/Modal.vue';
-import TextAreaInput from '@/Components/TextAreaInput.vue';
 import LoadingSpinner from '@/Components/LoadingSpinner.vue';
 
 const jobListingStore = useJobListingStore();
@@ -176,10 +157,6 @@ const dateListed = ref([
 const keywords = ref('');
 const location = ref('');
 const industry = ref('');
-
-const prompt = ref('');
-const response = ref('');
-const loading = ref(false);
 
 const dateListedFormat = (date) => {
     const firstDay = date[0].getDate();
@@ -198,11 +175,12 @@ onMounted(async () => {
     jobListingStore.getRecommendedJobs();
 })
 
-async function quickApply() {
-    loading.value = true;
-    const { data } = await jobListingStore.quickApply({prompt: prompt.value});
-    response.value = data.resp.response
-    loading.value = false;
+async function quickApply(job) {
+    job.showConfirmation = true;
+    job.loading = true;
+    const { data } = await jobListingStore.quickApply(job.id);
+    job.loading = false;
+    job.showConfirmation = false;
 }
 
 </script>

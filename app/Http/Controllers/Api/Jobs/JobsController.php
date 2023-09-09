@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Api\JobListings;
+namespace App\Http\Controllers\Api\Jobs;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\User\UserProfileRequest;
-use App\Http\Resources\JobListings\JobListingCollection;
-use App\Http\Resources\JobListings\JobListingResource;
-use App\Http\Resources\User\UserProfileResource;
+use App\Http\Resources\Jobs\JobApplicationResource;
+use App\Http\Resources\Jobs\JobListingResource;
+use App\Jobs\QuickApplicationJob;
 use App\Models\JobListing;
+use App\Models\UserJobApplication;
 use App\Repositories\JobListingRepository;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use OpenAI\Laravel\Facades\OpenAI;
+use App\Services\OpenAiPromptService;
 
-class JobListingController extends ApiController
+class JobsController extends ApiController
 {
 
     public function __construct(
         Request $request, 
         protected JobListingRepository $jobListingRepository,
+        protected OpenAiPromptService $openAiPromptService
     )
     {
         parent::__construct($request);
@@ -36,7 +37,7 @@ class JobListingController extends ApiController
 
         try {
             return $this->formatResponse([
-                'jobs' => JobListing::query()->paginate()
+                'jobs' => JobListingResource::collection(JobListing::query()->paginate())
             ]);
         } catch (Exception $exception) {
             return $this->formatResponse([
@@ -56,7 +57,7 @@ class JobListingController extends ApiController
 
         try {
             return $this->formatResponse([
-                'jobs' => JobListing::inRandomOrder()->limit(5)->get()
+                'jobs' => JobListingResource::collection(JobListing::inRandomOrder()->limit(5)->get())
             ]);
         } catch (Exception $exception) {
             return $this->formatResponse([
@@ -71,27 +72,35 @@ class JobListingController extends ApiController
      * @param Request $request 
      * @return JsonResponse 
      */
-    public function quickApply(Request $request): JsonResponse
+    public function getApplications(Request $request): JsonResponse
     {
-        $data = $request->get('prompt');
-
-        $chat = OpenAI::chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ['role' => 'user', 'content' => $data],
-            ],
-        ]);
+        $data = $request->all();
 
         try {
             return $this->formatResponse([
-                'response' => $chat['choices'][0]['message']['content'],
-                'models' => OpenAI::models()->list()
+                'applications' => JobApplicationResource::collection(UserJobApplication::query()->paginate(10))
             ]);
         } catch (Exception $exception) {
             return $this->formatResponse([
                 'status' => false,
-                'message' => 'Failed to retrieve jobs, error code:' . $exception->getMessage()
+                'message' => 'Failed to retrieve applications, error code:' . $exception->getMessage()
             ]);
         }
+    }
+
+
+    /**
+     * @param Request $request 
+     * @return JsonResponse 
+     */
+    public function quickApply(JobListing $jobListing, Request $request): JsonResponse
+    {
+        $data = $request->collect();
+
+        QuickApplicationJob::dispatch(Auth::user(), $jobListing);
+
+        return $this->formatResponse([
+            'status' => true
+        ]);
     }
 }

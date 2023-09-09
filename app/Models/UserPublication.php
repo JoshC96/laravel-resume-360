@@ -45,7 +45,7 @@ class UserPublication extends Model
      */
     public function location(): HasOne
     {
-        return $this->hasOne(Location::TABLE, self::FIELD_LOCATION_ID, Location::FIELD_ID);
+        return $this->hasOne(Location::class, self::FIELD_LOCATION_ID, Location::FIELD_ID);
     }
 
     /**
@@ -53,6 +53,6 @@ class UserPublication extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::TABLE, self::FIELD_USER_ID, User::FIELD_ID);
+        return $this->belongsTo(User::class, self::FIELD_USER_ID, User::FIELD_ID);
     }
 }

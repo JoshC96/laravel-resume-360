@@ -19,6 +19,7 @@ class UserResume extends Model
     public const FIELD_ID = 'id';
     public const FIELD_IS_PUBLIC = 'is_public';
     public const FIELD_USER_ID = 'user_id';
+    public const FIELD_CONTENT = 'content';
 
     public const RELATION_USER = 'user';
     public const RELATION_QUALIFICATIONS = 'qualifications';
@@ -39,6 +40,6 @@ class UserResume extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::TABLE, self::FIELD_USER_ID, User::FIELD_ID);
+        return $this->belongsTo(User::class, self::FIELD_USER_ID, User::FIELD_ID);
     }
 }

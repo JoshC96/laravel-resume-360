@@ -22,13 +22,13 @@
                 </div>
                 <div class="grid md:grid-cols-2 gap-5"> 
                     <div>
-                        <InputLabel for="entity" value="Organisation *" />
+                        <InputLabel for="organisation" value="Organisation *" />
             
                         <TextInput
-                            id="entity"
+                            id="organisation"
                             type="text"
                             class="mt-1 block w-full"
-                            v-model="profileStore.editingReferee.entity"
+                            v-model="profileStore.editingReferee.organisation"
                             required
                         />
                     </div>

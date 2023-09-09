@@ -31,11 +31,11 @@ class UserJobApplication extends Model
     public const FIELD_ID = 'id';
     public const FIELD_STATUS = 'status';
     public const FIELD_APPLIED_WITH_PROFILE = 'apply_with_profile';
+    public const FIELD_COVER_LETTER = 'cover_letter';
     public const FIELD_APPLIED_AT = 'applied_at';
     public const FIELD_VIEWED_AT = 'viewed_at';
     public const FIELD_USER_ID = 'user_id';
     public const FIELD_JOB_LISTING_ID = 'job_listing_id';
-    public const FIELD_COVER_LETTER_ID = 'cover_letter_id';
     public const FIELD_RESUME_ID = 'resume_id';
 
     public const RELATION_USER = 'user';
@@ -54,7 +54,7 @@ class UserJobApplication extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::TABLE, self::FIELD_USER_ID, User::FIELD_ID);
+        return $this->belongsTo(User::class, User::FIELD_ID, self::FIELD_USER_ID);
     }
 
     /**
@@ -62,7 +62,7 @@ class UserJobApplication extends Model
      */
     public function jobListing(): HasOne
     {
-        return $this->hasOne(JobListing::TABLE, self::FIELD_JOB_LISTING_ID, JobListing::FIELD_ID);
+        return $this->hasOne(JobListing::class, JobListing::FIELD_ID, self::FIELD_JOB_LISTING_ID);
     }
 
     /**
@@ -70,14 +70,6 @@ class UserJobApplication extends Model
      */
     public function resume(): HasOne
     {
-        return $this->hasOne(UserResume::TABLE, self::FIELD_RESUME_ID, UserResume::FIELD_ID);
-    }
-
-    /**
-     * @return HasOne 
-     */
-    public function coverLetter(): HasOne
-    {
-        return $this->hasOne(UserCoverLetter::TABLE, self::FIELD_COVER_LETTER_ID, UserCoverLetter::FIELD_ID);
+        return $this->hasOne(UserResume::class, UserResume::FIELD_ID, self::FIELD_RESUME_ID);
     }
 }

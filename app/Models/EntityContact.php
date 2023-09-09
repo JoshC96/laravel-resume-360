@@ -51,7 +51,7 @@ class EntityContact extends Model
      */
     public function user(): HasOne
     {
-        return $this->hasOne(User::TABLE, self::FIELD_USER_ID, User::FIELD_ID);
+        return $this->hasOne(User::class, self::FIELD_USER_ID, User::FIELD_ID);
     }
 
     /**
@@ -59,6 +59,6 @@ class EntityContact extends Model
      */
     public function entity(): BelongsTo
     {
-        return $this->belongsTo(Entity::TABLE, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
+        return $this->belongsTo(Entity::class, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
     }
 }

@@ -19,6 +19,10 @@ export default class JobsApi extends ApiService {
         return this.axios.get(`/recommended-jobs`, { params: { payload } })
     }
 
+    getApplications(payload) {
+        return this.axios.get(`/applications`, { params: { payload } })
+    }
+
     createJob(payload) {
         return this.axios.post(`/`, payload)
     }
@@ -31,8 +35,8 @@ export default class JobsApi extends ApiService {
         return this.axios.delete(`/${JobId}`, payload)
     }
 
-    quickApply(payload) {
-        return this.axios.post(`/quick-apply`, payload)
+    quickApply(jobId) {
+        return this.axios.get(`/${jobId}/quick-apply`)
     }
 
 }

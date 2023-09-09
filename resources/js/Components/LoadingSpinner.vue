@@ -12,6 +12,7 @@
   position: relative;
   width: 50px;
   height: 50px;
+  transform: scale(0.4);
 }
 .lds-spinner div {
   transform-origin: 40px 40px;
@@ -26,7 +27,7 @@
   width: 6px;
   height: 18px;
   border-radius: 20%;
-  background: #343434;
+  background: #fff;
 }
 .lds-spinner div:nth-child(1) {
   transform: rotate(0deg);

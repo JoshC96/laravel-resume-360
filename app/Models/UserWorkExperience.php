@@ -53,7 +53,7 @@ class UserWorkExperience extends Model
      */
     public function location(): HasOne
     {
-        return $this->hasOne(Location::TABLE, self::FIELD_LOCATION_ID, Location::FIELD_ID);
+        return $this->hasOne(Location::class, self::FIELD_LOCATION_ID, Location::FIELD_ID);
     }
 
     /**
@@ -61,7 +61,7 @@ class UserWorkExperience extends Model
      */
     public function entity(): HasOne
     {
-        return $this->hasOne(Entity::TABLE, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
+        return $this->hasOne(Entity::class, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
     }
 
     /**
@@ -69,6 +69,6 @@ class UserWorkExperience extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::TABLE, self::FIELD_USER_ID, User::FIELD_ID);
+        return $this->belongsTo(User::class, self::FIELD_USER_ID, User::FIELD_ID);
     }
 }

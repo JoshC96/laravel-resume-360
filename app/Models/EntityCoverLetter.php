@@ -36,6 +36,6 @@ class EntityCoverLetter extends Model
      */
     public function entity(): BelongsTo
     {
-        return $this->belongsTo(Entity::TABLE, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
+        return $this->belongsTo(Entity::class, self::FIELD_ENTITY_ID, Entity::FIELD_ID);
     }
 }
