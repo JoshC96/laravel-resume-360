@@ -10,6 +10,9 @@
         <template v-slot:content>
             <div class="space-y-6">
                 <div>
+                    <h3 class="text-md">Your referee's information can only be seen by you and may optionally appear on selected job applications</h3>
+                </div>
+                <div>
                     <InputLabel for="name" value="Name *" />
 
                     <TextInput
