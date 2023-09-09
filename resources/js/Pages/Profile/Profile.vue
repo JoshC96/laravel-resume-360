@@ -51,6 +51,7 @@
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <h1 class="h1 text-2xl mb-5">Bio</h1>
                         <TextAreaInput
+                            :rows="5"
                             class="mb-5"
                             v-model="profileStore.bio"
                         ></TextAreaInput>
@@ -90,7 +91,7 @@
                                 <p>{{ experienceItem.location }}</p>
                                 <p> {{ monthNames[experienceItem.started_month] }} {{ experienceItem.started_year }} - {{ monthNames[experienceItem.finished_month] }} {{ experienceItem.finished_year }} </p>
                             </div>
-                            <p class="text-md mb-3">{{ experienceItem.description }}</p>
+                            <p class="text-sm mb-3" style="white-space: pre-wrap">{{ experienceItem.description }}</p>
                             <hr v-if="profileStore.workExperiences.length > 1 && index + 1 !== profileStore.workExperiences.length" class="border-t-2 my-5 border-slate-300">
                         </div>
                         <EditExperienceForm />
