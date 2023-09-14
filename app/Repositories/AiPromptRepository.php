@@ -3,6 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Prompt;
+use Illuminate\Database\Eloquent\MassAssignmentException;
+use InvalidArgumentException;
+use Illuminate\Database\Eloquent\InvalidCastException;
 
 class AiPromptRepository
 {
@@ -18,5 +21,19 @@ class AiPromptRepository
         $prompt->save();
 
         return $prompt;
+    }
+
+    /**
+     * @param Prompt $prompt 
+     * @param array $data 
+     * @return bool 
+     * @throws MassAssignmentException 
+     * @throws InvalidArgumentException 
+     * @throws InvalidCastException 
+     */
+    public function updatePrompt(Prompt $prompt, array $data): bool
+    {
+        $prompt->fill($data);
+        return $prompt->save();
     }
 }
