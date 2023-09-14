@@ -1,28 +1,30 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Prompts;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class StorepromptRequest extends FormRequest
+class DestroyPromptRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user() ? true : false;
     }
+
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
         return [
-            //
         ];
     }
 }

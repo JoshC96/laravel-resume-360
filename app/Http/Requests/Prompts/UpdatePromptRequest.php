@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Prompts;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatepromptRequest extends FormRequest
+class UpdatePromptRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
