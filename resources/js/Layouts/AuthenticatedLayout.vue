@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import Sidebar from '@/Sidebar';
+import Sidebar from '@/Navigation/Sidebar';
 import Header from '@/Layouts/Components/Header';
 import UserFlash from './Components/UserFlash.vue';
 </script>

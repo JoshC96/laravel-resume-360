@@ -87,4 +87,11 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('/{jobListing}/generate-cover-letter', 'generateCoverLetter');
     });
 
+    Route::prefix('prompts')->controller(PromptsController::class)->group(function () {
+        Route::get('/', 'getPrompts');
+        Route::post('/', 'createPrompt');
+        Route::patch('/{prompt}', 'updatePrompt');
+        Route::delete('/{prompt}', 'deletePrompt');
+    });
+
 });

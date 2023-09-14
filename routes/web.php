@@ -46,6 +46,12 @@ Route::middleware('auth')->group(function () {
             return Inertia::render('Jobs/Jobs');
         })->name('jobs');
     });
+
+    Route::prefix('prompts')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('Prompts/Prompts');
+        })->name('prompts');
+    });
 });
 
 require __DIR__.'/auth.php';
