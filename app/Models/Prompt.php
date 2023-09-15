@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $content
  * @property int $created_by_id
  * @property int $template_id
+ * @property-read PromptTemplate $template
+ * @property-read AiResponse $response
+ * @property-read User $createdBy
  * @property-read Carbon $created_at
  */
 class Prompt extends Model 
@@ -27,6 +30,7 @@ class Prompt extends Model
 
     public const RELATION_CREATED_BY = 'createdBy';
     public const RELATION_TEMPLATE = 'template';
+    public const RELATION_RESPONSE = 'response';
 
     protected $table = self::TABLE;
     protected $guarded = [
@@ -40,6 +44,16 @@ class Prompt extends Model
     {
         return $this->hasOne(User::class, User::FIELD_ID, self::FIELD_CREATED_BY_ID);
     }
+
+
+    /**
+     * @return HasOne
+     */
+    public function response(): HasOne
+    {
+        return $this->hasOne(AiResponse::class, AiResponse::FIELD_PROMPT_ID);
+    }
+
 
     /**
      * @return BelongsTo 

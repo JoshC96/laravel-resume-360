@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { useUserFlashesStore } from '@/Stores/user-flashes-store.store';
 import PromptsApi from "@/Pages/Prompts/services/PromptsApi";
 
@@ -8,7 +8,15 @@ export const usePromptsStore = defineStore('promptsStore', () => {
     const api = PromptsApi.make();
     const prompts = ref();
     const paginationData = ref();
-    const editingPrompt= ref();
+    const editingPrompt = reactive({
+        id: 0,
+        content: '',
+        response: '',
+        template: '',
+        createdBy: '',
+        createdAt: '',
+    });
+    const showPromptForm = ref(false);
     
     async function getPrompts(page = 1, perPage) {
         const { data } = await api.getPrompts({ page: page, per_page: perPage });
@@ -24,6 +32,8 @@ export const usePromptsStore = defineStore('promptsStore', () => {
         api, 
         prompts,
         paginationData,
+        editingPrompt,
+        showPromptForm,
         getPrompts,
         handlePaginationEvent
     }

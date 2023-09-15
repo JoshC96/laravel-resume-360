@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Prompts;
 
+use App\Models\AiResponse;
 use App\Models\Prompt;
 use App\Models\PromptTemplate;
 use App\Models\User;
@@ -23,6 +24,7 @@ class PromptResource extends JsonResource
             'template' => $this->{Prompt::RELATION_TEMPLATE}?->{PromptTemplate::FIELD_CONTENT},
             'createdBy' => $this->{Prompt::RELATION_CREATED_BY}?->{User::FIELD_NAME},
             'createdAt' => $this->{Prompt::CREATED_AT},
+            'response' => $this->{Prompt::RELATION_RESPONSE}?->{AiResponse::FIELD_CONTENT}
         ];
     }
 }
