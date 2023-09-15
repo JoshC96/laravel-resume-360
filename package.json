@@ -20,6 +20,7 @@
     "dependencies": {
         "@inertiajs/vue3": "^1.0.9",
         "@vuepic/vue-datepicker": "^5.4.0",
+        "date-fns": "^2.30.0",
         "pinia": "^2.1.4"
     }
 }
