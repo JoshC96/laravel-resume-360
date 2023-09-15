@@ -34,6 +34,7 @@ class PromptsController extends ApiController
 
         return $this->formatResponse([
             'prompts_paginated' => Prompt::query()
+                ->orderBy(Prompt::CREATED_AT, 'desc')
                 ->paginate(
                     $data['per_page'] ?? 20,
                     ['*'],
