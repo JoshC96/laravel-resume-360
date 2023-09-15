@@ -2,15 +2,18 @@
 
 namespace App\Services;
 
+use App\Enums\AiSources;
 use App\Models\AiResponse;
 use App\Models\JobListing;
 use App\Models\Prompt;
+use App\Models\PromptTemplate;
 use App\Models\User;
 use App\Pipelines\Prompts\PromptPayloadFactory;
 use App\Pipelines\Prompts\PromptShortcodeService;
 use App\Repositories\AiPromptRepository;
 use App\Repositories\AiResponseRepository;
 use Exception;
+use Illuminate\Database\Eloquent\MassAssignmentException;
 use Illuminate\Support\Arr;
 use OpenAI\Exceptions\InvalidArgumentException;
 use OpenAI\Exceptions\ErrorException;
@@ -29,13 +32,13 @@ class OpenAiPromptService
     ) {}
 
     /**
-     * @param User $user 
+     * @param User|null $user
      * @param JobListing $jobListing 
      * @return string 
      */
-    public function generateCoverLetterPrompt(User $user, JobListing $jobListing): string
+    public function generateCoverLetterPrompt(JobListing $jobListing, User $user = null): string
     {
-        $promptTemplate = Prompt::STANDARD_MAKE_COVER_LETTER;
+        $promptTemplate = PromptTemplate::PREMIUM_MAKE_COVER_LETTER;
         $payload = PromptPayloadFactory::create([
             'job-listing' => $jobListing,
             'user' => $user,
@@ -45,13 +48,13 @@ class OpenAiPromptService
     }
 
     /**
-     * @param User $user 
+     * @param User|null $user 
      * @param JobListing $jobListing 
      * @return string 
      */
-    public function generateResumePrompt(User $user, JobListing $jobListing): string
+    public function generateResumePrompt(JobListing $jobListing, User $user = null): string
     {
-        $promptTemplate = Prompt::STANDARD_MAKE_RESUME;
+        $promptTemplate = PromptTemplate::STANDARD_MAKE_RESUME;
         $payload = PromptPayloadFactory::create([
             'job-listing' => $jobListing,
             'user' => $user,
@@ -62,13 +65,16 @@ class OpenAiPromptService
 
     /**
      * @param string $prompt 
+     * @param User|null $user 
      * @return array 
+     * @throws MassAssignmentException 
      * @throws InvalidArgumentException 
      * @throws ErrorException 
      * @throws UnserializableResponse 
      * @throws TransporterException 
+     * @throws Exception 
      */
-    public function sendPrompt(string $prompt): array
+    public function sendPrompt(string $prompt, User $user = null): array
     {
         $payload = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
@@ -83,17 +89,22 @@ class OpenAiPromptService
         $content = Arr::get($payload, 'choices.0.message.content');
         $remoteId = Arr::get($payload, 'id');
         $model = Arr::get($payload, 'model');
-        $source = 1; // @todo update to an the Ai Enum
+        $source = AiSources::OPENAI->value;
 
         if (!$content) {
             throw new Exception('No content received from OpenAI response.');
         }
 
         try {
+            $promptRecord = $this->aiPromptRepository->createPrompt([
+                Prompt::FIELD_CONTENT => $prompt,
+                Prompt::FIELD_CREATED_BY_ID => $user->{User::FIELD_ID}
+            ]);
+
             $this->aiResponseRepository->createAiResponse([
                 AiResponse::FIELD_PAYLOAD => json_encode($payload->toArray()),
                 AiResponse::FIELD_CONTENT => $content,
-                AiResponse::FIELD_PROMPT => $prompt,
+                AiResponse::FIELD_PROMPT_ID => $promptRecord->{Prompt::FIELD_ID},
                 AiResponse::FIELD_SOURCE => $source,
                 AiResponse::FIELD_REMOTE_ID => $remoteId,
                 AiResponse::FIELD_MODEL => $model,
