@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Users\UserController;
 use App\Http\Controllers\Api\Jobs\JobsController;
+use App\Http\Controllers\Api\Prompts\PromptsController;
 
 /*
 |--------------------------------------------------------------------------

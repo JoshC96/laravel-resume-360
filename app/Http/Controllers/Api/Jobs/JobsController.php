@@ -96,22 +96,6 @@ class JobsController extends ApiController
         }
     }
 
-
-    /**
-     * @param Request $request 
-     * @return JsonResponse 
-     */
-    public function quickApply(JobListing $jobListing, Request $request): JsonResponse
-    {
-        $data = $request->collect();
-
-        QuickApplicationJob::dispatch(Auth::user(), $jobListing);
-
-        return $this->formatResponse([
-            'status' => true
-        ]);
-    }
-
     /**
      * @param Request $request 
      * @return JsonResponse 
