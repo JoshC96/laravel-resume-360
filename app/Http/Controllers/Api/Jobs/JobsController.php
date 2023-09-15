@@ -104,12 +104,12 @@ class JobsController extends ApiController
     {
         $data = $request->collect();
 
-        $coverLetterPrompt = $this->openAiPromptService->generateCoverLetterPrompt(Auth::user(), $jobListing);
+        $coverLetterPrompt = $this->openAiPromptService->generateCoverLetterPrompt($jobListing, Auth::user());
 
         [
             'prompt' => $coverLetterPrompt,
             'response' => $coverLetterResponse
-        ] = $this->openAiPromptService->sendPrompt($coverLetterPrompt);
+        ] = $this->openAiPromptService->sendPrompt($coverLetterPrompt, Auth::user());
 
         return $this->formatResponse([
             'status' => true,

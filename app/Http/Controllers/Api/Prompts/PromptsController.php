@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Prompts\DestroyPromptRequest;
 use App\Http\Requests\Prompts\StorePromptRequest;
 use App\Http\Requests\Prompts\UpdatePromptRequest;
-use App\Http\Resources\Jobs\PromptResource;
+use App\Http\Resources\Prompts\PromptResource;
 use App\Models\Prompt;
 use App\Repositories\AiPromptRepository;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -30,6 +30,8 @@ class PromptsController extends ApiController
      */
     public function getPrompts(Request $request): JsonResponse
     {
+        $data = $request->all();
+
         return $this->formatResponse([
             'prompts_paginated' => Prompt::query()
                 ->paginate(
