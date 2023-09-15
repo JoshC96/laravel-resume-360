@@ -38,7 +38,7 @@ class Prompt extends Model
      */
     public function createdBy(): HasOne
     {
-        return $this->hasOne(User::class, self::FIELD_CREATED_BY_ID, User::FIELD_ID);
+        return $this->hasOne(User::class, User::FIELD_ID, self::FIELD_CREATED_BY_ID);
     }
 
     /**
