@@ -21,8 +21,8 @@ class PromptResource extends JsonResource
             'id' => $this->{Prompt::FIELD_ID},
             'content' => $this->{Prompt::FIELD_CONTENT},
             'template' => $this->{Prompt::RELATION_TEMPLATE}?->{PromptTemplate::FIELD_CONTENT},
-            'created_by' => $this->{Prompt::RELATION_CREATED_BY}?->{User::FIELD_NAME},
-            'created_at' => $this->{Prompt::CREATED_AT},
+            'createdBy' => $this->{Prompt::RELATION_CREATED_BY}?->{User::FIELD_NAME},
+            'createdAt' => $this->{Prompt::CREATED_AT},
         ];
     }
 }

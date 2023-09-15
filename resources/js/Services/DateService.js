@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 export const monthNames = [
     "January", 
     "February", 
@@ -12,3 +14,7 @@ export const monthNames = [
     "November", 
     "December"
 ];
+
+export const formatDate = function(date) {
+    return format(new Date(date), 'hh:mmaa E d-MMM-yy')
+}
