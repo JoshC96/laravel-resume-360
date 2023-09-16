@@ -10,14 +10,20 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * @property int $id
  * @property string $content
+ * @property int $status
+ * @property int $use_location
  * @property int $created_by_id
+ * @property int $updated_by_id
+ * @property-read Collection|null $prompts
+ * @property-read User $createdBy
+ * @property-read User $createdBy
  * @property-read Carbon $created_at
  */
 class PromptTemplate extends Model 
 {
     use HasFactory;
 
-    public const TABLE = 'prompt_template';
+    public const TABLE = 'prompt_templates';
 
     public const FIELD_ID = 'id';
     public const FIELD_CONTENT = 'content';
@@ -56,17 +62,16 @@ class PromptTemplate extends Model
      */
     public function createdBy(): HasOne
     {
-        return $this->hasOne(User::class, self::FIELD_CREATED_BY_ID, User::FIELD_ID);
+        return $this->hasOne(User::class, User::FIELD_ID, self::FIELD_CREATED_BY_ID);
     }
 
     /**
      * @return HasOne
      */
-    public function FIELD_UPDATED_BY_ID(): HasOne
+    public function updatedBy(): HasOne
     {
-        return $this->hasOne(User::class, self::FIELD_UPDATED_BY_ID, User::FIELD_ID);
+        return $this->hasOne(User::class, User::FIELD_ID, self::FIELD_UPDATED_BY_ID);
     }
-
     /**
      * @return HasMany 
      */

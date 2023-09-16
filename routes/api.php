@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Users\UserController;
 use App\Http\Controllers\Api\Jobs\JobsController;
 use App\Http\Controllers\Api\Prompts\PromptsController;
+use App\Http\Controllers\Api\Prompts\PromptTemplatesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,13 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::post('/', 'createPrompt');
         Route::patch('/{prompt}', 'updatePrompt');
         Route::delete('/{prompt}', 'deletePrompt');
+    });
+
+    Route::prefix('templates')->controller(PromptTemplatesController::class)->group(function () {
+        Route::get('/', 'getTemplates');
+        Route::post('/', 'createTemplate');
+        Route::patch('/{prompt}', 'updateTemplate');
+        Route::delete('/{prompt}', 'deleteTemplate');
     });
 
 });

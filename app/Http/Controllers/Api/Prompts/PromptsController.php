@@ -48,7 +48,7 @@ class PromptsController extends ApiController
     }
 
     /**
-     * @param StoreRefereeRequest $request 
+     * @param StorePromptRequest $request 
      * @return JsonResponse 
      * @throws BindingResolutionException 
      */

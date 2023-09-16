@@ -43,8 +43,8 @@ class StoreQualificationRequest extends FormRequest
         return [
             self::REQUEST_NAME => ['string', 'required', 'max:100'],
             self::REQUEST_INDUSTRY => ['string', 'required', 'max:100'],
-            self::REQUEST_DESCRIPTION => ['string','nullable', 'max:500'],
-            self::REQUEST_GRADE => ['string', 'nullable', 'max:15'],
+            self::REQUEST_DESCRIPTION => ['string','nullable'],
+            self::REQUEST_GRADE => ['string', 'nullable'],
             self::REQUEST_STARTED_MONTH => ['numeric', 'required'],
             self::REQUEST_STARTED_YEAR => ['numeric', 'required'],
             self::REQUEST_FINISHED_MONTH => ['numeric', 'required'],

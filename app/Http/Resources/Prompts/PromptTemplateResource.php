@@ -20,7 +20,7 @@ class PromptTemplateResource extends JsonResource
             'id' => $this->{PromptTemplate::FIELD_ID},
             'content' => $this->{PromptTemplate::FIELD_CONTENT},
             'status' => $this->{PromptTemplate::FIELD_STATUS},
-            'useLocation' => $this->{PromptTemplate::FIELD_USE_LOCATION},
+            'use_location' => $this->{PromptTemplate::FIELD_USE_LOCATION},
             'createdBy' => $this->{PromptTemplate::RELATION_CREATED_BY}?->{User::FIELD_NAME},
             'createdAt' => $this->{PromptTemplate::CREATED_AT},
             'updatedBy' => $this->{PromptTemplate::RELATION_UPDATED_BY}?->{User::FIELD_NAME},

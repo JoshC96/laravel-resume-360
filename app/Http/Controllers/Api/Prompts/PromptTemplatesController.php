@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api\Prompts;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Prompts\DestroyPromptRequest;
-use App\Http\Requests\Prompts\StorePromptRequest;
 use App\Http\Requests\Prompts\UpdatePromptRequest;
+use App\Http\Requests\PromptTemplates\DestroyPromptTemplateRequest;
+use App\Http\Requests\PromptTemplates\StorePromptTemplateRequest;
+use App\Http\Requests\PromptTemplates\StorePromptTemplatesRequest;
+use App\Http\Requests\PromptTemplates\UpdatePromptTemplateRequest;
 use App\Http\Resources\Prompts\PromptTemplateResource;
 use App\Models\PromptTemplate;
 use App\Repositories\PromptTemplateRepository;
@@ -44,25 +47,25 @@ class PromptTemplatesController extends ApiController
     }
 
     /**
-     * @param StoreRefereeRequest $request 
+     * @param StorePromptTemplatesRequest $request 
      * @return JsonResponse 
      * @throws BindingResolutionException 
      */
-    public function createTemplate(StorePromptRequest $request): JsonResponse
+    public function createTemplate(StorePromptTemplateRequest $request): JsonResponse
     {
         $data = $request->safe()->all();
 
         return $this->formatResponse([
-            'prompt' => $this->templateRepository->createPromptTemplate($data)
+            'template' => $this->templateRepository->createPromptTemplate($data)
         ]);
     }
 
     /**
      * @param PromptTemplate $template 
-     * @param UpdatePromptRequest $request 
+     * @param UpdatePromptTemplateRequest $request 
      * @return JsonResponse 
      */
-    public function updateTemplate(PromptTemplate $template, UpdatePromptRequest $request): JsonResponse
+    public function updateTemplate(PromptTemplate $template, UpdatePromptTemplateRequest $request): JsonResponse
     {
         $data = $request->safe()->all();
 
@@ -73,10 +76,10 @@ class PromptTemplatesController extends ApiController
 
     /**
      * @param PromptTemplate $template
-     * @param DestroyPromptRequest $request 
+     * @param DestroyPromptTemplateRequest $request 
      * @return JsonResponse 
      */
-    public function deleteTemplate(PromptTemplate $template, DestroyPromptRequest $request): JsonResponse
+    public function deleteTemplate(PromptTemplate $template, DestroyPromptTemplateRequest $request): JsonResponse
     {
         $data = $request->safe()->all();
 
