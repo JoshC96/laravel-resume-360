@@ -3,13 +3,11 @@
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <InputLabel for="keywords" value="Content Keywords" />
-                <TextInput id="keywords" type="text" placeholder="Keywords" class="mt-1 block w-full" v-model="keywords"
-                    required />
+                <TextInput id="keywords" type="text" placeholder="Keywords" class="mt-1 block w-full" v-model="keywords" />
             </div>
             <div>
-                <InputLabel for="location" value="Created By" />
-                <TextInput id="location" type="text" placeholder="Name" class="mt-1 block w-full" v-model="location"
-                    required />
+                <InputLabel for="createdBy" value="Created By" />
+                <TextInput id="createdBy" type="text" placeholder="Name" class="mt-1 block w-full" v-model="createdBy" />
             </div>
             <div>
                 <InputLabel value="Created At" />
@@ -30,8 +28,7 @@ const dateListed = ref([
     new Date(),
 ]);
 const keywords = ref('');
-const location = ref('');
-const industry = ref('');
+const createdBy = ref('');
 
 const promptStore = usePromptsStore();
 

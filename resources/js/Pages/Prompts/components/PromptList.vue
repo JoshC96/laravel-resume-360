@@ -22,10 +22,6 @@
                                     class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Content
                                 </th>
-                                <!-- <th
-                                class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                                Template
-                            </th> -->
                                 <th
                                     class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Created by
@@ -42,7 +38,7 @@
                         </thead>
                         <tbody>
                             <tr v-if="promptStore.prompts" v-for="prompt in promptStore.prompts">
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <div class="flex items-center">
                                         <div class="ml-3">
                                             <p class="text-gray-900 whitespace-nowrap">
@@ -51,29 +47,24 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <p class="text-gray-900 whitespace-nowrap">
                                         <td class="td-class text-center">
                                             {{ prompt.content && prompt.content.length > 100 ? prompt.content.substring(0, 100) + '...' : prompt.content }}
                                         </td>
                                     </p>
                                 </td>
-                                <!-- <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                                <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
-                                    {{ prompt.template }}
-                                </span>
-                            </td> -->
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <p class="text-gray-900 whitespace-nowrap">
                                         {{ prompt.createdBy }}
                                     </p>
                                 </td>
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <p class="text-gray-900 whitespace-nowrap">
                                         {{ prompt.createdAt ? formatDate(prompt.createdAt) : 'no date' }}
                                     </p>
                                 </td>
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
+                                <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <div class="flex justify-around">
                                         <button class="mx-2 rounded-md" @click="viewPrompt(prompt)" >
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-700"
@@ -129,7 +120,6 @@ onMounted(async () => {
 })
 
 const viewPrompt = function (prompt) {
-    console.log('here');
     promptStore.editingPrompt = prompt;
     promptStore.showPromptForm = true;
 }
