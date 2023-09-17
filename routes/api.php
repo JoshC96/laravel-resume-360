@@ -99,8 +99,8 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::prefix('templates')->controller(PromptTemplatesController::class)->group(function () {
         Route::get('/', 'getTemplates');
         Route::post('/', 'createTemplate');
-        Route::patch('/{prompt}', 'updateTemplate');
-        Route::delete('/{prompt}', 'deleteTemplate');
+        Route::patch('/{template}', 'updateTemplate');
+        Route::delete('/{template}', 'deleteTemplate');
     });
 
 });
