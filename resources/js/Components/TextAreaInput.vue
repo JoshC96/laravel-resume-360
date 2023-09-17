@@ -36,7 +36,7 @@ defineExpose({ focus: () => input.value.focus() });
 <template>
     <textarea
         ref="input"
-        class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+        class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm disabled:opacity-50"
         :disabled="disabled"
         :value="modelValue"
         :rows="rows"
