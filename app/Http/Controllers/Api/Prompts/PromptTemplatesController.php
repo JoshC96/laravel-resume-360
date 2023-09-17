@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api\Prompts;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\Prompts\DestroyPromptRequest;
-use App\Http\Requests\Prompts\UpdatePromptRequest;
 use App\Http\Requests\PromptTemplates\DestroyPromptTemplateRequest;
 use App\Http\Requests\PromptTemplates\StorePromptTemplateRequest;
 use App\Http\Requests\PromptTemplates\StorePromptTemplatesRequest;
@@ -35,6 +33,7 @@ class PromptTemplatesController extends ApiController
     {
         return $this->formatResponse([
             'templates_paginated' => PromptTemplate::query()
+                ->orderBy(PromptTemplate::FIELD_STATUS)
                 ->paginate(
                     $data['per_page'] ?? 20,
                     ['*'],
@@ -70,6 +69,7 @@ class PromptTemplatesController extends ApiController
         $data = $request->safe()->all();
 
         return $this->formatResponse([
+            '$template' => $template->{PromptTemplate::FIELD_ID},
             'status' => $this->templateRepository->updatePromptTemplate($template, $data)
         ]);
     }
