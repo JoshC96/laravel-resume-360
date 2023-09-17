@@ -10,28 +10,6 @@
         </template>
         <template v-slot:content>
             <div class="grid grid-cols-2 gap-5">
-                <div v-if="templatesStore.editingTemplate?.createdBy">
-                    <InputLabel for="createdBy" value="Created By" />
-
-                    <TextInput
-                        disabled
-                        id="createdBy"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="templatesStore.editingTemplate.createdBy"
-                    />
-                </div>
-                <div v-if="templatesStore.editingTemplate?.createdAt">
-                    <InputLabel for="createdAt" value="Created At" />
-
-                    <TextInput
-                        disabled
-                        id="createdAt"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="templatesStore.editingTemplate.createdAt"
-                    />
-                </div>
                 <div>
                     <InputLabel for="status" value="Status" />
 
@@ -61,6 +39,50 @@
                         type="text"
                         class="mt-1 block w-full"
                         v-model="templatesStore.editingTemplate.content"
+                    />
+                </div>
+                <div v-if="templatesStore.editingTemplate?.createdBy">
+                    <InputLabel for="createdBy" value="Created By" />
+
+                    <TextInput
+                        disabled
+                        id="createdBy"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="templatesStore.editingTemplate.createdBy"
+                    />
+                </div>
+                <div v-if="templatesStore.editingTemplate?.createdAt">
+                    <InputLabel class="mb-1" for="createdAt" value="Created At" />
+
+                    <TextInput
+                        disabled
+                        id="createdAt"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="templatesStore.editingTemplate.createdAt"
+                    />
+                </div>
+                <div v-if="templatesStore.editingTemplate?.updatedBy">
+                    <InputLabel for="updatedBy" value="Updated By" />
+
+                    <TextInput
+                        disabled
+                        id="updatedBy"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="templatesStore.editingTemplate.updatedBy"
+                    />
+                </div>
+                <div v-if="templatesStore.editingTemplate?.updatedAt">
+                    <InputLabel class="mb-1" for="updatedAt" value="Updated At" />
+
+                    <TextInput
+                        disabled
+                        id="updatedAt"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="templatesStore.editingTemplate.updatedAt"
                     />
                 </div>
             </div>
