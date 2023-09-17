@@ -23,31 +23,31 @@
                         <thead>
                             <tr>
                                 <th
-                                    class="w-56 px-5 py-3 text-xs font-semibold tracking-wider text-center text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                                    class="px-4 py-3 text-xs font-semibold tracking-wider text-center text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     ID
                                 </th>
                                 <th
-                                    class="w-56 px-5 py-3 text-xs font-semibold tracking-wider text-center text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                                    class="px-4 py-3 text-xs font-semibold tracking-wider text-center text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Status
                                 </th>
                                 <th
-                                    class="w-56 px-5 py-3 text-xs font-semibold tracking-wider text-center text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                                    class="px-4 py-3 text-xs font-semibold tracking-wider text-center text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Location
                                 </th>
                                 <th
-                                    class="w-56 px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                                    class="px-4 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Content
                                 </th>
                                 <th
-                                    class="w-56 px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                                    class="px-4 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Updated
                                 </th>
                                 <th
-                                    class="w-56 px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                                    class="px-4 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Created
                                 </th>
                                 <th
-                                    class="text-center w-56 px-5 py-3 text-xs font-semibold tracking-wider text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                                    class="text-center px-4 py-3 text-xs font-semibold tracking-wider text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Actions
                                 </th>
                             </tr>
@@ -56,7 +56,7 @@
                             <tr v-if="templatesStore.templates" v-for="template in templatesStore.templates">
                                 <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <div class="flex items-center">
-                                        <div class="ml-3">
+                                        <div class="mx-auto">
                                             <p class="text-gray-900 whitespace-nowrap">
                                                 {{ template.id }}
                                             </p>
@@ -65,25 +65,25 @@
                                 </td>
                                 <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <div class="flex items-center">
-                                        <div class="ml-3">
+                                        <div class="mx-auto">
                                             <p class="text-gray-900 whitespace-nowrap">
-                                                {{ template.status }}
+                                                {{ template.statusName }}
                                             </p>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <div class="flex items-center">
-                                        <div class="ml-3">
+                                        <div class="mx-auto">
                                             <p class="text-gray-900 whitespace-nowrap">
-                                                {{ template.use_location }}
+                                                {{ template.locationName }}
                                             </p>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <p class="text-gray-900 whitespace-nowrap">
-                                        {{ template.content && template.content.length > 70 ? template.content.substring(0, 70) + '...' : template.content }}
+                                        {{ template.content && template.content.length > 65 ? template.content.substring(0, 65) + '...' : template.content }}
                                     </p>
                                 </td>
                                 <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
@@ -91,10 +91,10 @@
                                         <!-- <div class="flex-shrink-0 w-10 h-10">
                                             <img class="w-full h-full rounded-full" src="" alt="profile pic" />
                                         </div> -->
-                                        <div class="ml-3">
+                                        <div class="mx-auto">
                                             <p class="text-gray-900 whitespace-nowrap">
                                                 {{ template.updatedAt ? formatDate(template.updatedAt) : 'no date' }}
-                                                <div class="text-sm leading-5 text-gray-500">
+                                                <div class="text-xs leading-5 text-gray-500">
                                                     {{ template.updatedBy }}
                                                 </div>
                                             </p>
@@ -106,10 +106,10 @@
                                         <!-- <div class="flex-shrink-0 w-10 h-10">
                                             <img class="w-full h-full rounded-full" src="" alt="profile pic" />
                                         </div> -->
-                                        <div class="ml-3">
+                                        <div class="mx-auto">
                                             <p class="text-gray-900 whitespace-nowrap">
                                                 {{ template.createdAt ? formatDate(template.createdAt) : 'no date' }}
-                                                <div class="text-sm leading-5 text-gray-500">
+                                                <div class="text-xs leading-5 text-gray-500">
                                                     {{ template.createdBy }}
                                                 </div>
                                             </p>
@@ -119,8 +119,8 @@
 
                                 <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <div class="flex justify-around">
-                                        <button class="mx-2 rounded-md" @click="templatesStore.triggerEditTemplateForm(template)" >
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-700"
+                                        <button class="mx-2 rounded-md" @click="templatesStore.triggerEditTemplateForm(template)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500"
                                                 viewBox="0 0 20 20" fill="currentColor">
                                                 <path
                                                     d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />

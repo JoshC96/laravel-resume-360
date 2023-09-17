@@ -1,5 +1,8 @@
 <template>
-    <Modal :show="true" @close="store.cancelQuickApply" @confirm="store.completeApplication">
+    <Modal 
+        :show="true" 
+        @close="store.cancelQuickApply" 
+        @confirm="store.completeApplication">
         <template v-slot:header>
             <h2 class="h2 text-xl">Review Application</h2>
         </template>
@@ -43,7 +46,7 @@
                 </div>
             </div>
             <div class="mt-5">
-                <div>
+                <div class="my-4">
                     <h4 class="text-lg">Resume</h4>
                     <p>Coming soon.</p>
                 </div>
