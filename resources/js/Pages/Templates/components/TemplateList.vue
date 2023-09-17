@@ -129,7 +129,7 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </button>
-                                        <button class="mx-2 rounded-md" >
+                                        <button class="mx-2 rounded-md" @click="templatesStore.deleteTemplate(template.id)">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-700"
                                                 viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd"

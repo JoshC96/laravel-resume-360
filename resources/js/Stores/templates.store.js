@@ -21,6 +21,22 @@ export const useTemplatesStore = defineStore('templatesStore', () => {
         getTemplates(newPageUrl.newPage, newPageUrl.perPage);
     }
 
+    async function deleteTemplate(templateId) {
+        if (templateId) {
+            const { data } = await api.deleteTemplate(templateId)
+
+            if (data.resp?.status) {
+                userFlashStore.showSuccess('Deleted template')
+                getTemplates();
+            } else {
+                userFlashStore.reportError('Error updating template, please try again later')
+            }
+        } else {
+            userFlashStore.reportError('A template ID is required.')
+        }
+    }
+
+
     async function saveTemplate() {
         if (editingTemplate.value.id) {
             const { data } = await api.updateTemplate(editingTemplate.value.id, editingTemplate.value)
@@ -66,6 +82,7 @@ export const useTemplatesStore = defineStore('templatesStore', () => {
         handlePaginationEvent,
         saveTemplate,
         triggerEditTemplateForm,
-        closeTemplateModal
+        closeTemplateModal,
+        deleteTemplate
     }
 })
