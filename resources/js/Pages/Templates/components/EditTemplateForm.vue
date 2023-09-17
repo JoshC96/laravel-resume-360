@@ -11,24 +11,20 @@
         <template v-slot:content>
             <div class="grid grid-cols-2 gap-5">
                 <div>
-                    <InputLabel for="status" value="Status" />
+                    <InputLabel for="status" value="Status" class="mb-1" />
 
-                    <TextInput
-                        id="status"
-                        type="text"
+                    <DropdownSelect 
                         class="mt-1 block w-full"
-                        v-model="templatesStore.editingTemplate.status"
-                    />
+                        :options="[{value: 1, label: 'Active'}, { value: 2, label: 'Draft' }, { value: 3, label: 'Archived' }]" 
+                        v-model="templatesStore.editingTemplate.status"  />
                 </div>
                 <div>
                     <InputLabel for="useLocation" value="Location to use this template" />
 
-                    <TextInput
-                        id="useLocation"
-                        type="text"
+                    <DropdownSelect 
                         class="mt-1 block w-full"
-                        v-model="templatesStore.editingTemplate.use_location"
-                    />
+                        :options="[{ value: 1, label: 'Cover Letters' }, { value: 2, label: 'Resumes' }]" 
+                        v-model="templatesStore.editingTemplate.use_location" />
                 </div>
                 <div class="col-span-2">
                     <InputLabel for="content" value="Content *" />
@@ -94,6 +90,7 @@
 import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import Modal from '@/Components/Modal.vue';
+import DropdownSelect from '@/Components/DropdownSelect.vue';
 import { useTemplatesStore } from '@/Stores/templates.store'
 
 const templatesStore = useTemplatesStore();
