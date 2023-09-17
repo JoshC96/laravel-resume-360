@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\AiSources;
+use App\Enums\PromptTemplateLocation;
 use App\Models\AiResponse;
 use App\Models\JobListing;
 use App\Models\Prompt;
@@ -14,7 +15,9 @@ use App\Repositories\AiPromptRepository;
 use App\Repositories\AiResponseRepository;
 use Exception;
 use Illuminate\Database\Eloquent\MassAssignmentException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
+use InvalidArgumentException as GlobalInvalidArgumentException;
 use OpenAI\Exceptions\InvalidArgumentException;
 use OpenAI\Exceptions\ErrorException;
 use OpenAI\Exceptions\UnserializableResponse;
@@ -31,30 +34,33 @@ class OpenAiPromptService
         protected AiPromptRepository $aiPromptRepository
     ) {}
 
+
+    /**
+     * @param PromptTemplateLocation $promptTemplateLocation 
+     * @param User $user 
+     * @return string 
+     * @throws GlobalInvalidArgumentException 
+     * @throws ModelNotFoundException 
+     */
+    public function getPromptTemplate(PromptTemplateLocation $promptTemplateLocation, User $user = null): string
+    {
+        $template = PromptTemplate::query()
+            ->where(PromptTemplate::FIELD_USE_LOCATION, $promptTemplateLocation->value)
+            ->firstOrFail();
+
+        // @Todo: return the template if the user is premium
+
+        return $template->{PromptTemplate::FIELD_CONTENT};
+    }
+
     /**
      * @param User|null $user
      * @param JobListing $jobListing 
      * @return string 
      */
-    public function generateCoverLetterPrompt(JobListing $jobListing, User $user = null): string
+    public function preparePrompt(PromptTemplateLocation $promptTemplateLocation, JobListing $jobListing, User $user = null): string
     {
-        $promptTemplate = PromptTemplate::PREMIUM_MAKE_COVER_LETTER;
-        $payload = PromptPayloadFactory::create([
-            'job-listing' => $jobListing,
-            'user' => $user,
-        ]);
-
-        return $this->promptShortcodeService->handle($promptTemplate, $payload);
-    }
-
-    /**
-     * @param User|null $user 
-     * @param JobListing $jobListing 
-     * @return string 
-     */
-    public function generateResumePrompt(JobListing $jobListing, User $user = null): string
-    {
-        $promptTemplate = PromptTemplate::STANDARD_MAKE_RESUME;
+        $promptTemplate = $this->getPromptTemplate($promptTemplateLocation, $user);
         $payload = PromptPayloadFactory::create([
             'job-listing' => $jobListing,
             'user' => $user,

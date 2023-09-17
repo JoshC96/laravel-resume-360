@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Jobs;
 
+use App\Enums\PromptTemplateLocation;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\Jobs\JobApplicationResource;
 use App\Http\Resources\Jobs\JobListingResource;
@@ -104,7 +105,7 @@ class JobsController extends ApiController
     {
         $data = $request->collect();
 
-        $coverLetterPrompt = $this->openAiPromptService->generateCoverLetterPrompt($jobListing, Auth::user());
+        $coverLetterPrompt = $this->openAiPromptService->preparePrompt(PromptTemplateLocation::COVER_LETTER, $jobListing, Auth::user());
 
         [
             'prompt' => $coverLetterPrompt,
