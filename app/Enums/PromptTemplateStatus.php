@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum PromptTemplateStatus: int
 {
-    case DRAFT = 1;
-    case ACTIVE = 2;
+    case ACTIVE = 1;
+    case DRAFT = 2;
     case ARCHIVED = 3;
 
     /**
@@ -15,8 +15,8 @@ enum PromptTemplateStatus: int
     public static function getDisplayString(int $value): ?string
     {
         return match ($value) {
-            self::DRAFT->value => 'Draft',
             self::ACTIVE->value => 'Active',
+            self::DRAFT->value => 'Draft',
             self::ARCHIVED->value => 'Archived',
         };
     }
