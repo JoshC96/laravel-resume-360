@@ -36,7 +36,10 @@
             </div>
             <div> 
                 <InputLabel value="Date Listed" />
-                <VueDatePicker v-model="dateListed" range :format="dateListedFormat" />
+                <DateRangeInput 
+                    :date-value="dateListed" 
+                    @update-date-range="dateListed = $event" 
+                />
             </div>
             <div>
                 <InputLabel for="salary" value="Salary" />
@@ -59,6 +62,9 @@ import { ref } from 'vue';
 import { useJobListingStore } from '@/Stores/job-listings.store';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import DateRangeInput from '@/Components/DateRangeInput.vue';
+
+const jobListingStore = useJobListingStore();
 
 const dateListed = ref([
     new Date(),
@@ -67,20 +73,6 @@ const dateListed = ref([
 const keywords = ref('');
 const location = ref('');
 const industry = ref('');
-
-const jobListingStore = useJobListingStore();
-
-const dateListedFormat = (date) => {
-    const firstDay = date[0].getDate();
-    const firstMonth = date[0].getMonth() + 1;
-    const firstYear = date[0].getFullYear();
-
-    const secondDay = date[1].getDate();
-    const secondMonth = date[1].getMonth() + 1;
-    const secondYear = date[1].getFullYear();
-
-    return `${firstDay}/${firstMonth}/${firstYear} - ${secondDay}/${secondMonth}/${secondYear}`;
-}
 
 
 </script>
