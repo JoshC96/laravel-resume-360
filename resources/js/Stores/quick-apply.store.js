@@ -27,6 +27,7 @@ export const useQuickApplyFlowStore = defineStore('quickApplyFlowStore', () => {
     const errorMessage = ref('');
     const currentSlide = ref(slideComponents[0]);
     const slides = ref(slideComponents);
+    const showReview = ref(true);
 
     function initializeFlow(job) {
         application.value.jobId = job.id;
@@ -54,6 +55,13 @@ export const useQuickApplyFlowStore = defineStore('quickApplyFlowStore', () => {
         }
     }
 
+    function completeApplication() {
+        showReview.value = false;
+        setTimeout(() => {
+            cancelQuickApply();
+        }, 2000);
+    }
+
     function cancelQuickApply() {
         loading.value = false;
         showQuickApplication.value = false;
@@ -61,12 +69,14 @@ export const useQuickApplyFlowStore = defineStore('quickApplyFlowStore', () => {
         currentSlide.value = slideComponents[0];
 
         Object.assign(application.value, {
+            jobId: null,
             jobRole: null,
-            entity: null,
+            entityName: null,
             applicantName: null,
             applicantEmail: null,
             applicantPhone: null,
             coverLetter: null,
+            userEditedCoverLetter: false
         });
     }
 
@@ -78,10 +88,12 @@ export const useQuickApplyFlowStore = defineStore('quickApplyFlowStore', () => {
         errorMessage,
         currentSlide,
         slides,
+        showReview,
         quickApply,
         generateCoverLetter,
         nextSlide,
         cancelQuickApply,
-        initializeFlow
+        initializeFlow,
+        completeApplication
     }
 })
