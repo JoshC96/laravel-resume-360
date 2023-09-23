@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\AiSources;
 use App\Enums\PromptTemplateLocation;
+use App\Enums\PromptTemplateStatus;
 use App\Models\AiResponse;
 use App\Models\JobListing;
 use App\Models\Prompt;
@@ -46,6 +47,7 @@ class OpenAiPromptService
     {
         $template = PromptTemplate::query()
             ->where(PromptTemplate::FIELD_USE_LOCATION, $promptTemplateLocation->value)
+            ->where(PromptTemplate::FIELD_STATUS, PromptTemplateStatus::ACTIVE->value)
             ->firstOrFail();
 
         // @Todo: return the template if the user is premium
