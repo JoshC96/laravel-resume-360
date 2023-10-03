@@ -1,0 +1,23 @@
+import { defineStore } from "pinia";
+import { ref } from "vue";
+import EntityApi from "@/Pages/Entity/services/EntityApi";
+
+export const useEntityStore = defineStore('entityStore', () => {
+    const api = EntityApi.make();
+    const loading = ref(false);
+    const errorMessage = ref('');
+    const userEntities = ref([]);
+
+    async function getUserEntities(payload) {
+        const { data } = await api.getEntities({ user_id: api.userId, ...payload });
+        userEntities.value = data.resp.entities;
+    }
+
+    return {
+        api,
+        loading,
+        errorMessage,
+        userEntities,
+        getUserEntities
+    }
+})

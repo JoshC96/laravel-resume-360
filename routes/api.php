@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Users\UserController;
 use App\Http\Controllers\Api\Jobs\JobsController;
 use App\Http\Controllers\Api\Prompts\PromptsController;
 use App\Http\Controllers\Api\Prompts\PromptTemplatesController;
+use App\Http\Controllers\Api\Entities\EntitiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,14 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
             Route::patch('/{licence}', 'updateLicence');
             Route::delete('/{licence}', 'destroyLicence');
         }); 
+    });
+
+    Route::prefix('entities')->controller(EntitiesController::class)->group(function () {
+        Route::get('/', 'getEntities');
+        Route::post('/', 'createEntity');
+        Route::patch('/{entity}', 'updateEntity');
+        Route::delete('/{entity}', 'deleteEntity');
+        Route::get('/{entity}/contacts', 'getEntityContacts');
     });
 
     Route::prefix('jobs')->controller(JobsController::class)->group(function () {
