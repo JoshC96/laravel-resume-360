@@ -10,7 +10,7 @@ export const useEntityStore = defineStore('entityStore', () => {
 
     async function getUserEntities(payload) {
         const { data } = await api.getEntities({ user_id: api.userId, ...payload });
-        userEntities.value = data.resp.entities;
+        userEntities.value = data.resp.entities.data;
     }
 
     return {
