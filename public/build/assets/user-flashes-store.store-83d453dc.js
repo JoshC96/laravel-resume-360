@@ -1,0 +1,1 @@
+import{x as u,e as o}from"./app-ac863ed7.js";const h=u("userFlashes",()=>{const e=o([]),r=o([]),n=o([]);function t(s){console.error(s),n.value.push(s)}function c(s){console.log("notice"),r.value.push(s)}function l(s){console.log(s),e.value.push(s)}return{successFlashes:e,noticeFlashes:r,errorFlashes:n,reportError:t,showNotice:c,showSuccess:l}},{persist:!1});export{h as u};

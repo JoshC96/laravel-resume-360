@@ -1,0 +1,1 @@
+import{J as r}from"./app-ac863ed7.js";const t=["January","February","March","April","May","June","July","August","September","October","November","December"],m=function(e){return r(new Date(e),"hh:mmaa E d-MMM-yy")};export{m as f,t as m};
