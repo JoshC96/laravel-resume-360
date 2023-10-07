@@ -16,12 +16,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $email
  * @property string $email_verified_at
  * @property string $password
- * @property string $bio
- * @property string $date_of_birth
- * @property string $mobile_phone
- * @property string $work_phone
- * @property string $website
- * @property string $address
+ * @property string|null $bio
+ * @property string|null $date_of_birth
+ * @property string|null $mobile_phone
+ * @property string|null $work_phone
+ * @property string|null $website
+ * @property string|null $address
+ * @property string|null $current_role
+ * @property string|null $location
  * @property Carbon $updated_at
  * @property-read Carbon $created_at
  */
@@ -42,6 +44,8 @@ class User extends Authenticatable
     public const FIELD_WORK_PHONE = 'work_phone';
     public const FIELD_WEBSITE = 'website';
     public const FIELD_ADDRESS = 'address';
+    public const FIELD_CURRENT_ROLE = 'current_role';
+    public const FIELD_LOCATION = 'location';
 
     public const RELATION_REFEREES = 'referees';
     public const RELATION_WORK_EXPERIENCES = 'workExperiences';
@@ -56,20 +60,8 @@ class User extends Authenticatable
 
     protected $table = self::TABLE;
     protected $guarded = [
-        self::FIELD_ID
-    ];
-
-
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+        self::FIELD_ID,
+        self::FIELD_PASSWORD
     ];
 
     /**

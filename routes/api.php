@@ -28,10 +28,10 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::prefix('user')->controller(UserController::class)->group(function () {
         Route::get('/', 'getProfile');
+        Route::patch('/', 'updateUser');
 
         Route::prefix('bio')->group(function () {
             Route::get('/', 'getBio');
-            Route::patch('/', 'updateBio');
         }); 
 
         Route::prefix('referees')->group(function () {

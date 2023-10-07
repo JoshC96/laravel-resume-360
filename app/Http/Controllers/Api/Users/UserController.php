@@ -40,6 +40,7 @@ use App\Repositories\LicenceRepository;
 use App\Repositories\PublicationRepository;
 use App\Repositories\QualificationRepository;
 use App\Repositories\RefereeRepository;
+use App\Repositories\UserRepository;
 use App\Repositories\WorkExperienceRepository;
 
 class UserController extends ApiController
@@ -53,6 +54,7 @@ class UserController extends ApiController
         protected CertificationRepository $certificationRepository,
         protected LicenceRepository $licenceRepository,
         protected PublicationRepository $publicationRepository,
+        protected UserRepository $userRepository,
     )
     {
         parent::__construct($request);
@@ -83,24 +85,18 @@ class UserController extends ApiController
      * @return JsonResponse 
      * @throws BindingResolutionException 
      */
-    public function updateBio(UserProfileRequest $request): JsonResponse
+    public function updateUser(UserProfileRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            UserProfileRequest::REQUEST_BIO => 'string|nullable|max:1000'
-        ]);
+        $data = $request->all();
 
         try {
-            /** @var User $user */
-            $user = Auth::user();
-            $user->{User::FIELD_BIO} = $validated[UserProfileRequest::REQUEST_BIO];
-
             return $this->formatResponse([
-                'status' => $user->save()
+                'status' => $this->userRepository->updateUser(Auth::user(), $data)
             ]);
         } catch (Exception $exception) {
             return $this->formatResponse([
                 'status' => false,
-                'message' => 'Failed to update user bio, error code:' . $exception->getCode()
+                'message' => 'Failed to update user, error code:' . $exception->getCode()
             ]);
         }
     }

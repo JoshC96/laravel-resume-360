@@ -41,7 +41,7 @@ export default class ProfileApi extends ApiService {
     }
 
     updateBio(bioContent) {
-        return this.axios.patch(`/bio`, { bio: bioContent })
+        return this.axios.patch(`/`, { bio: bioContent })
     }
 
     getWorkExperience() {
