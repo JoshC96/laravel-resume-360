@@ -31,7 +31,7 @@
                             id="organisation"
                             type="text"
                             class="mt-1 block w-full"
-                            v-model="profileStore.editingReferee.organisation"
+                            v-model="profileStore.editingReferee.entity"
                             required
                         />
                     </div>

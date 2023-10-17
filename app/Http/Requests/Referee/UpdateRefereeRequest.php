@@ -17,7 +17,7 @@ class UpdateRefereeRequest extends FormRequest
     public const REQUEST_PHONE = UserReferee::FIELD_PHONE;
     public const REQUEST_EMAIL = UserReferee::FIELD_EMAIL;
     public const REQUEST_USER_ID = UserReferee::FIELD_USER_ID;
-    public const REQUEST_ORGANISATION = UserReferee::FIELD_ORGANISATION;
+    public const REQUEST_ORGANISATION = UserReferee::FIELD_ENTITY;
 
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Jobs\JobsController;
 use App\Http\Controllers\Api\Prompts\PromptsController;
 use App\Http\Controllers\Api\Prompts\PromptTemplatesController;
 use App\Http\Controllers\Api\Entities\EntitiesController;
+use App\Http\Controllers\Api\Talent\TalentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,10 +85,12 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::prefix('entities')->controller(EntitiesController::class)->group(function () {
         Route::get('/', 'getEntities');
+        Route::get('/{entity}', 'getEntity');
         Route::post('/', 'createEntity');
         Route::patch('/{entity}', 'updateEntity');
         Route::delete('/{entity}', 'deleteEntity');
         Route::get('/{entity}/contacts', 'getEntityContacts');
+        Route::post('/register', 'register');
     });
 
     Route::prefix('jobs')->controller(JobsController::class)->group(function () {

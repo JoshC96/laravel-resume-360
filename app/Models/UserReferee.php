@@ -30,7 +30,7 @@ class UserReferee extends Model
     public const FIELD_DESCRIPTION = 'description';
     public const FIELD_PHONE = 'phone';
     public const FIELD_EMAIL = 'email';
-    public const FIELD_ORGANISATION = 'organisation';
+    public const FIELD_ENTITY = 'entity';
     public const FIELD_USER_ID = 'user_id';
 
     public const RELATION_USER = 'user';

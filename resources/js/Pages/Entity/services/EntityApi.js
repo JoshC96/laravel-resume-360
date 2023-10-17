@@ -11,6 +11,10 @@ export default class EntityApi extends ApiService {
         return new EntityApi(this.BASE_URL, `entities`, this.VERSION)
     }
 
+    register(payload) {
+        return this.axios.get(`/register`, { params: payload })
+    }
+
     getEntities(payload) {
         return this.axios.get(`/`, { params: payload })
     }

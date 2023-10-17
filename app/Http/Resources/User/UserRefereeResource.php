@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\User;
 
-use App\Models\Entity;
+
 use App\Models\User;
 use App\Models\UserReferee;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class UserRefereeResource extends JsonResource
             UserReferee::FIELD_PHONE => $this->{UserReferee::FIELD_PHONE},
             UserReferee::FIELD_EMAIL => $this->{UserReferee::FIELD_EMAIL},
             UserReferee::RELATION_USER => $this->{UserReferee::RELATION_USER}?->{User::FIELD_NAME},
-            UserReferee::FIELD_ORGANISATION => $this->{UserReferee::FIELD_ORGANISATION},
+            UserReferee::FIELD_ENTITY => $this->{UserReferee::FIELD_ENTITY},
         ];
     }
 }

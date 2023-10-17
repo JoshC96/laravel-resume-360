@@ -10,18 +10,18 @@
                     <div class="bg-white grid grid-cols-3 pb-4 pr-4 pl-4 sm:pb-8 sm:pr-8 sm:pl-8 shadow rounded-b-lg">
                         <div class="col-1">
                             <div>
-                                <img class="max-h-36 max-w-36 rounded-xl -mt-16" src="/assets/image4.jpg"
-                                    alt="profile image" />
+                                <img class="max-h-36 max-w-36 rounded-xl -mt-16" src="/assets/image4.jpg" alt="profile image" />
                             </div>
 
                             <div class="my-5 bg-white">
                                 <h3 class="h3 text-xl">
-                                    Josh Campbell
+                                    {{ user.name }}
                                 </h3>
                                 <p>
-                                    Software Engineer
+                                    {{ user.currentRole }}Software Engineer
                                 </p>
                                 <p>
+                                    {{ user.location }}
                                     Adelaide, South Australia
                                 </p>
                             </div>
@@ -65,9 +65,9 @@
                                 <div class="flex justify-between">
                                     <div class="flex  mb-3">
                                         <button
-                                            class="mr-3 relative z-10 block w-12 h-12 overflow-hidden rounded-full shadow focus:outline-none">
+                                            class="mr-3 relative z-10 block w-10 h-10 overflow-hidden rounded-full shadow focus:outline-none">
                                             <img class="object-cover w-full h-full"
-                                                src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=296&amp;q=80"
+                                                src="/assets/profile-image-placeholder.jpg"
                                                 alt="Your avatar">
                                         </button>
                                         <div class="text-sm text-slate-700">
@@ -228,10 +228,8 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import TextAreaInput from '@/Components/TextAreaInput.vue';
 import IconEdit from '@/Components/IconEdit.vue';
-import { ref } from 'vue';
-import ProfileApi from './services/ProfileApi';
+import { usePage } from "@inertiajs/vue3";
 import { onMounted } from 'vue';
-import { useUserFlashesStore } from '@/Stores/user-flashes-store.store';
 import EditRefereeForm from './components/EditRefereeForm.vue'
 import EditExperienceForm from './components/EditExperienceForm.vue';
 import { monthNames } from '@/Services/DateService';
@@ -242,97 +240,13 @@ import EditPublicationForm from './components/EditPublicationForm.vue';
 import EditCertificationForm from './components/EditCertificationForm.vue';
 import EditLicenceForm from './components/EditLicenceForm.vue';
 
-
-const userFlashStore = useUserFlashesStore();
-const api = ProfileApi.make();
 const profileStore = useUserProfileStore();
 const jobStore = useJobApplicationStore();
+const user = usePage().props.auth.user;
 
 onMounted(async () => {
     profileStore.getProfile();
     jobStore.getApplications();
 })
-
-
-// const workExperienceItems = ref([{
-//     name: 'test name 123',
-//     description: 'As a Senior Sales Representative at John Hopkins Ltd in Windsor Gardens, South Australia, from June 2020 to December 2022, I thrived in a dynamic role that involved building strong client relationships, surpassing sales targets, and leading a motivated sales team. My proactive approach to market analysis and product launches helped strengthen the company\'s position in the industry.I cherish the enriching experiences and valuable skills gained during this rewarding chapter of my career.',
-//     position: 'Senior Sales Representative',
-//     entity: 'John Hopkins Ltd',
-//     startedAt: 'June 2020',
-//     finishedAt: 'Dec 2022',
-//     location: 'Windsor Gardens, South Australia',
-// }, {
-//     description: '',
-//     position: 'Software Engineer',
-//     entity: 'SolarReviews',
-//     startedAt: 'Apr 2023',
-//     finishedAt: 'Present',
-//     location: 'Adelaide, South Australia',
-// }, {
-//     description: 'Technical project management, team lead, driving delivery of software solutions with engineers and customers ',
-//     position: 'Delivery Engineer and Unit Lead',
-//     entity: 'FOUR',
-//     startedAt: 'Sep 2020',
-//     finishedAt: 'Dec 2022',
-//     location: 'Adelaide, South Australia',
-// }, {
-//     description: '',
-//     position: 'Software Engineer',
-//     entity: 'Karmabunny',
-//     startedAt: 'Jan 2023',
-//     finishedAt: 'Apr 2020',
-//     location: 'Norwood, South Australia',
-// }, {
-//     description: 'This course is designed to be very fast paced and covers many topics including Bootstrap, JavaScript, NodeJS, ReactJS, MySQL, MongoDB, and much more.',
-//     position: 'Teaching Assistant',
-//     entity: 'University of Adelaide',
-//     startedAt: 'Feb 2020',
-//     finishedAt: 'Jul 2020',
-//     location: 'Adelaide, South Australia',
-// }]);
-
-// const education = ref([{
-//     name: 'Bachelors Degree in Sofware Development',
-//     startedAt: 'Feb 2013',
-//     finishedAt: 'June 2017',
-//     description: '',
-//     field: 'Sofware Development',
-//     location: 'Christchurch, New Zealand'
-// }]);
-// const certifications = ref([{
-//     name: 'ISC2',
-//     issuedAt: 'June 2019',
-//     description: 'CSSLP certification recognizes leading application security skills.',
-//     location: 'Sydney, New South Wales'
-// }]);
-// const licences = ref([]);
-// const publications = ref([{
-//     name: 'The phosphoinositide signature guides the final step of plant cytokinesis',
-//     publishedAt: 'June 2023',
-//     description: 'Plant cytokinesis, which fundamentally differs from that in animals, requires the outward expansion of a plasma membrane precursor named the cell plate. How the transition from a cell plate to a plasma membrane occurs remains poorly understood.',
-//     location: 'Brisbane, Queensland'
-// }]);
-// const referees = ref([{
-//     name: 'Ben Broad',
-//     position: 'Facilitator',
-//     entity: 'FOUR',
-//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt enim rerum perspiciatis reprehenderit debitis dicta sed nemo.',
-// }, {
-//     name: 'Rhys Moult',
-//     position: 'Director',
-//     entity: 'RMTA',
-//     description: 'Excepturi doloremque voluptatum dolore recusandae incidunt fugiat assumenda, at natus distinctio neque?',
-// }, {
-//     name: 'Jesse Castle',
-//     position: 'Operations Manager',
-//     entity: 'FOUR',
-//     description: 'Excepturi doloremque voluptatum dolore recusandae incidunt fugiat assumenda, at natus distinctio neque?',
-// }, {
-//     name: 'Gwilyn Saunders',
-//     position: 'CTO',
-//     entity: 'Karmabunny',
-//     description: 'Nam excepturi doloremque voluptatum dolore recusandae incidunt fugiat assumenda, at natus distinctio neque?',
-// }]);
 
 </script>

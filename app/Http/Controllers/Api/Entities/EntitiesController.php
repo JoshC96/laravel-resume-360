@@ -12,6 +12,7 @@ use App\Models\Entity;
 use App\Repositories\EntityRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntitiesController extends ApiController
 {
@@ -22,6 +23,23 @@ class EntitiesController extends ApiController
     )
     {
         parent::__construct($request);
+    }
+
+
+    /**
+     * @param StoreEntityRequest $request 
+     * @return JsonResponse 
+     */
+    public function register(StoreEntityRequest $request): JsonResponse
+    {
+        $data = $request->safe()->toArray();
+
+        $entity = $this->entityRepository->createEntity($data, Auth::user());
+
+        return $this->formatResponse([
+            'status' => true,
+            'entity' => $entity
+        ]);
     }
 
     /**
@@ -43,7 +61,21 @@ class EntitiesController extends ApiController
                     $data['page'] ?? 1
                 )
                 ->onEachSide(1)
-                ->through(fn ($jobListing) => new EntityResource($jobListing))
+                ->through(fn ($entity) => new EntityResource($entity))
+        ]);
+    }
+
+
+    /**
+     * @param Entity $entity 
+     * @param EntityRequest $request 
+     * @return JsonResponse 
+     * @throws BindingResolutionException 
+     */
+    public function getEntity(Entity $entity, EntityRequest $request): JsonResponse
+    {
+        return $this->formatResponse([
+            'entity' => new EntityResource($entity)
         ]);
     }
 

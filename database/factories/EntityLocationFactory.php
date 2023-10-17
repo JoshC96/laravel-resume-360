@@ -18,10 +18,11 @@ class EntityLocationFactory extends Factory
     public function definition(): array
     {
         $location = Location::inRandomOrder()->first();
+        $names = ['Head Office', 'Branch', 'Coworking Space', 'Warehouse'];
+        $nameIndex = rand(0, count($names) - 1);
 
         return [
-            EntityLocation::FIELD_NAME => fake()->name(),
-            EntityLocation::FIELD_DESCRIPTION => fake()->paragraph(),
+            EntityLocation::FIELD_NAME => $names[$nameIndex],
             EntityLocation::FIELD_LOCATION_ID => $location->{Location::FIELD_ID}
         ];
     }

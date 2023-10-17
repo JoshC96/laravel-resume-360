@@ -5,6 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Requests\Entities\EntityRequest;
+use App\Http\Resources\Entities\EntityResource;
+use App\Models\Entity;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +46,12 @@ Route::middleware('auth')->group(function () {
         })->name('profile');
     });
 
+    Route::prefix('entity')->group(function () {
+        Route::get('/{entity}', function (Entity $entity ) {
+            return Inertia::render('Entity/Entity', ['entity' => new EntityResource($entity)]);
+        })->name('entity');
+    });
+
     Route::prefix('jobs')->group(function () {
         Route::get('/', function () {
             return Inertia::render('Jobs/Jobs');
@@ -59,6 +68,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/', function () {
             return Inertia::render('Templates/Templates');
         })->name('templates');
+    });
+
+    Route::prefix('talent')->group(function () {
+        Route::get('/registration', function () {
+            return Inertia::render('Entity/Registration');
+        })->name('entity.registration');
     });
 });
 
