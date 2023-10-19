@@ -17,7 +17,7 @@
 <script setup>
 
 defineProps({
-    number: String,
+    number: Number,
     text: String,
     svgIcon: String
 })

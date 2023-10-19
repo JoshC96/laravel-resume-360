@@ -131,7 +131,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { usePage } from '@inertiajs/vue3';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import IconEdit from '@/Components/IconEdit.vue';
 import CounterWidget from '@/Components/DashboardWidgets/CounterWidget.vue';
