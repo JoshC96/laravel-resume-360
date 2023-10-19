@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Jobs\JobsController;
 use App\Http\Controllers\Api\Prompts\PromptsController;
 use App\Http\Controllers\Api\Prompts\PromptTemplatesController;
 use App\Http\Controllers\Api\Entities\EntitiesController;
+use App\Http\Controllers\Api\Permissions\PermissionsController;
 use App\Http\Controllers\Api\Talent\TalentController;
 
 /*
@@ -114,5 +115,21 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::patch('/{template}', 'updateTemplate');
         Route::delete('/{template}', 'deleteTemplate');
     });
+
+    Route::prefix('permissions')->controller(PermissionsController::class)->group(function () {
+        Route::get('/', 'getPermissions');
+        Route::post('/', 'createPermission');
+        Route::patch('/{permission}', 'updatePermission');
+        Route::delete('/{permission}', 'deletePermission');
+
+        Route::prefix('roles')->group(function () {
+            Route::get('/', 'getRoles');
+            Route::post('/', 'createRole');
+            Route::patch('/{role}', 'updateRole');
+            Route::delete('/{role}', 'deleteRole');
+        }); 
+
+    });
+
 
 });

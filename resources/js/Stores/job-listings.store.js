@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useUserFlashesStore } from '@/Stores/user-flashes-store.store';
-import ProfileApi from "@/Pages/Profile/services/ProfileApi";
-import JobsApi from "@/Pages/Jobs/services/JobsApi";
+import ProfileApi from "@/Services/ProfileApi";
+import JobsApi from "@/Services/JobsApi";
 
 
 export const useJobListingStore = defineStore('jobListingStore', () => {

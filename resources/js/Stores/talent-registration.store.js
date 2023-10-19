@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import EntityApi from "@/Pages/Entity/services/EntityApi";
+import EntityApi from "@/Services/EntityApi";
 
 export const useTalentRegistrationStore = defineStore('talentRegistrationStore', () => {
     const api = EntityApi.make();

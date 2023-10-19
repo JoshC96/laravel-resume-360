@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import JobsApi from "@/Pages/Jobs/services/JobsApi";
+import JobsApi from "@/Services/JobsApi";
 
 const slideComponents = [
     'ConfirmQuickApply',

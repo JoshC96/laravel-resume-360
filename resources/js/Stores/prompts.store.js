@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { useUserFlashesStore } from '@/Stores/user-flashes-store.store';
-import PromptsApi from "@/Pages/Prompts/services/PromptsApi";
+import PromptsApi from "@/Services/PromptsApi";
 
 export const usePromptsStore = defineStore('promptsStore', () => {
     const userFlashStore = useUserFlashesStore();

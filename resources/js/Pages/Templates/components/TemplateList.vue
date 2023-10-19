@@ -2,8 +2,6 @@
     <div class="mt-6">
         <h2 class="text-xl font-semibold leading-tight text-gray-700">Templates</h2>
 
-        <EditTemplateForm />
-
         <div>
             <div class="flex justify-between items-center my-5 py-5 px-3 bg-white rounded-md">
                 <TemplateFilters />
@@ -141,7 +139,10 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table>               
+                    </table>     
+                    
+                    
+                    <EditTemplateForm />
 
                     <div class="py-5 pr-5">
                         <Pagination 

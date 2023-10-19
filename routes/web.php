@@ -4,8 +4,6 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Profile\ProfileController;
-use App\Http\Requests\Entities\EntityRequest;
 use App\Http\Resources\Entities\EntityResource;
 use App\Models\Entity;
 
@@ -75,6 +73,13 @@ Route::middleware('auth')->group(function () {
             return Inertia::render('Entity/Registration');
         })->name('entity.registration');
     });
+
+    Route::prefix('permissions')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('Permissions/Permissions');
+        })->name('permissions');
+    });
+    
 });
 
 require __DIR__.'/auth.php';

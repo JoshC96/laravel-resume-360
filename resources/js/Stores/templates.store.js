@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { useUserFlashesStore } from '@/Stores/user-flashes-store.store';
-import TemplatesApi from "@/Pages/Templates/services/TemplatesApi";
+import TemplatesApi from "@/Services/TemplatesApi";
 
 export const useTemplatesStore = defineStore('templatesStore', () => {
     const userFlashStore = useUserFlashesStore();
@@ -29,7 +29,7 @@ export const useTemplatesStore = defineStore('templatesStore', () => {
                 userFlashStore.showSuccess('Deleted template')
                 getTemplates();
             } else {
-                userFlashStore.reportError('Error updating template, please try again later')
+                userFlashStore.reportError('Error deleting template, please try again later')
             }
         } else {
             userFlashStore.reportError('A template ID is required.')

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useUserFlashesStore } from '@/Stores/user-flashes-store.store';
-import ProfileApi from "@/Pages/Profile/services/ProfileApi";
+import ProfileApi from "@/Services/ProfileApi";
 
 
 export const useUserProfileStore = defineStore('userProfileStore', () => {
