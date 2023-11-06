@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $title
  * @property string $industry
  * @property string $description
@@ -29,6 +30,7 @@ class JobListing extends Model
     public const TABLE = 'job_listings';
 
     public const FIELD_ID = 'id';
+    public const FIELD_UUID = 'uuid';
     public const FIELD_TITLE = 'title';
     public const FIELD_INDUSTRY = 'industry';
     public const FIELD_DESCRIPTION = 'description';

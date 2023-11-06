@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Resources\Entities\EntityResource;
 use App\Models\Entity;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [AccountController::class, 'edit'])->name('account.edit');
     Route::patch('/account', [AccountController::class, 'update'])->name('account.update');
     Route::delete('/account', [AccountController::class, 'destroy'])->name('account.destroy');
+
+    Route::prefix('user')->controller(UserController::class)->group(function () {
+        Route::get('/{uuid}/impersonate', 'impersonateUser')->name('impersonate');
+        Route::get('/stop-impersonate', 'stopImpersonateUser')->name('stop-impersonate');
+    });
 
     Route::prefix('profile')->group(function () {
         Route::get('/', function () {

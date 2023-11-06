@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string $email
  * @property string $email_verified_at
@@ -34,6 +36,7 @@ class User extends Authenticatable
     public const TABLE = 'users';
 
     public const FIELD_ID = 'id';
+    public const FIELD_UUID = 'uuid';
     public const FIELD_NAME = 'name';
     public const FIELD_EMAIL = 'email';
     public const FIELD_VERIFIED_AT = 'email_verified_at';
@@ -63,6 +66,8 @@ class User extends Authenticatable
         self::FIELD_ID,
         self::FIELD_PASSWORD
     ];
+
+    protected $guard_name = 'api';
 
     /**
      * The attributes that should be hidden for serialization.

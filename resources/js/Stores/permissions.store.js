@@ -6,8 +6,8 @@ import PermissionsApi from "@/Services/PermissionsApi";
 export const usePermissionsStore = defineStore('permissionsStore', () => {
     const userFlashStore = useUserFlashesStore();
     const api = PermissionsApi.make();
-    const permissions = ref();
-    const roles = ref();
+    const permissions = ref([]);
+    const roles = ref([]);
 
     const editingPermission = ref({});
     const editingRole = ref({});
@@ -91,6 +91,7 @@ export const usePermissionsStore = defineStore('permissionsStore', () => {
     }
 
     async function saveRole() {
+        console.log(editingRole.value)
         if (editingRole.value.id) {
             const { data } = await api.updateRole(editingRole.value.id, editingRole.value)
 

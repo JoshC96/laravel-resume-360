@@ -2,18 +2,34 @@ import ApiService from '@/Services/ApiService';
 
 
 
-export default class ProfileApi extends ApiService {
+export default class UserApi extends ApiService {
 
     constructor(...args){
         super(...args);
     }
 
     static make() {
-        return new ProfileApi(this.BASE_URL, `user`, this.VERSION)
+        return new UserApi(this.BASE_URL, `user`, this.VERSION)
     }    
 
+    getUsers(payload) {
+        return this.axios.get(`/`, { params: payload })
+    }
+
+    createUser(payload) {
+        return this.axios.post(`/`, payload)
+    }
+
+    updateUser(userId, payload) {
+        return this.axios.patch(`/${userId}`, payload)
+    }
+
+    deleteUser(userId, payload) {
+        return this.axios.delete(`/${userId}`, payload)
+    }
+
     getProfile() {
-        return this.axios.get(`/`)
+        return this.axios.get(`/profile`)
     }
 
     updateSettings(payload) {

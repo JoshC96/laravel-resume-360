@@ -23,6 +23,7 @@ use App\Http\Requests\WorkExperience\DestroyWorkExperienceRequest;
 use App\Http\Requests\WorkExperience\StoreWorkExperienceRequest;
 use App\Http\Requests\WorkExperience\UpdateWorkExperienceRequest;
 use App\Http\Resources\User\UserProfileResource;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use App\Models\UserCertification;
 use App\Models\UserLicence;
@@ -42,6 +43,7 @@ use App\Repositories\QualificationRepository;
 use App\Repositories\RefereeRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\WorkExperienceRepository;
+use App\Services\UserService;
 
 class UserController extends ApiController
 {
@@ -54,10 +56,61 @@ class UserController extends ApiController
         protected CertificationRepository $certificationRepository,
         protected LicenceRepository $licenceRepository,
         protected PublicationRepository $publicationRepository,
+        protected UserService $userService,
         protected UserRepository $userRepository,
     )
     {
         parent::__construct($request);
+    }
+
+    /**
+     * @param Request $request 
+     * @return JsonResponse 
+     */
+    public function getUsers(Request $request): JsonResponse
+    {
+        $data = $request->all();
+
+        try {
+            return $this->formatResponse([
+                'users_paginated' => User::query()
+                    ->paginate(
+                        $data['per_page'] ?? 20,
+                        ['*'],
+                        'page',
+                        $data['page'] ?? 1
+                    )
+                    ->onEachSide(1)
+                    ->through(fn ($user) => new UserResource($user))
+            ]);
+        } catch (Exception $exception) {
+            return $this->formatResponse([
+                'status' => false,
+                'message' => 'Failed to retrieve users, error code:' . $exception->getCode()
+            ]);
+        }
+    }
+
+    /**
+     * @param User $user
+     * @param Request $request 
+     * @return JsonResponse 
+     * @throws BindingResolutionException 
+     */
+    public function updateUser(User $user, Request $request): JsonResponse
+    {
+        $data = $request->all();
+
+        try {
+            return $this->formatResponse([
+                'status' => $this->userRepository->updateUser($user, $data)
+            ]);
+        } catch (Exception $exception) {
+            return $this->formatResponse([
+                'status' => false,
+                'message' => 'Failed to update user:' . $exception->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -85,7 +138,7 @@ class UserController extends ApiController
      * @return JsonResponse 
      * @throws BindingResolutionException 
      */
-    public function updateUser(UserProfileRequest $request): JsonResponse
+    public function updateUserProfile(UserProfileRequest $request): JsonResponse
     {
         $data = $request->all();
 

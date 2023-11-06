@@ -16,7 +16,7 @@
                             required />
                     </div>
                     <div>
-                        <InputLabel for="phone" value="Phone *" />
+                        <InputLabel for="phone" value="Business Phone *" />
 
                         <TextInput 
                             id="phone" 
@@ -24,6 +24,26 @@
                             pattern="\d+"
                             class="mt-1 block w-full"
                             v-model="store.entity.phone" 
+                            required />
+                    </div>
+                    <div>
+                        <InputLabel for="email" value="Business Email *" />
+
+                        <TextInput 
+                            id="email" 
+                            type="email"
+                            class="mt-1 block w-full"
+                            v-model="store.entity.email" 
+                            required />
+                    </div>
+                    <div>
+                        <InputLabel for="industry" value="Industry *" />
+
+                        <TextInput 
+                            id="industry" 
+                            type="text"
+                            class="mt-1 block w-full"
+                            v-model="store.entity.industry" 
                             required />
                     </div>
                     <div>

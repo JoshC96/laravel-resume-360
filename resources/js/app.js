@@ -8,6 +8,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { createPinia } from 'pinia';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import '@vueform/multiselect/themes/default.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 const pinia = createPinia();

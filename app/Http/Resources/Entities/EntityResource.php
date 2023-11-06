@@ -21,16 +21,19 @@ class EntityResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->{Entity::FIELD_ID},
-            'name' => $this->{Entity::FIELD_NAME},
-            'description' => $this->{Entity::FIELD_DESCRIPTION},
-            'type' => EntityType::getDisplayString($this->{Entity::FIELD_TYPE}),
+            Entity::FIELD_ID => $this->{Entity::FIELD_ID},
+            Entity::FIELD_NAME => $this->{Entity::FIELD_NAME},
+            Entity::FIELD_PHONE => $this->{Entity::FIELD_PHONE},
+            Entity::FIELD_WEBSITE => $this->{Entity::FIELD_WEBSITE},
+            Entity::FIELD_DESCRIPTION => $this->{Entity::FIELD_DESCRIPTION},
+            Entity::FIELD_TYPE => EntityType::getDisplayString($this->{Entity::FIELD_TYPE}),
+            Entity::FIELD_INDUSTRY => $this->{Entity::FIELD_INDUSTRY},
             'employees' => $this->{Entity::FIELD_EMPLOYEE_SIZE},
             'createdAt' => Carbon::parse($this->{Entity::CREATED_AT})->format('d M y'),
-            'contacts' => ContactResource::collection($this->{Entity::RELATION_CONTACTS}),
-            'applications' => $this->{Entity::RELATION_APPLICATIONS},
-            'jobs' => $this->{Entity::RELATION_JOBS},
-            'locations' => EntityLocationResource::collection($this->{Entity::RELATION_LOCATIONS}),
+            Entity::RELATION_CONTACTS => ContactResource::collection($this->{Entity::RELATION_CONTACTS}),
+            Entity::RELATION_APPLICATIONS => $this->{Entity::RELATION_APPLICATIONS},
+            Entity::RELATION_JOBS => $this->{Entity::RELATION_JOBS},
+            Entity::RELATION_LOCATIONS => EntityLocationResource::collection($this->{Entity::RELATION_LOCATIONS}),
         ];
     }
 }

@@ -9,11 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property int $type
  * @property string|null $description
  * @property string|null $phone
+ * @property string|null $email
  * @property string|null $website
+ * @property string $industry
  * @property int|null $employee_size
  * @property Carbon $updated_at
  * @property-read Collection|null $locations
@@ -28,12 +31,15 @@ class Entity extends Model
     public const TABLE = 'entities';
 
     public const FIELD_ID = 'id';
+    public const FIELD_UUID = 'uuid';
     public const FIELD_NAME = 'name';
     public const FIELD_TYPE = 'type';
     public const FIELD_DESCRIPTION = 'description';
     public const FIELD_EMPLOYEE_SIZE = 'employee_size';
     public const FIELD_WEBSITE = 'website';
     public const FIELD_PHONE = 'phone';
+    public const FIELD_EMAIL = 'email';
+    public const FIELD_INDUSTRY = 'industry';
 
     public const RELATION_LOCATIONS = 'locations';
     public const RELATION_CONTACTS = 'contacts';

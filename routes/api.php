@@ -29,8 +29,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::prefix('user')->controller(UserController::class)->group(function () {
-        Route::get('/', 'getProfile');
-        Route::patch('/', 'updateUser');
+
+        // CRUD
+        Route::get('/', 'getUsers');
+        Route::post('/', 'createUser');
+        Route::patch('/{user}', 'updateUser');
+        Route::delete('/{user}', 'deleteUser');
+
+        // PROFILE
+        Route::get('/profile', 'getProfile');
+        Route::patch('/', 'updateUserProfile');
 
         Route::prefix('bio')->group(function () {
             Route::get('/', 'getBio');

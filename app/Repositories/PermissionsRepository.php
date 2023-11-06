@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
+use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -16,11 +17,20 @@ class PermissionsRepository
 
     /**
      * @param string $name 
-     * @return Permission
+     * @param string|null $guard 
+     * @return Permission 
+     * @throws BindingResolutionException 
+     * @throws NotFoundExceptionInterface 
+     * @throws ContainerExceptionInterface 
+     * @throws PermissionAlreadyExists 
+     * @throws MassAssignmentException 
      */
-    public function createPermission(string $name): Permission
+    public function createPermission(string $name, ?string $guard = null): Permission
     {
-        return Permission::create(['name' => $name]);
+        return Permission::create([
+            'name' => $name,
+            'guard_name' => $guard
+        ]);
     }
 
     /**
@@ -40,24 +50,40 @@ class PermissionsRepository
 
     /**
      * @param string $name 
+     * @param array $permissions
      * @return Permission
      */
-    public function createRole(string $name): Role
+    public function createRole(string $name, array $permissions = null, ?string $guard = null): Role
     {
-        return Role::create(['name' => $name]);
+        $role = Role::create([
+            'name' => $name,
+            'guard_name' => $guard
+        ]);
+
+        if (!is_null($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+
+        return $role;
     }
 
     /**
      * @param Role $Role 
      * @param string $name 
+     * @param array $permissions
      * @return bool 
      * @throws MassAssignmentException 
      * @throws InvalidArgumentException 
      * @throws InvalidCastException 
      */
-    public function updateRole(Role $role, string $name): bool
+    public function updateRole(Role $role, string $name, array $permissions = null): bool
     {
         $role->fill(['name' => $name]);
+
+        if (!is_null($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+
         return $role->save();
     }
 

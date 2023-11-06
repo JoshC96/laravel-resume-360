@@ -10,6 +10,7 @@ class UpdateRoleRequest extends FormRequest
 {
 
     public const REQUEST_NAME = 'name';
+    public const REQUEST_PERMISSIONS = 'permissions';
 
 
     /**
@@ -19,7 +20,8 @@ class UpdateRoleRequest extends FormRequest
     {
         /** @var User $user */
         $user = Auth::user();
-        return $user->can('edit-permissions');
+        // return $user->can('edit-permissions');
+        return true;
     }
 
 
@@ -32,6 +34,7 @@ class UpdateRoleRequest extends FormRequest
     {
         return [
             self::REQUEST_NAME => ['string', 'required'],
+            self::REQUEST_PERMISSIONS => ['array', 'sometimes'],
         ];
     }
 }

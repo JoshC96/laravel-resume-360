@@ -1,8 +1,8 @@
 <template>
     <Modal 
         :show="permissionsStore.showRoleForm"
-        @close="permissionsStore.closeRoleModal"
-        @confirm="permissionsStore.saveRole"
+        @close="closeModal"
+        @confirm="saveRole"
     >
 
         <template v-slot:header>
@@ -21,6 +21,21 @@
                         v-model="permissionsStore.editingRole.name"
                     />
                 </div>
+                <div>
+                    <InputLabel for="permissions" value="Assign Permissions" class="mb-1" />
+
+                    <Multiselect 
+                        v-if="permissionOptions"
+                        v-model="permissionsStore.editingRole.permissions" 
+                        :options="permissionOptions" 
+                        mode="tags"
+                        optionLabel="name" 
+                        placeholder="Select Permissions For Role"
+                        :clearOnSelect="false"
+                        :closeOnSelect="false"
+                        :closeOnDeselect="false"
+                        class="w-full md:w-20rem"> </Multiselect>
+                </div>
             </div>
         </template>
     </Modal>
@@ -31,8 +46,31 @@ import TextInput from '@/Components/TextInput';
 import InputLabel from '@/Components/InputLabel';
 import Modal from '@/Components/Modal.vue';
 import { usePermissionsStore } from '@/Stores/permissions.store';
+import Multiselect from '@vueform/multiselect';
+import { onMounted, ref } from 'vue';
+
 
 const permissionsStore = usePermissionsStore();
+const permissionOptions = ref();
+
+if (permissionsStore.editingRole?.permission) {
+    permissionsStore.editingRole.permissions = [];
+}
+
+onMounted(async function () {
+    if (permissionsStore.permissions?.length === 0) {
+        await permissionsStore.getPermissions();
+        permissionOptions.value = permissionsStore.permissions.map(permission => permission.name)
+    }
+});
+
+const saveRole = function () {
+    permissionsStore.saveRole();
+}
+
+const closeModal = function () {
+    permissionsStore.closeRoleModal();
+}
 
 
 </script>

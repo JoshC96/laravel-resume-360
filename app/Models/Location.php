@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string $address
  * @property string $city
@@ -25,6 +26,7 @@ class Location extends Model
     public const TABLE = 'locations';
 
     public const FIELD_ID = 'id';
+    public const FIELD_UUID = 'uuid';
     public const FIELD_NAME = 'name';
     public const FIELD_ADDRESS = 'address';
     public const FIELD_CITY = 'city';

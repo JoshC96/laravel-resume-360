@@ -9,6 +9,7 @@ use App\Http\Requests\Permissions\UpdatePermissionRequest;
 use App\Http\Requests\Permissions\UpdateRoleRequest;
 use App\Http\Requests\Referee\DestroyPermissionRequest;
 use App\Http\Requests\Referee\DestroyRoleRequest;
+use App\Http\Resources\Permissions\RoleResource;
 use App\Repositories\PermissionsRepository;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -48,7 +49,7 @@ class PermissionsController extends ApiController
         $data = $request->safe()->all();
 
         return $this->formatResponse([
-            'permission' => $this->repository->createPermission($data[StorePermissionRequest::REQUEST_NAME])
+            'permission' => $this->repository->createPermission($data[StorePermissionRequest::REQUEST_NAME], 'api')
         ]);
     }
 
@@ -88,7 +89,7 @@ class PermissionsController extends ApiController
     public function getRoles(Request $request): JsonResponse
     {
         return $this->formatResponse([
-            'roles' => Role::all()
+            'roles' => RoleResource::collection(Role::all()) 
         ]);
     }
 
@@ -103,7 +104,7 @@ class PermissionsController extends ApiController
         $data = $request->safe()->all();
 
         return $this->formatResponse([
-            'role' => $this->repository->createRole($data[StoreRoleRequest::REQUEST_NAME])
+            'role' => $this->repository->createRole($data[StoreRoleRequest::REQUEST_NAME], $data[UpdateRoleRequest::REQUEST_PERMISSIONS], 'api')
         ]);
     }
 
@@ -117,7 +118,7 @@ class PermissionsController extends ApiController
         $data = $request->safe()->all();
 
         return $this->formatResponse([
-            'status' => $this->repository->updateRole($role, $data[UpdateRoleRequest::REQUEST_NAME])
+            'status' => $this->repository->updateRole($role, $data[UpdateRoleRequest::REQUEST_NAME], $data[UpdateRoleRequest::REQUEST_PERMISSIONS])
         ]);
     }
 

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  * @property int $type
  * @property string|null $description
+ * @property boolean $is_primary
  * @property int $location_id
  * @property int $entity_id
  * @property Carbon $updated_at
@@ -28,6 +29,7 @@ class EntityLocation extends Model
     public const FIELD_ID = 'id';
     public const FIELD_NAME = 'name';
     public const FIELD_TYPE = 'type';
+    public const FIELD_IS_PRIMARY = 'is_primary';
     public const FIELD_DESCRIPTION = 'description';
     public const FIELD_LOCATION_ID = 'location_id';
     public const FIELD_ENTITY_ID = 'entity_id';

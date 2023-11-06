@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useUserFlashesStore } from '@/Stores/user-flashes-store.store';
-import ProfileApi from "@/Services/ProfileApi";
+import UserApi from "@/Services/UserApi";
 import JobsApi from "@/Services/JobsApi";
 
 

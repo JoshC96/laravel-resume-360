@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $content
  * @property int $status
  * @property int $use_location
@@ -26,6 +27,7 @@ class PromptTemplate extends Model
     public const TABLE = 'prompt_templates';
 
     public const FIELD_ID = 'id';
+    public const FIELD_UUID = 'uuid';
     public const FIELD_CONTENT = 'content';
     public const FIELD_STATUS = 'status';
     public const FIELD_USE_LOCATION = 'use_location';

@@ -100,7 +100,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import Pagination from '@/Components/Pagination';
-import {formatDate} from '@/Services/DateService'
+import { formatDate } from '@/Services/DateService'
 import { usePromptsStore } from '@/Stores/prompts.store'
 import PromptFilters from './PromptFilters';
 import ViewPromptForm from './ViewPromptForm'

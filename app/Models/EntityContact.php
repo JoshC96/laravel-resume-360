@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string $position
  * @property string|null $description
@@ -29,6 +30,7 @@ class EntityContact extends Model
     public const TABLE = 'entity_contacts';
 
     public const FIELD_ID = 'id';
+    public const FIELD_UUID = 'uuid';
     public const FIELD_NAME = 'name';
     public const FIELD_POSITION = 'position';
     public const FIELD_DESCRIPTION = 'description';

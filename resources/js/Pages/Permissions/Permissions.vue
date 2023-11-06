@@ -14,7 +14,7 @@
                         <thead>
                             <tr>
                                 <th
-                                    class="px-5 py-3 text-xs font-semibold tracking-wider text-center text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                                    class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                                     Name 
                                 </th>
                                 <th
@@ -83,7 +83,9 @@
                                 </td>
                                 <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
                                     <p class="text-gray-900 whitespace-nowrap">
-                                        {{ role.permissions ? role.permissions.toString() : '' }}
+                                        <span v-for="(permission, index) in role.permissions" >
+                                            {{ permission }}{{ role.permissions.length > 1 && index + 1 !== role.permissions.length ? ', ' : '' }}
+                                        </span>
                                     </p>
                                 </td>
                                 <td class="px-4 py-4 text-sm bg-white border-b border-gray-200">
@@ -105,8 +107,10 @@
                     </table>
 
                     <EditRoleForm />
-                </div>
+                </div>    
             </div>
+
+            <UserManagement />
         </div>
     </AuthenticatedLayout>
 </template>
@@ -118,6 +122,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { onMounted } from 'vue';
 import EditPermissionForm from './components/EditPermissionForm.vue'
 import EditRoleForm from './components/EditRoleForm.vue'
+import UserManagement from '@/Modules/UserManagement.vue'
 
 const permissionsStore = usePermissionsStore();
 

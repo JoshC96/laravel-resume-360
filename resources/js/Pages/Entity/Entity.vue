@@ -17,17 +17,20 @@
                                 {{ entity.name }}
                             </h3>
                             <h3 class="h3 text-slate-600">
-                                Software Development
+                                {{ entity.industry }}
+                            </h3>
+                            <h3 class="text-xs text-slate-600">
+                                {{ entity.type }}
                             </h3>
                         </div>
                     </div>
                     <div class="py-5 h-full flex items-start flex-col align-middle justify-center">
-                        <p><strong>Phone:</strong> 0412 345 678 </p>
-                        <p><strong>Email:</strong> info@webartisan.io </p>
-                        <p><strong>Website:</strong> https://webartisan.io</p>
+                        <p v-if="entity.phone" ><strong>Phone:</strong> {{ entity.phone }} </p>
+                        <p v-if="entity.email"><strong>Email:</strong> {{ entity.email }} </p>
+                        <p v-if="entity.website"><strong>Website:</strong> {{ entity.website }}</p>
                     </div>
                     <div class="col-1 py-5 h-full flex items-start flex-col align-middle justify-center">
-                        <p><strong>Employees:</strong> {{ entity.employees }}</p>
+                        <p><strong>Employees:</strong> {{ entity.employees ? entity.employees : 0 }}</p>
                         <p><strong>Primary Location:</strong> 8607 Thompson Corners Apt. 988 Port Montana, SD 62599-3371</p>
                     </div>
                 </div>

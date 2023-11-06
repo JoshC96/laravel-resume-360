@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite --host",
-        "build": "vite build"
+        "build": "vite build",
+        "mjml": "mjml resources/views/emails/mjml/default.mjml -o resources/views/emails/html/default.html"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
@@ -19,8 +20,10 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^1.0.9",
+        "@vueform/multiselect": "^2.6.6",
         "@vuepic/vue-datepicker": "^5.4.0",
         "date-fns": "^2.30.0",
+        "mjml": "^4.14.1",
         "pinia": "^2.1.4"
     }
 }
