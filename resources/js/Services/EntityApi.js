@@ -30,4 +30,16 @@ export default class EntityApi extends ApiService {
     deleteEntity(entityId, payload) {
         return this.axios.delete(`/${entityId}`, payload)
     }
+
+    getEntityContacts(entityId, payload) {
+        return this.axios.get(`/${entityId}/contacts`, { params: payload })
+    }
+
+    getEntityLocations(entityId, payload) {
+        return this.axios.get(`/${entityId}/locations`, { params: payload })
+    }
+
+    getEntityJobs(entityId, payload) {
+        return this.axios.get(`/${entityId}/jobs`, { params: payload })
+    }
 }

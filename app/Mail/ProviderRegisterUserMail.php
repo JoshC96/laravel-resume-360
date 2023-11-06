@@ -17,10 +17,11 @@ class ProviderRegisterUserMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        protected string $recipientName, 
+        protected string $entityName, 
+        protected string $customSubject = null
+    ){}
 
     /**
      * Get the message envelope.
@@ -32,7 +33,7 @@ class ProviderRegisterUserMail extends Mailable
             replyTo: [
                 new Address('josh@webartisan.io', 'Josh Campbell'),
             ],
-            subject: 'Provider Register User',
+            subject: config('app.name') . ' - ' . ($this->customSubject ?? 'Complete User Registration'),
         );
     }
 
@@ -42,7 +43,11 @@ class ProviderRegisterUserMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.html.default',
+            view: 'emails.templates.default',
+            with: [
+                'recipientName' => $this->recipientName,
+                'companyName' => $this->entityName,
+            ]
         );
     }
 

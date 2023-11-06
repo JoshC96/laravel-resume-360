@@ -16,6 +16,8 @@ class EntityRequest extends FormRequest
     public const REQUEST_TYPE = Entity::FIELD_TYPE;
     public const REQUEST_EMPLOYEES = Entity::FIELD_EMPLOYEE_SIZE;
     public const REQUEST_USER_ID = 'user_id';
+    public const REQUEST_PAGE = 'page';
+    public const REQUEST_PER_PAGE = 'per_page';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -39,6 +41,8 @@ class EntityRequest extends FormRequest
             self::REQUEST_TYPE => ['numeric', 'nullable', Rule::in(array_column(EntityType::cases(), 'value'))],
             self::REQUEST_EMPLOYEES => ['numeric', 'nullable'],
             self::REQUEST_USER_ID => ['numeric', 'nullable', Rule::exists(User::TABLE, User::FIELD_ID)],
+            self::REQUEST_PAGE => ['numeric', 'sometimes', 'nullable'],
+            self::REQUEST_PER_PAGE => ['numeric', 'sometimes', 'nullable'],
         ];
     }
 }

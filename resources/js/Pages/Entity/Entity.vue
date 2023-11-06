@@ -52,78 +52,97 @@
             </div>
 
             <div>
-                <div class="bg-white p-5 rounded-md">
-                    <div class="flex flex-row justify-between mb-6">
-                        <h3 class="h3 text-xl">Manage Listings</h3>
+                <div class="bg-white p-3 rounded-md">
+                    <div class="flex flex-row justify-between items-center mb-4">
+                        <h3 class="h3 text-lg">Manage Listings</h3>
                         <SecondaryButton @click="console.log('here')">Create</SecondaryButton>
                     </div>
                     <div class="grid space-y-5">
-                        <div v-for="(job, index) in entity.jobs" :key="index" class="col-1">
+                        <div v-for="(job, index) in entityStore.entityJobs" :key="index" class="col-1 mt-0">
                             <div class="flex justify-between">
-                                <div class="flex mb-3">
-                                    <div class="text-sm text-slate-700">
-                                        <h3 class="h3 text-lg">{{ job.role }}</h3>
-                                        <p>{{ job.title }}</p>
-                                        <p>{{ job.industry }}</p>
+                                <div class="flex mb-1">
+                                    <div class="text-slate-700">
+                                        <h3 class="h3 text-sm">{{ job.role }}</h3>
+                                        <p class="text-xs mb-1">{{ job.title }}</p>
+                                        <p class="text-xs mb-1">{{ job.industry }}</p>
                                     </div>
                                 </div>
                                 <IconEdit @click="console.log('here')" />
                             </div>
-                            <hr v-if="entity.jobs.length > 1 && index + 1 !== entity.jobs.length" class="border-t-2 my-5 border-slate-300">
+                            <hr v-if="entityStore.entityJobs.length > 1 && index + 1 !== entityStore.entityJobs.length" class="border-t-2 my-3 border-slate-300">
                         </div>
+                        <Pagination 
+                            v-if="entityStore.entityJobsPaginationData" 
+                            :per-page="5"
+                            :pagination-data="entityStore.entityJobsPaginationData" 
+                            @change-page="handleJobsPaginate" 
+                        />
                     </div>
                 </div>
             </div>
 
             <div>
-                <div class="bg-white p-5 rounded-md">
-                    <div class="flex flex-row justify-between mb-6">
-                        <h3 class="h3 text-xl">Contacts</h3>
+                <div class="bg-white p-3 rounded-md">
+                    <div class="flex flex-row justify-between items-center mb-4">
+                        <h3 class="h3 text-lg">Contacts</h3>
                         <SecondaryButton @click="console.log('here')">Create</SecondaryButton>
                     </div>
                     <div class="grid space-y-5">
-                        <div v-for="(contact, index) in entity.contacts" :key="index" class="col-1">
+                        <div v-for="(contact, index) in entityStore.entityContacts" :key="index" class="col-1 mt-0">
                             <div class="flex justify-between">
-                                <div class="flex mb-3">
+                                <div class="flex mb-1">
                                     <button
-                                        class="mr-3 relative z-10 block w-10 h-10 overflow-hidden rounded-full shadow focus:outline-none">
+                                        class="mr-3 relative z-10 block w-7 h-7 overflow-hidden rounded-full shadow focus:outline-none">
                                         <img class="object-cover w-full h-full"
                                             src="/assets/profile-image-placeholder.jpg"
                                             alt="Your avatar">
                                     </button>
-                                    <div class="text-sm text-slate-700">
-                                        <h3 class="h3 text-lg">{{ contact.name }}</h3>
-                                        <p>{{ contact.position }}</p>
+                                    <div class="text-slate-700">
+                                        <h3 class="h3 text-sm">{{ contact.name }}</h3>
+                                        <p class="text-xs mb-1">{{ contact.position }}</p>
                                         <p class="text-xs mb-1">{{ contact.phone }}</p>
                                         <p class="text-xs mb-1">{{ contact.email }}</p>
                                     </div>
                                 </div>
                                 <IconEdit @click="console.log('here')" />
                             </div>
-                            <hr v-if="entity.contacts.length > 1 && index + 1 !== entity.contacts.length" class="border-t-2 my-5 border-slate-300">
+                            <hr v-if="entityStore.entityContacts.length > 1 && index + 1 !== entityStore.entityContacts.length" class="border-t-2 my-3 border-slate-300">
                         </div>
+                        <Pagination 
+                            v-if="entityStore.entityContactsPaginationData" 
+                            :per-page="5"
+                            :pagination-data="entityStore.entityContactsPaginationData" 
+                            @change-page="handleContactsPaginate" 
+                        />
                     </div>
                 </div>
             </div>
             <div>
-                <div class="bg-white p-5 rounded-md">
-                    <div class="flex flex-row justify-between mb-6">
-                        <h3 class="h3 text-xl">Locations</h3>
+                <div class="bg-white p-3 rounded-md">
+                    <div class="flex flex-row justify-between mb-4">
+                        <h3 class="h3 text-lg">Locations</h3>
                         <SecondaryButton @click="console.log('here')">Create</SecondaryButton>
                     </div>
-                    <div v-for="(location, index) in entity.locations" :key="index" class="mb-5">
+                    <div v-for="(location, index) in entityStore.entityLocations" :key="index" class="mb-5">
                         <div class="flex justify-between">
-                            <div class="flex mb-3">
-                                <div class="text-sm text-slate-700">
-                                    <h3 class="h3 text-lg">{{ location.name }}</h3>
+                            <div class="flex mb-1">
+                                <div class="text-slate-700">
+                                    <h3 class="h3 text-sm">{{ location.name }}</h3>
                                     <p class="text-xs mb-1">{{ location.location.country }}</p>
                                     <p class="text-xs mb-1">{{ location.location.address }}</p>
                                 </div>
                             </div>
                             <IconEdit @click="console.log('here')" />
                         </div>
-                        <hr v-if="entity.jobs.length > 1 && index + 1 !== entity.jobs.length" class="border-t-2 my-5 border-slate-300">
+                        <hr v-if="entityStore.entityLocations.length > 1 && index + 1 !== entityStore.entityLocations.length" class="border-t-2 my-3 border-slate-300">
                     </div>
+
+                    <Pagination 
+                        v-if="entityStore.entityLocationsPaginationData" 
+                        :per-page="5"
+                        :pagination-data="entityStore.entityLocationsPaginationData" 
+                        @change-page="handleLocationsPaginate" 
+                    />
                 </div>
             </div>
         </div>
@@ -134,11 +153,30 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { usePage } from '@inertiajs/vue3';
+import { useEntityStore } from '@/Stores/entity.store.js'
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import IconEdit from '@/Components/IconEdit.vue';
 import CounterWidget from '@/Components/DashboardWidgets/CounterWidget.vue';
+import Pagination from '@/Components/Pagination.vue';
 
 const entity = usePage().props.entity.data;
+const entityStore = useEntityStore();
+entityStore.getEntityContacts(entity.id);
+entityStore.getEntityLocations(entity.id);
+entityStore.getEntityJobs(entity.id);
+
+
+const handleContactsPaginate = function (newPageUrl) {
+    entityStore.handleContactPaginationEvent(entity.id, newPageUrl)
+}
+
+const handleLocationsPaginate = function (newPageUrl) {
+    entityStore.handleLocationPaginationEvent(entity.id, newPageUrl)
+}
+
+const handleJobsPaginate = function (newPageUrl) {
+    entityStore.handleEntityJobPaginationEvent(entity.id, newPageUrl)
+}
 
 
 </script>

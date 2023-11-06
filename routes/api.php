@@ -98,7 +98,11 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::post('/', 'createEntity');
         Route::patch('/{entity}', 'updateEntity');
         Route::delete('/{entity}', 'deleteEntity');
+
         Route::get('/{entity}/contacts', 'getEntityContacts');
+        Route::get('/{entity}/locations', 'getEntityLocations');
+        Route::get('/{entity}/jobs', 'getEntityJobs');
+
         Route::post('/register', 'register');
     });
 

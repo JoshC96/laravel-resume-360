@@ -143,6 +143,7 @@ import { Link } from '@inertiajs/vue3';
 
 const { isOpen } = useSidebarStore();
 const entityStore = useEntityStore();
+entityStore.getUserEntities()
 
 const activeClass = ref(
     "bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100"
@@ -150,8 +151,6 @@ const activeClass = ref(
 const inactiveClass = ref(
     "border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100"
 );
-
-entityStore.getUserEntities()
 
 
 

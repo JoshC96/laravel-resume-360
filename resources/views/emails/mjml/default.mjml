@@ -1,0 +1,70 @@
+<mjml>
+  <mj-head>
+      <mj-style>
+          .box-shadow {
+              box-shadow: 1px 1px 5px #aaa; 
+          }
+      </mj-style>
+  </mj-head>
+  <mj-body>
+    <mj-raw>
+      <!-- Company Header -->
+    </mj-raw>
+    <mj-section background-color="#f0f0f0" padding="20px">
+      <mj-column >
+        <mj-text font-style="italic" font-size="20px" color="#626262" padding="0px 20px">Resume360</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-raw>
+      <!-- Intro text -->
+    </mj-raw>
+    <mj-section background-color="#fafafa">
+      <mj-column width="470px">
+        <mj-text font-size="20px" font-family="Roboto" color="#626262">Hi Username, </mj-text>
+        <mj-text color="#525252"  line-height="18px">
+          You've been invited to Resume360 by CompanyName.<br><br>
+          Clicking the button below will create a new account for you and give CompanyName access to edit your profile, resumes, and cover letters. <br>
+        </mj-text>
+        <mj-button background-color="#F45E43" href="#">Continue</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-raw>
+      <!-- Side image -->
+    </mj-raw>
+    <mj-section background-color="white">
+      <mj-raw>
+        <!-- Left image -->
+      </mj-raw>
+      <mj-column>
+        <mj-image width="200px" src="https://images.pexels.com/photos/2422293/pexels-photo-2422293.jpeg"></mj-image>
+      </mj-column>
+      <mj-column>
+        <mj-text font-style="normal" font-size="20px" font-family="Roboto" color="#626262">Simplify Your Job Search</mj-text>
+        <mj-text color="#525252" line-height="18px" >Say goodbye to the days of endless resume tweaking and cover letter struggles. With Resume360, we've harnessed the power of AI to do the heavy lifting for you. Our cutting-edge tools craft a standout resume that makes recruiters sit up and take notice.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fafafa">
+      <mj-column>
+        <mj-social font-size="15px" icon-size="20px" mode="horizontal">
+          <mj-social-element name="facebook" href="https://resume360.co/">
+          </mj-social-element>
+          <mj-social-element name="twitter" href="https://resume360.co/">
+          </mj-social-element>
+          <mj-social-element name="linkedin" href="https://resume360.co/">
+          </mj-social-element>
+          <mj-social-element name="instagram" href="https://resume360.co/">
+          </mj-social-element>
+          <mj-social-element name="web" href="https://resume360.co/">
+          </mj-social-element>
+        </mj-social>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="12px" color="#5e5e5e" align="center" line-height="15px">
+          118 Prospect Rd<br> Prospect <br>SA 5082
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

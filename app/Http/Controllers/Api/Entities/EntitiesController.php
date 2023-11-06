@@ -7,7 +7,10 @@ use App\Http\Requests\Entities\DestroyEntityRequest;
 use App\Http\Requests\Entities\EntityRequest;
 use App\Http\Requests\Entities\StoreEntityRequest;
 use App\Http\Requests\Entities\UpdateEntityRequest;
+use App\Http\Resources\Contacts\ContactResource;
 use App\Http\Resources\Entities\EntityResource;
+use App\Http\Resources\Jobs\JobListingResource;
+use App\Http\Resources\Locations\EntityLocationResource;
 use App\Models\Entity;
 use App\Repositories\EntityRepository;
 use Illuminate\Http\JsonResponse;
@@ -62,6 +65,72 @@ class EntitiesController extends ApiController
                 )
                 ->onEachSide(1)
                 ->through(fn ($entity) => new EntityResource($entity))
+        ]);
+    }
+
+    /**
+     * @param EntityRequest $request 
+     * @return JsonResponse 
+     * @throws BindingResolutionException 
+     */
+    public function getEntityContacts(Entity $entity, EntityRequest $request): JsonResponse
+    {
+        $data = $request->safe()->collect();
+
+        return $this->formatResponse([
+            'contacts' => $entity->{Entity::RELATION_CONTACTS}()
+                ->paginate(
+                    $data['per_page'] ?? 5,
+                    ['*'],
+                    'page',
+                    $data['page'] ?? 1
+                )
+                ->onEachSide(1)
+                ->through(fn ($contact) => new ContactResource($contact))
+        ]);
+    }
+
+    /**
+     * @param EntityRequest $request 
+     * @return JsonResponse 
+     * @throws BindingResolutionException 
+     */
+    public function getEntityLocations(Entity $entity, EntityRequest $request): JsonResponse
+    {
+        $data = $request->safe()->collect();
+
+        return $this->formatResponse([
+            'locations' => $entity->{Entity::RELATION_LOCATIONS}()
+                ->paginate(
+                    $data['per_page'] ?? 5,
+                    ['*'],
+                    'page',
+                    $data['page'] ?? 1
+                )
+                ->onEachSide(1)
+                ->through(fn ($entity) => new EntityLocationResource($entity))
+        ]);
+    }
+
+    /**
+     * @param EntityRequest $request 
+     * @return JsonResponse 
+     * @throws BindingResolutionException 
+     */
+    public function getEntityJobs(Entity $entity, EntityRequest $request): JsonResponse
+    {
+        $data = $request->safe()->collect();
+
+        return $this->formatResponse([
+            'jobs' => $entity->{Entity::RELATION_JOBS}()
+                ->paginate(
+                    $data['per_page'] ?? 5,
+                    ['*'],
+                    'page',
+                    $data['page'] ?? 1
+                )
+                ->onEachSide(1)
+                ->through(fn ($job) => new JobListingResource($job))
         ]);
     }
 

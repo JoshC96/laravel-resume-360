@@ -36,12 +36,16 @@ const props = defineProps({
     paginationData: {
         required: true,
         type: Object
-    }
+    },
+    perPage: {
+        required: false,
+        type: Number
+    },
 });
 const emit = defineEmits(['changePage']);
 
 const data = ref();
-const perPage = ref(20);
+const perPage = ref(props.perPage ?? 20);
 
 watch(props, (newValue) => {
     data.value = newValue.paginationData;
