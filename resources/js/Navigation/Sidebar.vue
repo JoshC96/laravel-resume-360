@@ -1,10 +1,10 @@
 <template>
     <div class="flex">
         <!-- Backdrop -->
-        <div :class="isOpen ? 'block' : 'hidden'" @click="isOpen = false" class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
+        <div :class="sidebarStore.isOpen ? 'block' : 'hidden'" @click="sidebarStore.toggleSidebar" class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
         <!-- End Backdrop -->
 
-        <div :class="isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="justify-between fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
+        <div :class="sidebarStore.isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="justify-between fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
 
             <div class="flex h-100 flex-col">
 
@@ -141,7 +141,7 @@ import { useSidebarStore } from '@/Stores/sidebar-store.store.js'
 import { useEntityStore } from '@/Stores/entity.store.js'
 import { Link } from '@inertiajs/vue3';
 
-const { isOpen } = useSidebarStore();
+const sidebarStore = useSidebarStore();
 const entityStore = useEntityStore();
 entityStore.getUserEntities()
 
