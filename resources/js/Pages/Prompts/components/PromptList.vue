@@ -9,7 +9,7 @@
                 <PromptFilters />
             </div>
 
-            <div class="py-4">
+            <div class="py-4 overflow-scroll">
                 <div class="bg-white inline-block min-w-full overflow-hidden rounded-lg shadow">
                     <table class="min-w-full leading-normal">
                         <thead>

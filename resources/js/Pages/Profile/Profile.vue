@@ -7,20 +7,20 @@
                     <div class="profile-cover w-full h-48"
                         style="background: url('/assets/working-on-website.jpg') no-repeat; background-size: cover; background-position: center;">
                     </div>
-                    <div class="bg-white grid grid-cols-3 pb-4 pr-4 pl-4 sm:pb-8 sm:pr-8 sm:pl-8 shadow rounded-b-lg">
+                    <div class="bg-white grid grid-cols-1 lg:grid-cols-3 pb-4 pr-4 pl-4 sm:pb-8 sm:pr-8 sm:pl-8 shadow rounded-b-lg">
                         <div class="col-1">
                             <div>
                                 <img class="max-h-36 max-w-36 rounded-xl -mt-16" src="/assets/image4.jpg" alt="profile image" />
                             </div>
 
                             <div class="my-5 bg-white">
-                                <h3 class="h3 text-xl">
+                                <h3 class="h3 text-lg lg:text-xl">
                                     {{ user.name }}
                                 </h3>
-                                <p>
+                                <p class="text-md lg:text-lg">
                                     {{ user.currentRole }}Software Engineer
                                 </p>
-                                <p>
+                                <p class="text-md lg:text-lg">
                                     {{ user.location }}
                                     Adelaide, South Australia
                                 </p>
@@ -29,15 +29,15 @@
                         </div>
                         <div class="col-1"></div>
                         <div class="col-1 py-5 h-full flex items-start flex-col align-middle justify-center">
-                            <h2 class="h2 text-2xl mb-4">Profile Visibility</h2>
+                            <h2 class="h2 text-lg lg:text-xl mb-4">Profile Visibility</h2>
 
                             <label class="flex align-middle items-center mb-2">
-                                <p class="mr-3">Share with Recruiters</p>
+                                <p class="mr-3 text-md lg:text-lg">Share with Recruiters</p>
                                 <Checkbox :value="true" :checked="true"></Checkbox>
                             </label>
 
                             <label class="flex align-middle items-center">
-                                <p class="mr-3">Share with Companies</p>
+                                <p class="mr-3 text-md lg:text-lg">Share with Companies</p>
                                 <Checkbox :value="true" :checked="true"></Checkbox>
                             </label>
                             <PrimaryButton class="mt-5">Save</PrimaryButton>
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-3 space-x-4">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 space-y-4 lg:space-y-0 lg:space-x-4">
                 <div class="col-span-2 space-y-4">
 
 
@@ -60,7 +60,7 @@
 
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <h1 class="h1 text-2xl mb-6">Referees</h1>
-                        <div class="grid grid-cols-3 gap-5">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                             <div v-for="(referee, index) in profileStore.referees" :key="index" class="mb-5 col-1">
                                 <div class="flex justify-between">
                                     <div class="flex  mb-3">

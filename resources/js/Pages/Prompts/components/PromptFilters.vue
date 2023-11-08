@@ -1,6 +1,6 @@
 <template>
     <div class="mb-5">
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div>
                 <InputLabel for="keywords" value="Content Keywords" />
                 <TextInput id="keywords" type="text" placeholder="Keywords" class="mt-1 block w-full" v-model="keywords" />

@@ -6,7 +6,7 @@
                 <div class="profile-cover w-full h-48"
                     style="background: url('/assets/company-image.jpg') no-repeat; background-size: cover; background-position: center;">
                 </div>
-                <div class="bg-white grid grid-cols-3 pb-4 pr-4 pl-4 sm:pb-8 sm:pr-8 sm:pl-8 shadow rounded-b-lg">
+                <div class="bg-white grid grid-cols-1 lg:grid-cols-3 pb-4 pr-4 pl-4 sm:pb-8 sm:pr-8 sm:pl-8 shadow rounded-b-lg">
                     <div class="col-1">
                         <div>
                             <img class="max-h-36 max-w-36 rounded-xl -mt-16" src="/assets/logo.jpg" alt="profile image" />
@@ -24,7 +24,7 @@
                             </h3>
                         </div>
                     </div>
-                    <div class="py-5 h-full flex items-start flex-col align-middle justify-center">
+                    <div v-if="entity.phone || entity.email || entity.website" class="py-5 h-full flex items-start flex-col align-middle justify-center">
                         <p v-if="entity.phone" ><strong>Phone:</strong> {{ entity.phone }} </p>
                         <p v-if="entity.email"><strong>Email:</strong> {{ entity.email }} </p>
                         <p v-if="entity.website"><strong>Website:</strong> {{ entity.website }}</p>
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-cols-3 gap-4">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
 
             <div>
                 <CounterWidget :number="5" text="Applications Received Today" />

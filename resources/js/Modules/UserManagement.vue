@@ -2,8 +2,8 @@
     <div>
         <div class="py-12">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-8">User Management</h2>
-            <div class="max-w-8xl mx-auto">
-                <div class="p-4 bg-white inline-block min-w-full overflow-hidden rounded-lg shadow">
+            <div class="max-w-8xl mx-auto overflow-scroll">
+                <div class="p-4 bg-white inline-block min-w-full rounded-lg shadow">
                     <div class="flex flex-row justify-between mb-6">
                         <h2 class="h2 text-lg">Users</h2>
                         <!-- <PrimaryButton @click.stop="usersStore.triggerEditUserForm">Create</PrimaryButton> -->

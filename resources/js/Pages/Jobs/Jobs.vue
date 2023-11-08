@@ -2,8 +2,8 @@
     <AuthenticatedLayout>
         <div class="py-6">
             
-            <div class="grid grid-cols-3 max-w-7xl mx-auto sm:px-6 lg:px-8 gap-4">
-                <div class="col-span-2 p-4 sm:p-8 bg-white shadow sm:rounded-lg"> 
+            <div class="grid grid-cols-1 lg:grid-cols-3 max-w-7xl mx-auto sm:px-6 lg:px-8 gap-4">
+                <div class="col-span-1 lg:col-span-2 p-4 sm:p-8 bg-white shadow sm:rounded-lg"> 
                     <h1 class="text-2xl mb-8">Available Job Listings</h1>
 
 
@@ -12,17 +12,16 @@
                     <div class="space-y-5">
                         <div v-for="(job, index) in jobListingStore.jobs" :key="index">
                             <div class="border border-slate-200 shadow rounded-md p-4">
-                                <div class="grid grid-cols-2">
+                                <div class="grid grid-cols-1 lg:grid-cols-2">
                                     <div>
-                                        <h3 class="h3 text-xl text-bold">{{ job.role }}</h3>
-                                        <h5 class="text-md">{{ job.title }}</h5>
+                                        <h3 class="h3 text-lg lg:text-xl text-bold">{{ job.role }}</h3>
                                     </div>
-                                    <div class="text-right">
-                                        <h5 class="text-md">{{ job.entity }}</h5>
-                                        <h6 class="text-sm">Added {{ job.createdAt }}</h6>
+                                    <div class="lg:text-right">
+                                        <h5 class="text-sm lg:text-md">{{ job.entity }}</h5>
+                                        <h6 class="text-sm lg:text-sm">Added {{ job.createdAt }}</h6>
                                     </div>
                                 </div>
-                                <p class="mt-3">{{ job.description }}</p>
+                                <p class="mt-3 text-sm lg:text-md ">{{ job.description.length > 80 ? job.description.substring(0, 80) + '...' : job.description }}</p>
                                 <div class="flex justify-end space-x-2">
                                     <PrimaryButton class="mt-6" @click="quickApplyStore.initializeFlow(job)" >
                                         Quick Apply
@@ -41,7 +40,7 @@
                         />
                     </div>
                 </div>
-                <div class="col-span-1">
+                <div class="col-span-1 order-first lg:order-last">
                     <div class=" p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <h3 class="h3 text-xl mb-5">Recommended Jobs</h3>
                         <div v-for="(job, index) in jobListingStore.recommendedJobs" :key="index" class="mb-5">
@@ -55,7 +54,7 @@
                                         <h6 class="text-sm">{{ job.location }}</h6>
                                     </div>
                                 </div>
-                                <p class="mt-3">{{ job.description }}</p>
+                                <p class="mt-3 text-sm lg:text-md ">{{ job.description.length > 80 ? job.description.substring(0, 80) + '...' : job.description }}</p>
                                 <div class="flex justify-end space-x-2">
                                     <PrimarySmallButton class="mt-3" @click="console.log('test')" >
                                         Apply

@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Roles & Permissions</h2>
 
         <div class="py-12">
-            <div class="max-w-8xl mx-auto grid grid-cols-2 gap-5">
+            <div class="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5">
 
                 <div class="p-4 bg-white inline-block min-w-full overflow-hidden rounded-lg shadow">
                     <div class="flex flex-row justify-between mb-6">
@@ -52,7 +52,7 @@
                     <EditPermissionForm />
                 </div>
 
-                <div class="p-4 bg-white inline-block min-w-full overflow-hidden rounded-lg shadow">
+                <div class="p-4 bg-white inline-block min-w-full overflow-hidden rounded-lg shadow overflow-scroll">
                     <div class="flex flex-row justify-between mb-6">
                         <h2 class="h2 text-lg">Roles</h2>
                         <PrimaryButton @click.stop="permissionsStore.triggerEditRoleForm">Create</PrimaryButton>

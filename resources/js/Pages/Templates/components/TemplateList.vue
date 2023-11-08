@@ -5,17 +5,9 @@
         <div>
             <div class="flex justify-between items-center my-5 py-5 px-3 bg-white rounded-md">
                 <TemplateFilters />
-                
-                <div>
-                    <button 
-                        @click.stop="templatesStore.triggerEditTemplateForm"
-                        class="transition duration-100 bg-indigo-500 hover:bg-indigo-400 text-white font-medium focus:outline-none py-2 rounded-md px-5 mr-6">
-                        Create New Template
-                    </button>
-                </div>
             </div>
 
-            <div class="py-4">
+            <div class="py-4 overflow-scroll">
                 <div class="bg-white inline-block min-w-full overflow-hidden rounded-lg shadow">
                     <table class="min-w-full leading-normal">
                         <thead>
