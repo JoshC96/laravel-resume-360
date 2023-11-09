@@ -52,13 +52,14 @@
                             class="mt-1 block w-full"
                             v-model="store.entity.type"
                             :options="[
-                                { value: 1, label: 'Recruiter' },
-                                { value: 2, label: 'Small Business' },
-                                { value: 3, label: 'Corporation' },
-                                { value: 4, label: 'Partnership' },
-                                { value: 5, label: 'Non-Profit' },
-                                { value: 6, label: 'Government Entity' },
-                                { value: 7, label: 'Sole Trader' }
+                                { value: 1, label: 'Provider' },
+                                { value: 2, label: 'Recruiter' },
+                                { value: 3, label: 'Small Business' },
+                                { value: 4, label: 'Corporation' },
+                                { value: 5, label: 'Partnership' },
+                                { value: 6, label: 'Non-Profit' },
+                                { value: 7, label: 'Government Entity' },
+                                { value: 8, label: 'Sole Trader' }
                             ]" 
                         />
                     </div>

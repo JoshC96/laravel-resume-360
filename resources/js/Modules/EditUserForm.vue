@@ -55,7 +55,7 @@
                     />
                 </div>
             </div>
-            <div class="mt-5">
+            <div v-if="showPermissions" class="mt-5">
                 <InputLabel value="Assign Roles" class="mb-1" />
 
                 <Multiselect 
@@ -83,18 +83,34 @@ import { usePermissionsStore } from '@/Stores/permissions.store';
 import Multiselect from '@vueform/multiselect';
 import { watch, ref } from 'vue';
 
+
+const props = defineProps({
+    showPermissions: {
+        type: Boolean,
+        default: false
+    },
+    entityId: {
+        type: Number,
+        required: false
+    }
+});
+
 const usersStore = useUserManagementStore();
 const permissionsStore = usePermissionsStore();
 const selectedRoles = ref([]);
 const roleOptions = ref([]);
 permissionsStore.getRoles();
 
+if (props.entityId) {
+    usersStore.editingUser.provider_id = props.entityId;
+}
+
 watch(selectedRoles, () => {
-    usersStore.editingUser.roles = selectedRoles.value
+    usersStore.editingUser.roles = selectedRoles.value;
 })
 
 watch(permissionsStore.roles, () => {
-    roleOptions.value = permissionsStore.roles.map(role => role.name)
+    roleOptions.value = permissionsStore.roles.map(role => role.name);
 })
 
 </script>

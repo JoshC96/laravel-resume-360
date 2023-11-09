@@ -12,7 +12,7 @@ export default class EntityApi extends ApiService {
     }
 
     register(payload) {
-        return this.axios.get(`/register`, { params: payload })
+        return this.axios.post(`/register`, payload)
     }
 
     getEntities(payload) {

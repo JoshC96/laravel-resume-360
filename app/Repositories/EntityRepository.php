@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassAssignmentException;
 use Illuminate\Database\Eloquent\InvalidCastException;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 class EntityRepository

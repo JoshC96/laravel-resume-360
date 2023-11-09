@@ -52,7 +52,7 @@
                     <EditPermissionForm />
                 </div>
 
-                <div class="p-4 bg-white inline-block min-w-full overflow-hidden rounded-lg shadow overflow-scroll">
+                <div class="p-4 bg-white inline-block min-w-full rounded-lg shadow overflow-scroll">
                     <div class="flex flex-row justify-between mb-6">
                         <h2 class="h2 text-lg">Roles</h2>
                         <PrimaryButton @click.stop="permissionsStore.triggerEditRoleForm">Create</PrimaryButton>
@@ -106,11 +106,13 @@
                         </tbody>
                     </table>
 
-                    <EditRoleForm />
+                    <EditRoleForm :show-permissions="true" key="permissionUserManagement" />
                 </div>    
             </div>
 
-            <UserManagement />
+            <div class="py-12">
+                <UserManagement />
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>

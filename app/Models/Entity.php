@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @property int $id
@@ -51,6 +53,14 @@ class Entity extends Model
         self::FIELD_ID
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function (Entity $entity) {
+            $entity->{Entity::FIELD_UUID} = (string) Str::uuid();
+        });
+    }
+
     
     /**
      * @return HasMany 
@@ -83,4 +93,13 @@ class Entity extends Model
     {
         return $this->hasManyThrough(UserJobApplication::class, JobListing::class);
     }
+
+    /**
+     * @return HasMany 
+     */
+    public function providerUsers(): HasMany
+    {
+        return $this->hasMany(User::class, User::FIELD_PROVIDER_ID, self::FIELD_ID);
+    }
+
 }

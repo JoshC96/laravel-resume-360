@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UserManagementResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,9 +25,16 @@ class UserResource extends JsonResource
             User::FIELD_EMAIL => $user->{User::FIELD_EMAIL},
             User::FIELD_MOBILE => $user->{User::FIELD_MOBILE},
             User::FIELD_LOCATION => $user->{User::FIELD_LOCATION},
+            User::FIELD_VERIFIED_AT => $user->{User::FIELD_VERIFIED_AT},
+            User::FIELD_BIO => $user->{User::FIELD_BIO},
+            User::FIELD_DATE_OF_BIRTH => $user->{User::FIELD_DATE_OF_BIRTH},
+            User::FIELD_WORK_PHONE => $user->{User::FIELD_WORK_PHONE},
+            User::FIELD_WEBSITE => $user->{User::FIELD_WEBSITE},
+            User::FIELD_ADDRESS => $user->{User::FIELD_ADDRESS},
+            User::FIELD_CURRENT_ROLE => $user->{User::FIELD_CURRENT_ROLE},
             'created_at' => $user->created_at,
-            'roles' => $user->roles,
-            'permissions' =>  $user->permissions
+            'roles' => array_column($user->roles->toArray(), 'name'),
+            'permissions' => array_column($user->permissions->toArray(), 'name')
         ];
     }
 }

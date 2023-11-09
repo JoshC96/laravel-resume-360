@@ -14,7 +14,7 @@ export default class ApiService {
 
     constructor(baseUrl, baseEndpoint, version) {
         this.bearer = null;
-        this.userId = usePage().props.auth.user.id;
+        this.userId = usePage().props.auth.user.data.id;
         this.baseUrl = baseUrl;
         this.baseEndpoint = baseEndpoint;
         this.version = version;

@@ -13,14 +13,14 @@ export const useUserManagementStore = defineStore('userManagementStore', () => {
     const showUserEditModal = ref(false);
     const editingUser = ref({});
 
-    async function getUsers(page = 1, perPage) {
-        const { data } = await api.getUsers({ page: page, per_page: perPage });
+    async function getUsers(entityId, page = 1, perPage) {
+        const { data } = await api.getUsers({ entityId: entityId, page: page, per_page: perPage });
         users.value = data.resp.users_paginated.data;
         userPaginationData.value = data.resp.users_paginated;
     }
 
-    async function handleUserPaginationEvent(newPageUrl) {
-        getUsers(newPageUrl.newPage, newPageUrl.perPage);
+    async function handleUserPaginationEvent(newPageUrl, entityId) {
+        getUsers(entityId, newPageUrl.newPage, newPageUrl.perPage);
     }
 
     async function saveUser() {

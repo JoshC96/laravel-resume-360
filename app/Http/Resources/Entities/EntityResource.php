@@ -22,6 +22,7 @@ class EntityResource extends JsonResource
     {
         return [
             Entity::FIELD_ID => $this->{Entity::FIELD_ID},
+            Entity::FIELD_UUID => $this->{Entity::FIELD_UUID},
             Entity::FIELD_NAME => $this->{Entity::FIELD_NAME},
             Entity::FIELD_PHONE => $this->{Entity::FIELD_PHONE},
             Entity::FIELD_WEBSITE => $this->{Entity::FIELD_WEBSITE},

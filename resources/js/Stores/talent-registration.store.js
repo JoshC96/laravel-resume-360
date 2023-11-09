@@ -17,14 +17,9 @@ export const useTalentRegistrationStore = defineStore('talentRegistrationStore',
 
     async function register() {
         loading.value = true;
-        api.register(entity.value).then((resp) => {
-            window.location.href = 'entity/' + resp.data.data.entity.id;
-        }).catch((error) => {
-            errorMessage.value = error.message || error;
-        }).finally(() => {
-            loading.value = false;
-        });
-
+        const resp = await api.register(entity.value);
+        window.location.href = '/entity/' + resp.data.resp.entity.id;
+        loading.value = false;
     }
 
     return {

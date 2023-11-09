@@ -40,7 +40,7 @@
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
 
             <div>
-                <CounterWidget :number="5" text="Applications Received Today" />
+                <CounterWidget :number="5" text="New Applications Received Today" />
             </div>
 
             <div>
@@ -50,6 +50,14 @@
             <div>
                 <CounterWidget :number="9" text="Potential Candidates Matching your Job Ads" />
             </div>
+
+        </div>
+
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 py-8">
+            <UserManagement :entity="entity" key="entityUserManagement" />
+        </div>
+
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
 
             <div>
                 <div class="bg-white p-3 rounded-md">
@@ -158,13 +166,13 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import IconEdit from '@/Components/IconEdit.vue';
 import CounterWidget from '@/Components/DashboardWidgets/CounterWidget.vue';
 import Pagination from '@/Components/Pagination.vue';
+import UserManagement from '@/Modules/UserManagement.vue'
 
 const entity = usePage().props.entity.data;
 const entityStore = useEntityStore();
 entityStore.getEntityContacts(entity.id);
 entityStore.getEntityLocations(entity.id);
 entityStore.getEntityJobs(entity.id);
-
 
 const handleContactsPaginate = function (newPageUrl) {
     entityStore.handleContactPaginationEvent(entity.id, newPageUrl)

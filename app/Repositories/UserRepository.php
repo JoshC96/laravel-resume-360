@@ -10,6 +10,15 @@ class UserRepository
 {
 
     /**
+     * @param array $data 
+     * @return User
+     */
+    public function createUser(array $data): User
+    {
+        return User::query()->create($data);
+    }
+
+    /**
      * @param User $user 
      * @param array $data 
      * @return bool 

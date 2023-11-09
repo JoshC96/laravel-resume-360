@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -46,6 +47,14 @@ class JobListing extends Model
     protected $guarded = [
         self::FIELD_ID
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function (JobListing $job) {
+            $job->{JobListing::FIELD_UUID} = (string) Str::uuid();
+        });
+    }
 
 
     /**

@@ -24,6 +24,8 @@ use App\Http\Requests\WorkExperience\StoreWorkExperienceRequest;
 use App\Http\Requests\WorkExperience\UpdateWorkExperienceRequest;
 use App\Http\Resources\User\UserProfileResource;
 use App\Http\Resources\User\UserResource;
+use App\Jobs\ProviderRegisterUserJob;
+use App\Models\Entity;
 use App\Models\User;
 use App\Models\UserCertification;
 use App\Models\UserLicence;
@@ -70,10 +72,14 @@ class UserController extends ApiController
     public function getUsers(Request $request): JsonResponse
     {
         $data = $request->all();
+        $entity = isset($data['entityId']) ? Entity::query()->where(Entity::FIELD_UUID, $data['entityId']) : null;
 
         try {
             return $this->formatResponse([
                 'users_paginated' => User::query()
+                    ->when($entity, function($query) use ($entity) {
+                        return $query->where(User::FIELD_PROVIDER_ID, $entity->{Entity::FIELD_ID});
+                    })
                     ->paginate(
                         $data['per_page'] ?? 20,
                         ['*'],
@@ -87,6 +93,33 @@ class UserController extends ApiController
             return $this->formatResponse([
                 'status' => false,
                 'message' => 'Failed to retrieve users, error code:' . $exception->getCode()
+            ]);
+        }
+    }
+
+    /**
+     * @param Request $request 
+     * @return JsonResponse 
+     * @throws BindingResolutionException 
+     */
+    public function createUserFromProvider(Entity $entity, Request $request): JsonResponse
+    {
+        $data = $request->all();
+
+        $user = $this->userRepository->createUser($data);
+        
+        if ($data['notifyByEmail']) {
+            ProviderRegisterUserJob::dispatch($user, $entity);
+        }
+
+        try {
+            return $this->formatResponse([
+                'status' => !!$user
+            ]);
+        } catch (Exception $exception) {
+            return $this->formatResponse([
+                'status' => false,
+                'message' => 'Failed to create user:' . $exception->getMessage()
             ]);
         }
     }

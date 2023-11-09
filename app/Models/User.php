@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -49,6 +50,7 @@ class User extends Authenticatable
     public const FIELD_ADDRESS = 'address';
     public const FIELD_CURRENT_ROLE = 'current_role';
     public const FIELD_LOCATION = 'location';
+    public const FIELD_PROVIDER_ID = 'provider_id';
 
     public const RELATION_REFEREES = 'referees';
     public const RELATION_WORK_EXPERIENCES = 'workExperiences';
@@ -60,6 +62,7 @@ class User extends Authenticatable
     public const RELATION_COVER_LETTERS = 'coverLetters';
     public const RELATION_RESUMES = 'resumes';
     public const RELATION_JOB_APPLICATIONS = 'jobApplications';
+    public const RELATION_PROVIDER = 'provider';
 
     protected $table = self::TABLE;
     protected $guarded = [
@@ -88,6 +91,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function (User $user) {
+            $user->{User::FIELD_UUID} = (string) Str::uuid();
+        });
+    }
 
     /**
      * @return HasMany 
@@ -159,5 +170,13 @@ class User extends Authenticatable
     public function jobApplications(): HasMany
     {
         return $this->hasMany(UserJobApplication::class, UserResume::FIELD_USER_ID, self::FIELD_ID);
+    }
+
+    /**
+     * @return HasOne 
+     */
+    public function provider(): HasOne
+    {
+        return $this->hasOne(Entity::class, Entity::FIELD_ID, self::FIELD_PROVIDER_ID);
     }
 }
