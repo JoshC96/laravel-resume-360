@@ -54,7 +54,7 @@
         </div>
 
         <div v-if="entity.type === 'Provider'" class="max-w-6xl mx-auto sm:px-6 lg:px-8 py-8">
-            <UserManagement :entity="entity" key="entityUserManagement" />
+            <UserManagement :entity="entity" :key="2" />
         </div>
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-4">

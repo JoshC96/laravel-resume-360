@@ -23,7 +23,7 @@ export const useUserManagementStore = defineStore('userManagementStore', () => {
         getUsers(entityId, newPageUrl.newPage, newPageUrl.perPage);
     }
 
-    async function saveUser() {
+    async function saveUser(entityId) {
         if (editingUser.value.id) {
             const { data } = await api.updateUser(editingUser.value.id, editingUser.value)
 
@@ -35,7 +35,7 @@ export const useUserManagementStore = defineStore('userManagementStore', () => {
                 userFlashStore.reportError('Error updating user, please try again later')
             }
         } else {
-            const { data } = await api.createUser(editingUser.value)
+            const { data } = await api.createUser(entityId, editingUser.value)
 
             if (data.resp?.user) {
                 userFlashStore.showSuccess('Added a new user')

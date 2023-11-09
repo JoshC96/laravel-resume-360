@@ -20,7 +20,7 @@ class ProviderRegisterUserMail extends Mailable
     public function __construct(
         protected string $recipientName, 
         protected string $entityName, 
-        protected string $customSubject = null
+        protected string|null $customSubject = null
     ){}
 
     /**

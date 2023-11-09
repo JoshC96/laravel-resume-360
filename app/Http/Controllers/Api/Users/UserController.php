@@ -107,14 +107,12 @@ class UserController extends ApiController
         $data = $request->all();
 
         $user = $this->userRepository->createUser($data);
-        
-        if ($data['notifyByEmail']) {
-            ProviderRegisterUserJob::dispatch($user, $entity);
-        }
+        ProviderRegisterUserJob::dispatch($user, $entity);
 
         try {
             return $this->formatResponse([
-                'status' => !!$user
+                'status' => !!$user,
+                'user' => $user
             ]);
         } catch (Exception $exception) {
             return $this->formatResponse([

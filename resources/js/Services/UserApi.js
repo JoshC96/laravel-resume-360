@@ -16,8 +16,8 @@ export default class UserApi extends ApiService {
         return this.axios.get(`/`, { params: payload })
     }
 
-    createUser(payload) {
-        return this.axios.post(`/`, payload)
+    createUser(entityId, payload) {
+        return this.axios.post(`/${entityId}`, payload)
     }
 
     updateUser(userId, payload) {

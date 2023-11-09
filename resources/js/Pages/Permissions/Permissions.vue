@@ -111,7 +111,7 @@
             </div>
 
             <div class="py-12">
-                <UserManagement />
+                <UserManagement :show-all="true" :key="1" />
             </div>
         </div>
     </AuthenticatedLayout>

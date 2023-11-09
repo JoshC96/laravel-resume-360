@@ -2,7 +2,7 @@
     <Modal 
         :show="usersStore.showUserEditModal"
         @close="usersStore.closeUserModal"
-        @confirm="usersStore.saveUser"
+        @confirm="usersStore.saveUser(props.entityId)"
     >
 
         <template v-slot:header>

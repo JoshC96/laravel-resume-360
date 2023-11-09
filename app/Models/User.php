@@ -97,6 +97,9 @@ class User extends Authenticatable
         parent::boot();
         self::creating(function (User $user) {
             $user->{User::FIELD_UUID} = (string) Str::uuid();
+            if(!$user->{User::FIELD_PASSWORD}) {
+                $user->{User::FIELD_PASSWORD} = 'password';
+            }
         });
     }
 

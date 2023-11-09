@@ -17,16 +17,22 @@ class ProviderRegisterUserJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public function __construct(
+        protected User $recipientUser,
+        protected Entity $entity
+    ) {
+    }
+
     /**
      * Execute the job.
      */
-    public function handle(User $recipientUser, Entity $entity): void
+    public function handle(): void
     {
-        $recipientName = $recipientUser->{User::FIELD_NAME};
-        $entityName = $entity->{Entity::FIELD_NAME};
+        $recipientName = $this->recipientUser->{User::FIELD_NAME};
+        $entityName = $this->entity->{Entity::FIELD_NAME};
         $subject = $entityName . ' - Complete User Registration';
 
-        Mail::to($recipientUser)
+        Mail::to($this->recipientUser)
             ->send(new ProviderRegisterUserMail($recipientName, $entityName, $subject));
     }
 }

@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
         // CRUD
         Route::get('/', 'getUsers');
-        Route::post('/', 'createUserFromProvider');
+        Route::post('/{entity}', 'createUserFromProvider');
         Route::patch('/{user}', 'updateUser');
         Route::delete('/{user}', 'deleteUser');
 

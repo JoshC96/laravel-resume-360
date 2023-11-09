@@ -113,6 +113,10 @@ const props = defineProps({
     entity: {
         type: Object,
     },
+    showAll: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const usersStore = useUserManagementStore();
@@ -121,7 +125,7 @@ const entity = props.entity;
 onMounted(() => {
     if (entity?.uuid) {
         usersStore.getUsers(entity.uuid);
-    } else if (permissionsService.canManageUsers() && !entity) {
+    } else if (permissionsService.canManageUsers() && props.showAll) {
         usersStore.getUsers();
     }
 })
