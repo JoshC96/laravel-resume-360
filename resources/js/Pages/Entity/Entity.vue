@@ -53,7 +53,7 @@
 
         </div>
 
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 py-8">
+        <div v-if="entity.type === 'Provider'" class="max-w-6xl mx-auto sm:px-6 lg:px-8 py-8">
             <UserManagement :entity="entity" key="entityUserManagement" />
         </div>
 
