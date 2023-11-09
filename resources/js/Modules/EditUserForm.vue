@@ -70,6 +70,19 @@
                     class="w-full md:w-20rem"> </Multiselect>
             </div>
 
+            <div v-if="!usersStore.editingUser?.id" class="mt-4">
+                <InputLabel for="password" value="Password" />
+
+                <TextInput
+                    id="password"
+                    type="password"
+                    class="mt-1 block w-full"
+                    v-model="usersStore.editingUser.password"
+                    required
+                    autocomplete="new-password"
+                />
+            </div>
+
         </template>
     </Modal>
 </template>
